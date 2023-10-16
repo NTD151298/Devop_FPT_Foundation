@@ -1,0 +1,36 @@
+<div class="grid">
+    <div class="col-4">
+        <div class="field">
+            <label for="name" class="block">Tên khách hàng</label>
+            <input id="name" type="text" pInputText [(ngModel)]="modelCustmer.Name" />
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="field">
+            <label for="phone" class="block">
+                Số điện thoại</label>
+            <input id="phone" type="text" pInputText [(ngModel)]="modelCustmer.Phone" />
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="field">
+            <label for="phone" class="block">
+                Tỉnh thành</label>
+            <p-dropdown [options]="province" [(ngModel)]="modelCustmer.province_code" placeholder="Chọn tỉnh thành"
+                [showClear]="true" filter="true" appendTo="body"></p-dropdown>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="field">
+            <label for="address" class="block">
+                Địa chỉ</label>
+            <input id="address" type="text" pInputText [(ngModel)]="modelCustmer.Address" />
+        </div>
+    </div>
+</div>
+
+<div class="pt-3 flex justify-content-end">
+    <div class="px-3"><button pButton type="button" label="Lưu" (click)="onSaveClick()"></button></div>
+    <div class="px-3"><button pButton type="button" class="p-button-danger" label="Đóng"
+            (click)="onCloseClick()"></button></div>
+</div>

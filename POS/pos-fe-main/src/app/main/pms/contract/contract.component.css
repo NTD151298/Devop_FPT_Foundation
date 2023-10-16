@@ -1,0 +1,10 @@
+.table-contract th {
+    background-color: aliceblue;
+    text-align: center;
+
+}
+
+.table-contract td {
+    height: 2.5rem;
+    text-align: center;
+}

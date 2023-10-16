@@ -1,0 +1,10 @@
+Dành cho một số bạn vẫn chưa deploy được 
+source code todo app này lên EC2
+
+Mình có viết 
+cho mọi người đoạn userdata để add vào con 
+instance thì nó sẽ tự clone source về
+
+Cài 
+dependencies và start cái Front end và backend 
+lên.

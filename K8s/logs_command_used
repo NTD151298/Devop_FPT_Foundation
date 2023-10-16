@@ -1,0 +1,270 @@
+
+
+# Install and Set Up kubectl on Windows
+# Before you begin
+# You must use a kubectl version that is within one minor version difference of your cluster. For example, 
+# a v1.28 client can communicate with v1.27, v1.28, and v1.29 control planes. Using the latest compatible version 
+# of kubectl helps avoid unforeseen issues.
+# Install kubectl on Windows
+# The following methods exist for installing kubectl on Windows:
+# Install kubectl binary with curl on Windows
+# Install on Windows using Chocolatey, Scoop, or winget
+# Install kubectl binary with curl on Windows
+# Download the latest 1.28 patch release: kubectl 1.28.0.
+# Or if you have curl installed, use this command:
+
+curl.exe -LO "https://dl.k8s.io/release/v1.28.0/bin/windows/amd64/kubectl.exe"
+
+# Note: To find out the latest stable version (for example, for scripting), take a look at https://dl.k8s.io/release/stable.txt.
+# Validate the binary (optional)
+# Download the kubectl checksum file:
+
+curl.exe -LO "https://dl.k8s.io/v1.28.0/bin/windows/amd64/kubectl.exe.sha256"
+
+# Validate the kubectl binary against the checksum file:
+# Using Command Prompt to manually compare CertUtil's output to the checksum file downloaded:
+
+CertUtil -hashfile kubectl.exe SHA256
+type kubectl.exe.sha256
+
+# Using PowerShell to automate the verification using the -eq operator to get a True or False result:
+
+ $(Get-FileHash -Algorithm SHA256 .\kubectl.exe).Hash -eq $(Get-Content .\kubectl.exe.sha256)
+
+# Append or prepend the kubectl binary folder to your PATH environment variable.
+# Test to ensure the version of kubectl is the same as downloaded:
+
+kubectl version --client
+
+# Or use this for detailed view of version:
+
+kubectl version --client --output=yaml
+
+kubectl version --client
+
+# Progress: Downloading Minikube 1.31.2... 100%
+# Minikube v1.31.2 [Approved]
+# Minikube package files install completed. Performing other installation steps.
+#  ShimGen has successfully created a shim for minikube.exe
+#  The install of Minikube was successful.
+#   Software installed to 'C:\ProgramData\chocolatey\lib\Minikube'
+#  minikube
+# W0825 18:15:19.972443    4324 main.go:291] Unable to resolve the current Docker CLI context "default": 
+# context "default": context not found: open 
+# C:\Users\ADMIN\.docker\contexts\meta\37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f\meta.json: 
+# The system cannot find the path specified.     
+# minikube provisions and manages local Kubernetes clusters optimized for development workflows.
+
+Basic Commands:
+  start            Starts a local Kubernetes cluster
+  status           Gets the status of a local Kubernetes cluster
+  stop             Stops a running local Kubernetes cluster
+  delete           Deletes a local Kubernetes cluster
+  dashboard        Access the Kubernetes dashboard running within the minikube cluster
+  pause            pause Kubernetes
+  unpause          unpause Kubernetes
+
+Images Commands:
+  docker-env       Provides instructions to point your terminal's docker-cli to the Docker Engine inside minikube.
+(Useful for building docker images directly inside minikube)
+  podman-env       Configure environment to use minikube's Podman service
+  cache            Manage cache for images
+  image            Manage images
+
+Configuration and Management Commands:
+  addons           Enable or disable a minikube addon
+  config           Modify persistent configuration values
+  profile          Get or list the current profiles (clusters)
+  update-context   Update kubeconfig in case of an IP or port change
+
+Networking and Connectivity Commands:
+  service          Returns a URL to connect to a service
+  tunnel           Connect to LoadBalancer services
+
+Advanced Commands:
+  mount            Mounts the specified directory into minikube
+  ssh              Log into the minikube environment (for debugging)
+  kubectl          Run a kubectl binary matching the cluster version
+  node             Add, remove, or list additional nodes
+  cp               Copy the specified file into minikube
+
+Troubleshooting Commands:
+  ssh-key          Retrieve the ssh identity key path of the specified node
+  ssh-host         Retrieve the ssh host key of the specified node
+  ip               Retrieves the IP address of the specified node
+  logs             Returns logs to debug a local Kubernetes cluster
+  update-check     Print current and latest version number
+  version          Print the version of minikube
+  options          Show a list of global command-line options (applies to all commands).
+
+Other Commands:
+  completion       Generate command completion for a shell
+  license          Outputs the licenses of dependencies to a directory
+
+Use "minikube <command> --help" for more information about a given command.
+
+PS D:\Devops_FPT_Foudations\K8s> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             
+KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine  
+
+docker context use default
+
+# Kubectl: kubectl is the command-line tool for interacting with Kubernetes clusters. It is used to manage, 
+# deploy, inspect, and control applications and resources within Kubernetes clusters. kubectl is essential for 
+# working with any Kubernetes environment, whether it's a local development cluster, a cloud-based cluster, or 
+# any other Kubernetes deployment.
+# Minikube: Minikube is a tool that enables you to run a single-node Kubernetes cluster locally on your machine. 
+# It is useful for local development, testing, and learning Kubernetes concepts without the need for a full-scale 
+# production-like cluster. Minikube provides an easy way to spin up a small Kubernetes environment on your local 
+# machine, allowing you to test your applications and configurations in an environment that closely resembles a real 
+# Kubernetes cluster.
+
+kubectl create deployment nginx-deployment --image=nginx
+
+# In the context of computing and specifically Kubernetes, a cluster refers to a group of interconnected computers, 
+# servers, or nodes that work together to manage and run applications and services. A cluster provides a way to pool 
+# computing resources to improve availability, scalability, and manageability of applications.
+# In Kubernetes, a cluster is a collection of nodes and control plane components that collectively provide the 
+# platform for deploying, managing, and orchestrating containerized applications. Let's break down the components 
+# of a Kubernetes cluster:
+
+# 1. **Nodes:**
+#    Nodes are individual machines within the cluster, often referred to as worker nodes or worker machines. Each 
+#    node is responsible for running containers, which are the fundamental units of applications in Kubernetes. 
+#    Nodes provide the computational resources, such as CPU and memory, needed to run containers. Multiple nodes 
+#    together form the computing capacity of the cluster.
+# 
+# 2. **Control Plane:**
+#    The control plane is the brain of the Kubernetes cluster. It consists of several key components that manage 
+#    the cluster's overall state and orchestrate various operations. These components include:
+# 
+#    - **API Server:** Acts as the central management point for the control plane, allowing users and automation 
+#    to interact with the cluster.
+#    - **etcd:** A distributed key-value store that stores the cluster's configuration and state information.
+#    - **Scheduler:** Assigns work (containers) to nodes based on available resources and constraints.
+#    - **Controller Manager:** Monitors the state of the cluster and ensures that the desired state is maintained, 
+#    managing tasks like scaling, replication, and self-healing.
+#    - **Cloud Controller Manager (optional):** Integrates with cloud provider APIs to manage cloud-specific 
+#    features and resources.
+# 
+# 3. **Networking:**
+#    Networking in a Kubernetes cluster involves ensuring that nodes and containers can communicate with each other 
+#    seamlessly. Kubernetes networking handles services, load balancing, and network policies.
+# 
+# 4. **Storage:**
+#    Kubernetes clusters often include storage solutions that provide persistent storage for containers and 
+#    applications. These solutions ensure that data remains available even if a container is moved to a different node.
+# 
+# 5. **Namespaces:**
+#    Namespaces are a way to divide a single physical cluster into multiple virtual clusters. They help organize 
+#    and isolate resources within the cluster, enabling multiple teams or applications to use the same cluster 
+#    without interfering with each other.
+# 
+# Clusters enable the benefits of scalability, high availability, and easy management. They allow you to deploy 
+# and manage applications in a standardized and consistent manner, regardless of the underlying infrastructure. 
+# Kubernetes abstracts away the complexities of managing individual nodes and offers tools to automate scaling, 
+# load balancing, and recovery, making clusters a cornerstone of modern containerized application deployment.
+
+docker context ls
+docker context use default
+
+minikube stop
+minikube dashboard 
+
+kubectl apply -f worker1.yaml
+kubectl get node -o wide
+kubectl get pod -o wide
+kubectl get pod --show-labels 
+kubectl get deployment -o wide
+kubectl get replicasets -o wide
+
+kubectl create deployment nginx-duong1-deployment --image=nginx:alpine
+kubectl create deployment mongo-duong1-deployment --image=mongo
+
+pod:            nginx-duong1-deployment-df789868f-zlpfn
+replicasets:    nginx-duong1-deployment-df789868f
+deployment:     nginx-duong1-deployment 
+
+kubectl edit deployment nginx-duong1-deployment (open note file for us)
+
+kubectl logs pod-name
+kubectl describe pod pod-name
+kubectl exec -it pod-name -- bin/bash
+
+kubectl delete deployment mongo-duong1-deployment 
+kubectl delete deployment nginx-duong1-deployment 
+
+# kind
+
+kind create cluster
+docker exec -it kind-control-plane bash
+
+# all controplane file of kind is in here
+
+cd /etc/kubernetes/manifests 
+
+# CONTAINER-RUNTIME: containerd://1.7.1  
+
+kubectl get node -o wide
+
+# virtuabox ubuntu accouts
+
+ssh -p 19980 kube_duong@127.0.0.1
+kubelet --version
+kubectl version --client
+sudo apt-get remove --purge kubectl kubeadm kubelet
+sudo apt-get autoremove
+
+# 1. Update the apt package index and install packages needed to use the Kubernetes apt repository:
+sudo apt-get update
+# apt-transport-https may be a dummy package; if so, you can skip that package
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+# 2. Download the public signing key for the Kubernetes package repositories. 
+# The same signing key is used for all 
+# repositories so you can disregard the version in the URL:
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+# 3. Add the appropriate Kubernetes apt repository:
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+# 4. Update the apt package index, install kubelet, kubeadm and kubectl, and pin their version:
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+kubectl describe pod
+kubelet --version
+kubectl version --client
+kubeadm version
+
+# check status k8s
+sudo systemctl status kubelet
+sudo systemctl status kubeadm
+sudo systemctl status kubectl
+sudo systemctl status docker
+sudo systemctl status containerd
+
+
+sudo rm /etc/containerd/config.toml
+systemctl restart containerd
+sudo kubeadm init
+
+# wipe your current kubeadm
+sudo kubeadm reset
+sudo systemctl stop kubelet
+sudo systemctl stop docker
+
+sudo rm -rf /etc/kubernetes/
+sudo rm -rf /var/lib/etcd/
+sudo rm -rf $HOME/.kube/
+
+sudo docker rm -f $(sudo docker ps -a -q)
+sudo docker rmi -f $(sudo docker images -q)
+
+sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X
+sudo ipvsadm --clear
+
+

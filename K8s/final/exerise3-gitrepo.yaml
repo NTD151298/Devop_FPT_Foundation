@@ -1,0 +1,28 @@
+# kubectl apply -f exerise3-gitrepo.yaml
+# Define a Kubernetes Pod named "nginx-gitrepo-pod" that runs an Nginx container.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-gitrepo # Name of the Pod
+spec:
+  containers:
+    - name: container-1 # Name of the container
+      image: nginx:alpine # The Nginx container image to use
+      resources: # Define resource limits for the container
+        limits:
+          memory: "128Mi" # Maximum memory limit for the container
+          cpu: "500m" # Maximum CPU limit for the container
+      volumeMounts:
+        - name: gitrepo-final
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+      ports:
+        - containerPort: 80 # Expose port 80 on the container
+          protocol: TCP
+  volumes:
+    - name: gitrepo-final # Name of the volume
+      gitRepo:
+        repository: https://github.com/NTD151298/NTD1512.github.io.git # Git repository URL to mount
+        revision: main # Specify the branch or commit you want to mount
+        directory: . # To make sure not to create outer dir but take all file from gitrepo
+# kubectl port-forward pod-gitrepo 9999:80

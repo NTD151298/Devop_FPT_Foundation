@@ -1,0 +1,8 @@
+
+
+wsl --list --verbose
+wsl --set-version Ubuntu-22.04 2
+wsl -l
+wsl -d Ubuntu-22.04
+sudo systemctl status httpd
+sudo lsof -i :3000 

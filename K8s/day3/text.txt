@@ -1,0 +1,33 @@
+kubectl get pod -o wide
+
+kubectl get pod --show-labels 
+
+kubectl exec -it httpd-pod-node1 -- /bin/sh
+
+apt update
+apt install iputils-ping
+
+kubectl port-forward service/my-nginxport-service 8000:30080
+kubectl port-forward service/my-httpdport-service 9000:30081
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

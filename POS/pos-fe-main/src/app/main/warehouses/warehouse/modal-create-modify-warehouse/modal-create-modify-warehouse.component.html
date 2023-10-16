@@ -1,0 +1,77 @@
+<div class="modal-content">
+  <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+    <!-- <div>{{formGroupCreate.value | json}}</div> -->
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <span *ngIf="itemId == 0">Tạo mới kho</span>
+        <span *ngIf="itemId != 0">Sửa kho</span>
+      </h5>
+      <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" *ngIf="formGroupCreate.value.id==0">
+        <label class="form-label" for="Admin_code">Tỉnh thành</label>
+        <p-dropdown [options]="province" formControlName="province_code" placeholder="Chọn tỉnh thành"
+          [showClear]="true" filter="true"></p-dropdown>
+      </div>
+      <div class="form-group" *ngIf="formGroupCreate.value.id==0">
+        <label class="form-label" for="Admin_code">Khối ST/Bếp</label>
+        <div class="flex flex-row">
+          <div class="flex align-items-center field-radiobutton">
+            <label for="T">Siêu thị</label>
+            <p-radioButton value="T" formControlName="warehouse_type" inputId="T"></p-radioButton>
+          </div>
+          <div class="flex align-items-center field-radiobutton">
+            <label for="B">Bếp</label>
+            <p-radioButton value="B" formControlName="warehouse_type" inputId="B"></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="Warehouse_name">Tên kho</label>
+        <input type="string" formControlName="name" class="form-control" placeholder="Tên kho">
+      </div>
+
+      <!-- <div class="form-group">
+        <label class="form-label" for="Warehouse_code">Mã kho</label>
+        <input type="string" formControlName="code" class="form-control" placeholder="Mã kho">
+      </div> -->
+
+      <div class="form-group">
+        <label class="form-label" for="Warehouse_type">Kiểu kho</label>
+        <select name="type" id="type" formControlName="type" class="form-control">
+          <option [value]="null" disabled>Chọn kiểu kho</option>
+          <option *ngFor="let s of typeWarehouse" value="{{s.id}}">{{s.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Warehouse_parent_id">Kho cha</label>
+        <select name="parent_id" id="parent_id" formControlName="parent_id" [disabled]="formGroupCreate.value.type != 2"
+          class="form-control">
+          <option [ngValue]="null" disabled>Chọn kho cha</option>
+          <option *ngFor="let s of parents" [ngValue]="s.id">{{s.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="Warehouse_description">Mô tả</label>
+        <textarea type="string" formControlName="description" class="form-control" placeholder="Mô tả"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="Warehouse_address">Địa chỉ</label>
+        <textarea type="string" formControlName="address" class="form-control" placeholder="Địa chỉ kho"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default " (click)="close()">
+        Bỏ qua
+      </button>
+      <button [disabled]="formSubmitted" type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+        <i class="fa fa-save"></i>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </form>
+</div>

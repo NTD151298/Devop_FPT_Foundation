@@ -1,0 +1,116 @@
+<h3>Quản lý chuyên mục sản phẩm</h3>
+<hr />
+<div class="flex flex-row gap-5 justify-content-center">
+  <form
+    [formGroup]="formSearch"
+    class="w-full flex flex-wrap justify-content-between align-items-end row"
+  >
+    <div class="product-search col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 flex flex-column">
+      <h6 class="product-name-title">Tên chuyên mục</h6>
+      <input
+        pInputText
+        formControlName="search"
+        type="text"
+        placeholder="Nhập tìm kiếm ..."
+        id="example-search-input"
+        (keyup.enter)="getList()"
+      />
+    </div>
+
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 flex justify-content-end">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Tìm kiếm"
+        (click)="getList()"
+        class="p-button-outlined p-button-rounded p-button-sm"
+        style="width: 6rem"
+      ></button>
+    </div>
+  </form>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-center pt-3 product-mobile-plus"
+>
+  <div>
+    <h5 class="m-0" style="font-size: 1.1rem;">Danh sách chuyên mục sản phẩm</h5>
+  </div>
+  <div style="padding-right: 0.6rem;">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Thêm"
+      class="p-button-sm p-button-success"
+      (click)="openCreateCategoryProductModal(null, 0)"
+      style="width: 6rem"
+    ></button>
+  </div>
+</div>
+
+
+<div class="pt-1 product-table" >
+  <p-table
+    responsiveLayout="scroll"
+    [value]="categoryProduct"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="product-table-th-sm" scope="col">STT</th>
+        <th class="product-table-mobile-th" scope="col" sortable="name">Tên chuyên mục</th>
+        <th class="product-table-mobile-th" scope="col" sortable="area">Mã chuyên mục</th>
+        <th class="product-table-th-sm" scope="col" sortable="area">Sắp xếp</th>
+        <th class="product-table-mobile-th" scope="col" sortable="population">Trạng thái</th>
+        <th class="product-table-mobile-th" scope="col">Hoạt động</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.order }}</td>
+        <td>
+          <p *ngIf="item.status_id == 0">Chưa duyệt</p>
+          <p *ngIf="item.status_id == 1">Đã duyệt</p>
+        </td>
+        <td class="">
+          <i
+            class="pi pi-pencil"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 10px"
+            (click)="openCreateCategoryProductModal(item, indexOfelement)"
+          ></i>
+          <i
+            class="pi pi-trash"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="deleteCategoryProduct(item.id)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div class="row">
+  <pagination
+    [totalItems]="totalRows"
+    [maxSize]="5"
+    [itemsPerPage]="page_size"
+    class="pagination-sm"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+    [boundaryLinks]="true"
+    (pageChanged)="onChangedPage($event)"
+    class="pull-right center"
+    style="margin-top: 10px"
+  ></pagination>
+</div>

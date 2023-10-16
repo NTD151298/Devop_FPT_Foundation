@@ -1,0 +1,7 @@
+# kind create cluster --name duong1 --config kind-config.yaml
+kind: Cluster # Define a Kind cluster
+apiVersion: kind.x-k8s.io/v1alpha4 # Specify the API version of Kind configuration
+nodes: # Specify the nodes for the cluster
+  - role: control-plane # First node is a control-plane node (master)
+  - role: worker # Second node is a worker node
+  - role: worker # Third node is another worker node

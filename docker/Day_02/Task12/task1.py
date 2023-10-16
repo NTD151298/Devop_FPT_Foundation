@@ -1,0 +1,6 @@
+print("Hello world this is a Duong making task 1 and 2 ")
+print("In docker container it cant read input from terminal")
+a = int(1500)
+b = str("To the moon")
+print(f"The number a is {a}")
+print(f"Slowly to the {b}")

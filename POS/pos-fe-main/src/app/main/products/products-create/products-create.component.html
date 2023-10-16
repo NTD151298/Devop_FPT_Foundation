@@ -1,0 +1,139 @@
+<div class="modal-content">
+    <div class="w-100 p-3 flex flex-row justify-content-end"></div>
+    <div class="modal-body text-center">
+      <h3 class="m-0">Thêm sản phẩm</h3>
+      <!-- <div>{{ item | json }}</div> -->
+      <div class="grid text-left p-5 gap-3 flex flex-row justify-content-between">
+        <div class="col-12">
+          <h6>Tên sản phẩm *</h6>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="item.name"
+            [disabled]="product_form_dis"
+          />
+        </div>
+        <div class="col-5">
+          <h6>Ngành hàng *</h6>
+          <p-dropdown
+            [options]="products"
+            [(ngModel)]="item.category_code"
+            placeholder="Chọn ngành hàng"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Gian hàng *</h6>
+          <p-dropdown
+            [options]="products"
+            [(ngModel)]="item.category_code"
+            placeholder="Chọn ngành hàng"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Nhóm hàng *</h6>
+          <p-dropdown
+            [options]="products"
+            [(ngModel)]="item.category_code"
+            placeholder="Chọn ngành hàng"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Nhà cung cấp *</h6>
+          <p-dropdown
+            [options]="partners"
+            [(ngModel)]="item.partner_id"
+            placeholder="Chọn nhà cung cấp"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Barcode *</h6>
+          <input
+            type="text"
+            placeholder="Nhập mã barcode"
+            pInputText
+            [(ngModel)]="item.barcode"
+            (keypress)="numberOnly($event)"
+          />
+        </div>
+        <div class="col-5">
+          <h6>Đơn vị *</h6>
+          <p-dropdown
+            [options]="units"
+            [(ngModel)]="item.unit_code"
+            placeholder="Chọn đơn vị"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Quy cách đóng gói *</h6>
+          <p-dropdown
+            [options]="packings"
+            [(ngModel)]="item.packing_code"
+            placeholder="Chọn kiểu đóng gói"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </div>
+        <div class="col-5">
+          <h6>Giá nhập *</h6>
+          <p-inputNumber
+            class="col-12"
+            style="padding: 0 !important"
+            [(ngModel)]="price_import"
+            mode="decimal"
+            placeholder="Giá nhập"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+        </div>
+        <div class="col-5">
+          <h6>Giá bán *</h6>
+          <p-inputNumber
+            class="col-12"
+            style="padding: 0 !important"
+            [(ngModel)]="item.price"
+            mode="decimal"
+            placeholder="Nhập giá bán"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+        </div>
+        <div class="col-12">
+          <h6>Mô tả sản phẩm</h6>
+          <textarea
+            pInputTextarea
+            [disabled]="product_form_dis"
+            [(ngModel)]="item.note"
+          ></textarea>
+        </div>
+      </div>
+      <div
+        class="w-full flex flex-row justify-content-center align-items-center gap-3 pb-5"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          (click)="close()"
+          label="Đóng"
+          class="p-button-sm p-button-secondary w-3"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          (click)="save()"
+          label="Lưu"
+          class="p-button-sm p-button-success w-3"
+        ></button>
+      </div>
+    </div>
+  </div>
+  

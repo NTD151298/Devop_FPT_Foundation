@@ -1,0 +1,64 @@
+td{
+  padding: 0 !important;
+  vertical-align: middle;
+
+  i{
+    padding: 5px;
+    font-size: 20px;
+  }
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product-table td,  .product-table th {
+  text-align: center;
+}
+
+.product-table th {
+  background-color: aliceblue;
+}
+
+@media screen and (max-width: 850px)  {
+  .product-name-title {
+    width: 8rem;
+  }
+
+  .product-search {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .product-table {
+    overflow-x: scroll;
+    padding-top: 1rem;
+  }
+
+  .product-table th {
+    padding: 0 1rem;
+    text-align: center;
+    height: 3rem;
+  }
+
+  .product-table-mobile-th {
+    min-width: 180px;
+  }
+
+  .product-table-th-sm {
+    min-width: 100px;
+  }
+
+  .product-mobile-plus {
+    padding-bottom: 0.5rem;
+  }
+
+
+}

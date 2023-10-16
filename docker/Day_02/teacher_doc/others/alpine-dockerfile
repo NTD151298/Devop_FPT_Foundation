@@ -1,0 +1,7 @@
+FROM alpine
+
+COPY index.html /tmp
+
+# EXPOSE 80
+
+CMD ["sleep", "3600"]

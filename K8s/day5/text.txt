@@ -1,0 +1,19 @@
+kubectl exec -it pod-nginx-config-map -- /bin/sh  
+printenv | grep COURSE
+printenv | grep SESSION
+
+kubectl exec -it pod-nginx-secret -- /bin/sh
+printenv | grep USERNAME
+printenv | grep PASSWORD
+
+kubectl get pv,pvc
+kubectl delete pvc vpcday5
+kubectl delete pv pvday5
+
+
+
+
+
+
+
+

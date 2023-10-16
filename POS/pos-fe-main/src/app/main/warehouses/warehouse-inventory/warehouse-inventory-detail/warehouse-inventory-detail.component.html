@@ -1,0 +1,110 @@
+<h3>Phiếu kiểm kho ({{ item.warehouse_name }})</h3>
+<hr />
+<div class="grid">
+  <div class="col-6">
+    <p>Thời gian kiểm: {{ item.inventory_date | date: "dd/MM/yyyy hh:mm" }}</p>
+    <p>Nội dung: {{ item.content }}</p>
+  </div>
+  <div class="col-6 flex flex-column justify-content-end">
+
+    <div class="flex flex-row justify-content-end">
+      <button pButton pRipple type="button" label="Xuất excel" class="p-button-info p-button-sm"
+        (click)="exportExcel()" style="min-width: 110px; margin-right: 10px"></button>
+      <ng-container *ngIf="item.id && item.status_id == 0">
+        <button pButton pRipple type="button" label="Xác nhận" class="p-button-success p-button-sm" (click)="approve()"
+          *ngIf="!disableForm" style="margin: 5px"></button>
+        <button pButton pRipple type="button" label="Từ chối" class="p-button-success p-button-sm" (click)="reject()"
+          *ngIf="!disableForm" style="margin: 5px"></button>
+      </ng-container>
+      <ng-container *ngIf="item.status_id == 0">
+        <button pButton pRipple type="button" label="Lưu" class="p-button-success p-button-sm w-1" (click)="save(0)"
+          *ngIf="!disableForm" style="margin: 5px"></button>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<hr />
+<div>
+  <div class="grid" *ngIf="item.status_id == 0">
+    <div class="col-12">
+      <p-autoComplete [(ngModel)]="item.ProductBox" [suggestions]="filteredProducts" styleClass="w-12"
+        (onDropdownClick)="searchProducts()" (completeMethod)="filterProducts($event)" field="nameView"
+        placeholder="Search" [dropdownIcon]="'pi pi-search'" (onKeyUp)="keyPressSearchProduct($event)" [dropdown]="true"
+        (onSelect)="onSelectProduct()" [delay]="400" [minLength]="2">
+      </p-autoComplete>
+    </div>
+  </div>
+  <div>
+    <div>
+      <p-table [value]="item.products" styleClass="p-datatable-sm">
+        <ng-template pTemplate="colgroup">
+          <col />
+          <col />
+          <col />
+          <col />
+          <!-- <col width="90px" /> -->
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Mã bán hàng</th>
+            <th>Mã đơn vị</th>
+            <th>Kiểu đóng gói</th>
+            <th>SL tồn kho</th>
+            <th>Sl kiểm kho</th>
+            <th>Chênh lệch</th>
+            <th>Nguyên nhân</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex" let-record="$implicit" let-rowIndex="rowIndex">
+          <tr [pSelectableRow]="record" class="align-content-start">
+            <td>{{ rowIndex + 1 }}</td>
+            <td style="min-width: 300px">
+              <input type="text" pInputText [(ngModel)]="product.name" [disabled]="true" placeholder="Sản phẩm" />
+            </td>
+            <td>
+              <input type="text" pInputText [(ngModel)]="product.barcode" [disabled]="true" />
+            </td>
+            <td style="max-width: 150px">
+              <input type="text" pInputText [(ngModel)]="product.unit_code" [disabled]="true" placeholder="Đơn vị" />
+            </td>
+            <td style="max-width: 150px">
+              <input type="text" pInputText [(ngModel)]="product.packing_code" [disabled]="true"
+                placeholder="Kiểu đóng gói" />
+            </td>
+            <td>
+              <p-inputNumber [(ngModel)]="product.quantity_stock" mode="decimal" [minFractionDigits]="1"
+                [maxFractionDigits]="3" [disabled]="true"></p-inputNumber>
+            </td>
+            <td>
+              <p-inputNumber [(ngModel)]="product.quantity" mode="decimal" [minFractionDigits]="1"
+                [maxFractionDigits]="3" [disabled]="disableForm" placeholder="Số lượng"
+                (ngModelChange)="changeQuantity(product)"></p-inputNumber>
+            </td>
+            <td>
+              <p-inputNumber [(ngModel)]="product.diff_amount" mode="decimal" [minFractionDigits]="1"
+                [maxFractionDigits]="3" [disabled]="true"></p-inputNumber>
+            </td>
+            <td>
+              <textarea pInputTextarea [(ngModel)]="product.note" [disabled]="disableForm" [rows]="2"
+                placeholder="Ghi chú"></textarea>
+            </td>
+            <td>
+              <button pButton pRipple type="button" icon="pi pi-trash"
+                class="p-button-rounded p-button-danger mr-1 p-button-sm" pTooltip="Xoá" tooltipPosition="bottom"
+                [showDelay]="1000" (click)="deleteProduct(i)" *ngIf="!disableForm"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

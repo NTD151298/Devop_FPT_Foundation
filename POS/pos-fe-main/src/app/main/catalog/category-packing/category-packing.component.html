@@ -1,0 +1,123 @@
+<h3>Quản lý quy cách đóng gói</h3>
+<hr />
+<div class="flex flex-row gap-5 justify-content-center">
+  <form
+    [formGroup]="formSearch"
+    class="w-full flex flex-wrap justify-content-between align-items-end row"
+  >
+    <div
+      class="packing-search col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 flex flex-column"
+    >
+      <h6>Tên cách đóng gói</h6>
+      <input
+        pInputText
+        formControlName="search"
+        type="text"
+        placeholder="Nhập tìm kiếm ..."
+        id="example-search-input"
+        (keyup.enter)="getList()"
+      />
+    </div>
+
+    <div
+      class="col-lg-8 col-md-12 col-sm-12 col-xs-12 flex justify-content-end"
+    >
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Tìm kiếm"
+        (click)="getList()"
+        class="p-button-outlined p-button-rounded p-button-sm"
+        style="width: 6rem"
+      ></button>
+    </div>
+  </form>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-center pt-3"
+>
+  <div class="packing-name-table">
+    <h5 class="m-0" style="font-size: 1.1rem">Danh sách quy cách đóng gói</h5>
+  </div>
+  <div style="padding-right: 0.7rem">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Thêm"
+      class="p-button-sm p-button-success packing-button-plus-mobile"
+      (click)="openCreatePackingModal(null, 0)"
+      style="width: 6rem"
+    ></button>
+  </div>
+</div>
+
+<div class="packing-table pt-1">
+  <p-table responsiveLayout="scroll" [value]="categoryPacking" styleClass="">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="">STT</th>
+        <th class="packing-table-name packing-table-th-mobile">
+          Tên quy cách đóng gói
+        </th>
+        <th class="packing-table-th-mobile">Mã quy cách đóng gói</th>
+        <th class="packing-table-th-mobile-sm">Sắp xếp</th>
+        <th class="packing-table-th-mobile-sm">Trạng thái</th>
+        <th class="packing-table-th-mobile-sm">Hành Động</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>
+          {{ item.name }}
+        </td>
+        <td>
+          {{ item.code }}
+        </td>
+        <td>
+          {{ item.order }}
+        </td>
+        <td>
+          <p *ngIf="item.status_id == 0">Chưa duyệt</p>
+          <p *ngIf="item.status_id == 1">Đã duyệt</p>
+        </td>
+        <td _ngcontent-qnv-c278="" class="text-truncate">
+          <i
+            class="pi pi-pencil"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 10px"
+            (click)="openCreatePackingModal(item, indexOfelement)"
+          ></i>
+          <i
+            class="pi pi-trash"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="deleteCategoryPacking(item.id)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div class="row">
+  <pagination
+    [totalItems]="totalRows"
+    [maxSize]="5"
+    [itemsPerPage]="page_size"
+    class="pagination-sm"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+    [boundaryLinks]="true"
+    (pageChanged)="onChangedPage($event)"
+    class="pull-right center"
+    style="margin-top: 10px"
+  ></pagination>
+</div>

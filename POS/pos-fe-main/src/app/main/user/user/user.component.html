@@ -1,0 +1,147 @@
+<h3>Quản lý người dùng</h3>
+<hr />
+<div class="flex flex-row gap-5 justify-content-center">
+  <form
+    [formGroup]="formGroupCreate"
+    class="row w-full flex flex-wrap justify-content-start align-items-end"
+  >
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Tên hiển thị</h6>
+      <input
+        pInputText
+        formControlName="full_name"
+        type="text"
+        placeholder="Tên hiển thị"
+        (keyup.enter)="search()"
+      />
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Tên đăng nhập</h6>
+      <input
+        pInputText
+        formControlName="username"
+        placeholder="Tên đăng nhập"
+        type="text"
+        (keyup.enter)="search()"
+      />
+    </div>
+
+    <div class="wrap col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-8">
+      <div
+        class="flex flex-column justify-content-end"
+        style="width: 110px; margin-right: 10px"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Tìm kiếm"
+          class="p-button-outlined p-button-rounded p-button-sm"
+          (click)="search()"
+        ></button>
+      </div>
+      <div class="flex flex-column justify-content-end" style="width: 110px">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Thêm mới"
+          class="p-button-success p-button-sm"
+          (click)="openCreateModifyUserModal(null, 0)"
+        ></button>
+      </div>
+    </div>
+  </form>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-center pt-3 pb-2"
+>
+  <div>
+    <h5 class="m-0">Danh sách người dùng</h5>
+  </div>
+</div>
+
+<div class="pt-1 user-table">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="userList"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="" style="width: 50px">STT</th>
+        <th class="user-table-th-big">Tên đăng nhập</th>
+        <th class="user-table-th-big">Tên hiển thị</th>
+        <th class="user-table-th-sm">Mã</th>
+        <th class="user-table-th-big">Địa chỉ</th>
+        <th class="user-table-th-big">Số điện thoại</th>
+        <th class="user-table-th-big">Email</th>
+        <th class="user-table-th-big" style="width: 150px; text-align: center">
+          Thao tác
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.full_name }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.phone_number }}</td>
+        <td>{{ item.email }}</td>
+        <td style="text-align: center" class="">
+          <i
+            class="pi pi-pencil"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 5px"
+            (click)="openCreateModifyUserModal(item, indexOfelement)"
+          ></i>
+          <i
+            class="pi pi-key"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(177, 167, 28); margin-right: 10px"
+            (click)="forgotPassword(item)"
+          ></i>
+          <i
+            class="pi pi-users"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="openCreateModifyUserGroupModal(item)"
+          ></i>
+
+          <span
+            style="color: rgb(184, 50, 90); font-size: 16px; margin-right: 5px"
+            class="group"
+            (click)="openCreateModifyUserWarehouse(item)"
+          >
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <pagination
+      [totalItems]="totalRows"
+      [maxSize]="5"
+      [itemsPerPage]="formGroupCreate.value.page_size"
+      class="pagination-sm"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+      [boundaryLinks]="true"
+      (pageChanged)="onChangedPage($event)"
+      class="pull-right center"
+      style="margin-top: 10px"
+    ></pagination>
+  </div>
+</div>

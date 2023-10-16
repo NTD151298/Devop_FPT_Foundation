@@ -1,0 +1,31 @@
+version: "3.8"
+
+networks:
+  sample-webapp-network:
+
+services:
+  frontend:
+    container_name: reactjs-frontend
+    image: "thainm/sample-webapp-reactjs:latest"
+    restart: always
+    ports:
+      - 0.0.0.0:8080:80
+    networks:
+      - sample-webapp-network
+    logging:
+      driver: gcplogs
+      options:
+        labels: web,frontend
+
+  backend:
+    container_name: nodejs-backend
+    image: "thainm/sample-webapp-nodejs:latest"
+    restart: always
+    ports:
+      - 0.0.0.0:3000:3000
+    networks:
+      - sample-webapp-network
+    logging:
+      driver: gcplogs
+      options:
+        labels: web,backend

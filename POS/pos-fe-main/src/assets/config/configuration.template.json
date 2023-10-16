@@ -1,0 +1,4 @@
+{
+    "ApiUrl": "${API_URL}", 
+    "ClientId": "PosSmartGap"
+}

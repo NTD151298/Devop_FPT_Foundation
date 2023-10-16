@@ -1,0 +1,115 @@
+<div class="flex flex-row justify-content-between">
+    <h3>Báo cáo sổ quỹ theo ca</h3>
+    <div>
+        <button pButton pRipple type="button" label="Xuất báo cáo" class="p-button-rounded p-button-sm"
+            (click)="exportExcel()"></button>
+    </div>
+</div>
+<hr />
+<div class="flex flex-row gap-5">
+    <div class="row col-12">       
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+            <h6>Từ ngày</h6>
+            <p-calendar [(ngModel)]="filter.start_date" (onSelect)="getList(true)" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+            <h6>Đến ngày</h6>
+            <p-calendar [(ngModel)]="filter.end_date" (onSelect)="getList(true)" [showIcon]="true"></p-calendar>
+        </div>      
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+            <h6>Kho</h6>
+            <p-dropdown *ngIf="listWarehouse.length>0" [options]="listWarehouse" [(ngModel)]="filter.warehouse_id"
+                (onChange)="getList(true)" placeholder="Chọn kho" [showClear]="true" filter="true"></p-dropdown>
+        </div>
+        <div class="wrap col-sm-12 col-md-12 col-lg-3 col-xl-12 col-xxl-6">
+            <div class="flex flex-column justify-content-end">
+                <button style="min-width: 110px" pButton pRipple type="button" label="Tìm kiếm"
+                    class="p-button-outlined p-button-rounded p-button-sm" (click)="getList(true)"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pt-3">
+    <p-table responsiveLayout="scroll" [value]="items" styleClass="p-datatable-sm w-100">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center w-6rem">ID Phiên</th>
+                <th class="text-center user-table-th-big">Tên siêu thị</th>
+                <th class="text-center user-table-th-big">Tên người bán</th>
+                <th class="text-center user-table-th-big">Bắt đầu</th>
+                <th class="text-center user-table-th-big">Kết thúc</th> 
+                <th class="text-center user-table-th-big">Tổng tiền thẻ</th>
+                <th class="text-center user-table-th-big">Tổng tiền chuyển khoản</th>
+                <th class="text-center user-table-th-big">Tổng tiền thu</th>
+                <th class="text-center user-table-th-big">Tiền mặt thu trong ca</th>            
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-i="rowIndex">
+            <tr [ngClass]="{ 'bg-cyan-100': item.status === 0 }">
+                <td class="text-center">{{ item.id }}</td>
+                <td>{{ item.warehouse_name}}</td>
+                <td>{{ item.staff_name }}</td>
+                <td class="text-center">
+                    {{ item.start_time | date: "dd/MM/yyyy HH:mm" }}
+                </td>
+                <td class="text-center">
+                    {{ item.end_time | date: "dd/MM/yyyy HH:mm" }}
+                </td>             
+                <td class="text-right">
+                    {{ item.closing_card | number: "0.0-0" }}&nbsp;đ
+                </td>
+                <td class="text-right">
+                    {{ item.closing_online_transfer | number: "0.0-0" }}&nbsp;đ
+                </td>
+                <td class="text-right">
+                    {{ item.closing_total_proceeds | number: "0.0-0" }}&nbsp;đ
+                </td>
+                <td class="text-right">
+                    {{ item.session_cash | number: "0.0-0" }}&nbsp;đ
+                </td>               
+            </tr>
+        </ng-template>
+    </p-table>  
+</div>
+
+<table #export class="hidden">
+    <thead>
+      <tr>
+        <th class="text-center w-6rem">ID Phiên</th>
+        <th class="text-center user-table-th-big">Tên siêu thị</th>
+        <th class="text-center user-table-th-big">Tên người bán</th>
+        <th class="text-center user-table-th-big">Bắt đầu</th>
+        <th class="text-center user-table-th-big">Kết thúc</th>       
+        <th class="text-center user-table-th-big">Tổng tiền thẻ</th>
+        <th class="text-center user-table-th-big">Tổng tiền chuyển khoản</th>
+        <th class="text-center user-table-th-big">Tổng tiền thu</th>
+        <th class="text-center user-table-th-big">Tiền mặt thu trong ca</th>
+   
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <td class="text-center">{{ item.id }}</td>
+        <td>{{ item.warehouse_name}}</td>
+        <td>{{ item.staff_name }}</td>
+        <td class="text-center">
+            {{ item.start_time | date: "dd/MM/yyyy" }}
+        </td>
+        <td class="text-center">
+            {{ item.end_time | date: "dd/MM/yyyy" }}
+        </td>       
+        <td class="text-right">
+            {{ item.closing_card | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+            {{ item.closing_online_transfer | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+            {{ item.closing_total_proceeds | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+            {{ item.session_cash | number: "0.0-0" }}&nbsp;đ
+        </td>        
+      </tr>
+    </tbody>
+  </table>

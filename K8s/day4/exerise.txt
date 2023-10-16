@@ -1,0 +1,8 @@
+bài 1 
+Create service + deployment for Nginx image with any resource request and limit
+Port-forward the service to port 8080 localhost
++ initcontainer, env, nodeport,...
+
+
+bài 2 
+Deploy ingress nginx controller thoi nhe

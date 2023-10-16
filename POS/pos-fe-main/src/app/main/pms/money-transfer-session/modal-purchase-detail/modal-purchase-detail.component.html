@@ -1,0 +1,136 @@
+<form class="mua-detail" novalidate >
+    <div class="flex justify-content-between pb-2 mb-3" style="border-bottom: 2px solid rgb(153, 149, 149)">
+        <h3>Chi tiết phiếu mua hàng</h3>
+    </div>
+
+    <div class="row" >
+        
+
+       
+        <div class="col-lg-3">
+            <h6>Nội dung</h6>
+            <input
+                pInputText
+            />
+        </div>
+
+
+        <div class="col-lg-3">
+            <h6>Ghi chú</h6>
+            <input
+                pInputText
+            />
+        </div>
+
+        <div class="col-lg-3">
+            <h6>Đối tác</h6>
+            <p-dropdown 
+                placeholder="Chọn đối tác" 
+                [showClear]="true"
+            >
+            </p-dropdown>
+        </div>
+
+        <div class="col-lg-3">
+            <h6>Kho đích</h6>
+            <p-dropdown 
+                placeholder="Chọn kho đích" 
+                [showClear]="true"
+            >
+            </p-dropdown>
+        </div>
+
+        <div class="col-lg-3">
+            <h6>Ngày bắt đầu gửi</h6>
+            <input
+                pInputText
+            />
+        </div>
+    </div>
+
+    <div class="pur-detail-table mt-3">
+        <table>
+            <thead>
+                    <th style="width: 30px; text-align: center;">STT</th>
+                    <th style="width: 200px">Sản phẩm</th>
+                    <th>Mã SP</th>
+                    <th>SL tồn kho</th>
+                    <th>SL mua</th>
+                    <th>Giá nhập</th>
+                    <th>Giá bán</th>
+                    <th>Mã đơn vị</th>
+                    <th style="width: 110px">Kiểu đóng gói</th>
+                    <th style="width: 100px">SP cân</th>
+                    <th>Ghi chú</th>
+            </thead>
+
+            <tbody>
+                <tr >
+                    <td style="text-align: center;">1</td>
+                    <td>
+                        <p-dropdown 
+                            placeholder="Chọn sản phẩm" 
+                            [showClear]="true"
+
+                        >
+                        </p-dropdown>
+                    </td>
+                    <td>
+                        <input
+                            pInputText
+                        />
+                    </td>
+                    <td>
+                        <input
+                            pInputText
+                            placeholder="0.0"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            pInputText
+                            placeholder="0.0"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            pInputText
+                            placeholder="0.0"
+                        />
+                    </td>
+                    <td>
+                        <input
+                            placeholder="0.0"
+                            text="number"
+                            pInputText
+                        />
+                    </td>
+                    <td>
+                        <p-dropdown 
+                            placeholder="Hộp" 
+                            [showClear]="true"
+                        >
+                        </p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown 
+                            placeholder="Hộp" 
+                            [showClear]="true"
+                        >
+                        </p-dropdown>
+                    </td>
+                    <td >
+                        
+                    </td>
+                    <td>
+                        <input
+                            text="number"
+                            pInputText
+                        />
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

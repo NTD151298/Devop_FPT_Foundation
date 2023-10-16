@@ -1,0 +1,44 @@
+# Apply the configuration defined in this YAML file using the kubectl apply command
+# kubectl apply -f pod-nginx.yaml --namespace this-is-nginx-space
+
+# Pod on First Node (control-plane node)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-nginx-node1 # The name of the pod
+  labels:
+    app: nginx
+spec:
+  nodeName: duong1-control-plane # Specify the name of the control-plane node
+  containers:
+    - name: container-node1-nginx # Name of the container
+      image: nginx:alpine # Use the official Nginx image
+      ports:
+        - containerPort: 80 # Nginx uses port 80
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+  initContainers: # Add the initContainers section for defining init containers.
+    - name: init-container-example # Name of the init container.
+      image: busybox:latest # Use a simple BusyBox image as an example.
+      command: ["sh", "-c", "echo 'Init Container is running!'"] # Specify the init container command.
+
+# ---
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: pod-httpd-node1 # The name of the http pod
+#   labels:
+#     app: httpd
+# spec:
+#   nodeName: duong1-control-plane # Specify the name of the control-plane node
+#   containers:
+#     - name: container-node1-httpd # Name of the container
+#       image: httpd # Use the official httpd image
+#       ports:
+#         - containerPort: 80 # HTTPD also uses port 80
+#       resources:
+#         limits:
+#           cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+#           memory: "512Mi" # Limit memory usage to 512 megabytes

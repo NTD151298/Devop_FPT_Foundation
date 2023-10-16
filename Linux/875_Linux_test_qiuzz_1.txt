@@ -1,0 +1,612 @@
+Quiz _HCM_FRF.V_Devops_02[LINUX]
+Tổng điểm
+775/1000
+ 875/1000
+sửa lại thêm 4 câu đúng 
+Các câu lỗi:
+câu 9: lỗi
+câu 13: lỗi
+câu 26: lỗi
+câu 32: lỗi
+ 
+Câu có nhầm lẫn đáp án đúng:
+câu 31: Đáp án đúng là B
+câu 33: Đáp án đúng là A
+ 
+Các câu không thay đổi:
+câu 7: đúng
+câu 25: đúng
+
+
+
+40 CÂU - 60 PHÚT
+ExtendedForms Id (skip this field)
+DO NOT EDIT this field or your score will not recorded.
+999ccc91-04aa-4089-95f2-421e1fbb6407
+HỌ VÀ TÊN
+*
+Nguyễn Thái Dương
+ 
+1. You need to prepare a report for your supervisor with the total space used by each user. What command would help you prepare this report?
+
+A.  du
+B.  df
+C.  ls -al
+D.  wc
+25/25
+A
+ 
+B
+C
+D
+ 
+2. You need to prepare a report that will be the basis of planning for needed hard disk space expansion. What command could you use to help prepare it?
+
+A.  du
+B.  df
+C.  ls –l
+D.  wc
+25/25
+A
+B
+ 
+C
+D
+ 
+3. What would you expect  to see if you type “uname -a”?
+
+A.  Information on the username of the current user,including the user’s real name
+B.  Information on the running system, such as the OS, the kernel version, and the CPU type
+C.  Information on the computer’s hostname, as it’s defined locally
+D.  Information on the loaded kernel modules, including the modules upton which they depend
+25/25
+A
+B
+ 
+C
+D
+ 
+
+4. Which runlevels are reserved by init for reboot?
+
+A.  0
+B.  1
+C.  5
+D.  6
+25/25
+A
+B
+C
+D
+ 
+ 
+5. In what environment variable is the current working directory stored>
+
+A.  PATH
+B.  CWD
+C.  PWD
+D.  PRESENT 
+25/25
+A
+B
+C
+ 
+D
+ 
+6. What is the purpose of condition expression in the shell scripts? 
+
+A.  They prevent scripts from executing if license condition are not met.
+B.  They display information on the script’s computer environment.
+C.  They enable the script to take different actions in response to variable data.
+D.  They enable script to learn in a manner reminiscent of Pavlovian conditioning.
+25/25
+A
+B
+C
+ 
+D
+ 
+7. Which of the following lines, if used in a user cron job, will run /usr/local/bin/cleanup twice a day?
+
+A. 15 7,19 * * * /usr/local/bin/cleanup
+B. */12 * * * * /usr/local/bin/cleanup
+C. 00 12 * * * /usr/local/bin/cleanup
+D. 15 7-19 * * * /usr/local/bin/cleanup
+0/25
+A
+B
+C
+ 
+D
+Câu trả lời đúng
+A
+ 
+8. A user types “kill -9 19999” at a bash prompt. What is the probable intent, assuming the user typed the correct command?
+
+A. To cut off a network connection using TCP port 19999
+B. To terminate a program with process ID 19999
+C. To show 19999 processes which were removed last 9 days
+D. To reload the configuration of service with process ID 19999
+25/25
+A
+B
+ 
+C
+D
+ 
+9. Which of the following commands creates a display of processes, showing the parent/child relationships through links between their names?
+
+A.    ps –ef
+B.    ps aux
+C.    ps -e
+D.    All of the above
+0/25
+A
+B
+ 
+C
+D
+Câu trả lời đúng
+A
+ 
+10. What would a Linux system adminstrator type to remove the nemo account and its home directory?
+
+A.  userdell nemo
+B.  userdell -f nemo
+C.  userdel -r nemo
+D.  rm -f /home/nemo
+25/25
+A
+B
+C
+ 
+D
+ 
+11. Question: What will be the output of the following Linux script?
+#!/bin/bash
+count=0
+while [ $count -lt 3 ]
+do    
+echo "Count: $count"    
+((count++))
+done
+Which of the following is the correct output? 
+
+A.
+Count: 0  
+Count: 1   
+Count: 2 
+B.
+Count: 1   
+Count: 2   
+Count: 3 
+C.
+Count: 0   
+Count: 1
+Count: 2  
+Count: 3 
+D.
+Count: 1   
+Count: 2
+25/25
+A
+ 
+B
+C
+D
+ 
+12. Question: What will be the output of the following Linux script? 
+#!/bin/bash
+message="Hello, World!"
+echo $messages
+Which of the following is the correct output?
+
+A.  Hello, World!
+B.  $message
+C.  "Hello, World!"
+D.  The script will show nothing.
+25/25
+A
+B
+C
+D
+ 
+ 
+13. Question: What will be the output of the following Linux script? 
+#!/bin/bash
+text="Hello, World!"
+new=$(echo $message | sed -e 's/World/SED/')
+echo $new
+Which of the following is the correct output?
+
+A.  Hello, SED!
+B.  Hello, World!
+C.  World, World!
+D.  The script will throw an error.
+25/25
+A
+ 
+B
+C
+D
+ 
+14. Which of the following system logging codes represents the highest priority?
+
+A.	Emerg
+B.	Warning
+C.	Critical
+D.	Debug 
+0/25
+A
+ 
+B
+C
+D
+Câu trả lời đúng
+D
+ 
+15. Question: In Linux, what does the `sed` command stand for?
+Choose the most appropriate option:
+
+A.	Search and Edit
+B.	Stream Editor
+C.	Substitute and Edit
+D.	Search and Delete
+0/25
+A
+ 
+B
+C
+D
+Câu trả lời đúng
+B
+ 
+16. What is the effect of this command?
+“rpm -ivh megaprod.rpm”
+
+A.	The megaprod package, if it’s installed, is uninstalled from the computer
+B.	The megaprod.rpm package, if it exists, is valid, and is not already installed, is installed on the system
+C.	The megaprod.rpm source RPM package is compiled into a binary RPM for the computer
+D.	Nothing; megaprod.rpm is not a valid RPM filename, so rpm will refuse to operate on this file
+25/25
+A
+B
+ 
+C
+D
+ 
+17	Question: Using the octal notation, what permission value should be used to grant read, write, and execute permissions to the owner, read and execute permissions to the group, and read-only permissions to others for a file or directory in Linux?
+Choose the most appropriate option:
+
+A.	744
+B.	644
+C.	754
+D.	666 	
+25/25
+A
+B
+C
+ 
+D
+ 
+18. Question: Which command is used to grant read, write, and execute permissions to a file or directory in Linux?
+Choose the most appropriate option:
+
+A.	chmod
+B.	chown
+C.	ls
+D.	rm
+25/25
+A
+ 
+B
+C
+D
+ 
+19. You want to backup the /home directories to /backups on another partion.
+
+A.	tar -cf /backups/HomeBackUp.tar home/*
+B.	cp /home/* /backups/
+C.	cp -P /home /backups
+D.	tar -xf /backups/HomeBackUp.tar home/*
+25/25
+A
+ 
+B
+C
+D
+ 
+20. Which command will remove the directory /home/student and all its files and subdirectories?
+
+A.	rmdir -p /home/student
+B.	rm -fr /home/student
+C.	rmdir -p /home/*
+D.	rm -fr /home/student/*
+25/25
+A
+B
+ 
+C
+D
+ 
+21. ________ command is used to remove files?
+ 
+A.	dm
+B.	rm
+C.	delete
+D.	erase
+E.	None of the above 
+25/25
+A
+B
+ 
+C
+D
+ 
+22. _______ command is used to remove the directory?
+A.	rdir
+B.	remove
+C.	rd
+D.	rmdir
+E.	None of the above 
+25/25
+A
+B
+C
+D
+ 
+ 
+23. http://127.0.0.1 is the address of
+ 
+A.	ISP (Internet Service Provider)
+B.	Own Machine
+C.	windows
+D.	Linux
+E.	None of the above 
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+24. http://127.0.0.1 is the address of
+A.	ISP (Internet Service Provider)
+B.	Own Machine
+C.	windows
+D.	Linux
+E.	None of the above 
+0/25
+A
+B
+ 
+C
+D
+E
+Câu trả lời đúng
+D
+ 
+25. Which one is the permission number used for r – x?
+ 
+A.	4
+B.	7
+C.	1
+D.	3
+E.	5 
+25/25
+A
+B
+C
+D
+E
+ 
+ 
+26. Which one is the permission number used for r – x?
+ 
+A.	4
+B.	7
+C.	1
+D.	3
+E.	5 
+0/25
+A
+B
+C
+D
+E
+ 
+Câu trả lời đúng
+B
+C
+ 
+27. Which of the following is a popular Linux distribution?
+ 
+A.	Microsoft Windows
+B.	macOS
+C.	Ubuntu
+D.	Android
+25/25
+A
+B
+C
+ 
+D
+ 
+28. Which of the following best describes Linux?
+ 
+A.	A programming language
+B.	An operating system
+C.	A hardware device
+D.	A web browser
+25/25
+A
+B
+ 
+C
+D
+ 
+29. Which command is used to search for a specific text pattern in files in Linux?
+ 
+A.	grep
+B.	find
+C.	ls
+D.	awk
+25/25
+A
+ 
+B
+C
+D
+ 
+30. Which of the following commands is used to create a symbolic link in Linux?
+ 
+A.	ln
+B.	cp
+C.	mv 
+D.	rm
+0/25
+A
+B
+ 
+C
+D
+Câu trả lời đúng
+A
+ 
+31. You are installing a new application for your users. Where should you put it?
+
+A.	/etc
+B.	/usr
+C.	/home
+D.	/var
+0/25
+A
+B
+ 
+C
+D
+Câu trả lời đúng
+A
+ 
+32. The regular expression to find all lines beginning with cat is
+
+A.	/cat/
+B.	/[cat]/
+C.	/^cat/
+D.	/cat*/
+25/25
+A
+B
+C
+ 
+D
+ 
+33. A system administrator types the following command:
+# shutdown -c
+What is the effect of this command?
+
+A.	A previously scheduled shutdown is cancelled.
+B.	The system shuts down and reboots immediately.
+C.	The system shuts down and halts immediately.
+D.	The system asks for confirmation and then shuts down.
+0/25
+A
+ 
+B
+C
+D
+Câu trả lời đúng
+C
+ 
+34. How do you exit Vi’s insert mode in order to type command-mode commands?
+
+A.	Press the ~ key.
+B.	Press the Esc key.
+C.	Type Ctrl+X followed by Ctrl+C.
+D.	Press the F10 key.
+25/25
+A
+B
+ 
+C
+D
+ 
+35. What is the default shell in most Linux distributions?
+ 
+A.	Bash
+B.	PowerShell
+C.	Zsh
+D.	Command Prompt
+25/25
+A
+ 
+B
+C
+D
+ 
+36. Which command is used to search for files and directories in Linux?
+ 
+A.	find
+B.	search
+C.	locate
+D.	query
+25/25
+A
+ 
+B
+C
+D
+ 
+37. Which command is used to view the contents of a file in Linux?
+ 
+A.	view
+B.	cat
+C.	ls
+D.	open
+25/25
+A
+B
+ 
+C
+D
+ 
+38. Which file contains the configuration settings for the Bash shell in Linux?
+
+A.	.bashrc
+B.	.profile
+C.	.bash_profile
+D.	.bash_config
+25/25
+A
+ 
+B
+C
+D
+ 
+39. What is the command-line interface used in Linux called?
+ 
+A.	GUI
+B.	DOS
+C.	Terminal
+D.	All of the above
+25/25
+A
+B
+C
+ 
+D
+ 
+40. What are the components of a Linux distribution?
+
+A.	Kernel
+B.	Utilities
+C.	Services
+D.	Software/Packages Management
+E.	All of the above
+25/25
+A
+B
+C
+D
+E

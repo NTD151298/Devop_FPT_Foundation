@@ -1,0 +1,10 @@
+Bài1
+How many services in the cluster? Create 1 pod with nginx:alpine image and 1 pod 
+with httpd image and assign same labels to them
+(mọi người thêm options --show-labels để nó hiện ra label của các pod xem có trùng ko nhé)   
+
+Bài2
+tạo 1 service nodeport có label khớp với 2 container vừa tạo
+kubectl port-fortward           
+
+

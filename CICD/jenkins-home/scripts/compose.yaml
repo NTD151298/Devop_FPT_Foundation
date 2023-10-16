@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  jenkins:
+    build: ./
+    # image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      - cisystem
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    env_file: ./secrets.env
+    restart: always
+
+networks:
+  cisystem:
+
+volumes:
+  my_jenkins_home:

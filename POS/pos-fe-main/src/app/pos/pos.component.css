@@ -1,0 +1,13 @@
+app-pos-invoid {
+    display: none;
+}
+
+@media print {
+    #pos-content {
+        display: none;
+    }
+
+    app-pos-invoid {
+        display: block; 
+    } 
+}

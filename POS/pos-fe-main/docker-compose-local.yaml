@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  pos-fe-v2:
+    environment:
+      - API_URL=http://localhost:5293/api/
+    container_name: smartgap-pos-fe
+    image: duongtn1512/smartgap-pos-fe:devops-duong-1
+    networks:
+      - smartgapjsc-pos-network
+    ports:
+      - target: 80
+        published: 4200
+    labels:
+      service: pos-fe
+      env: "Development"
+      project: pos
+networks:
+  smartgapjsc-pos-network:
+    driver: bridge

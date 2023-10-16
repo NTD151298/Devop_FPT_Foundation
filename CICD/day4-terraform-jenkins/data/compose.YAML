@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  jenkins:
+    container_name: jenkins  # Đặt tên container là "jenkins"
+    build: ./  # Sử dụng context hiện tại để build image.
+    image: duongtn1512/jenkins_docker:after_FPT_training  # Tên image sau khi build
+    ports:
+      - "8080:8080"  # Kết nối cổng máy host (bên trái) với cổng container (bên phải).
+      - "50000:50000"  # Cổng khác (nếu cần).
+    networks:
+      - cisystem  # Sử dụng network "cisystem" (bạn có thể thay tên mạng tại đây).
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Chia sẻ truy cập vào Docker socket.
+      - /usr/bin/docker:/usr/bin/docker  # Chia sẻ thực thi Docker.
+    restart: always  # Luôn khởi động container khi Docker daemon khởi động lại.
+
+networks:
+  cisystem:  # Đặt tên mạng (có thể đổi tên mạng tại đây).
+
+volumes:
+  my_jenkins_home:

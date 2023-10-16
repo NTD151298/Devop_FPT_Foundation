@@ -1,0 +1,91 @@
+<ng-container *ngIf="units.length > 0">
+  <div class="modal-content">
+    <form [formGroup]="formGroupCreate" (ngSubmit)="save()" novalidate autocomplete="off">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span>Chỉnh sửa giá của sản phẩm</span>
+        </h5>
+        <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Tên sản phẩm</label>
+          <input [disabled]="true" type="string" class="form-control" placeholder="Tên sản phẩm"
+            [value]="itemDetail.name">
+        </div>
+
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Barcode</label>
+          <input  type="string" class="form-control" placeholder="Mã code" [value]="itemDetail.barcode" formControlName="barcode">
+        </div>
+
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Ngày hết hạn</label>
+          <input [disabled]="true" type="string" class="form-control" placeholder="Ngày hết hạn"
+            [value]="itemDetail.exp_date | date:'dd/MM/yyyy'">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Mã đơn vị</label>
+          <p-dropdown
+              [options]="units"
+              formControlName="unit_code"
+              placeholder="Chọn đơn vị"
+              [showClear]="true"
+            ></p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Phương thức đóng gói</label>
+          <p-dropdown
+              [options]="packings"
+              formControlName="packing_code"
+              placeholder="Chọn phương thức"
+              [showClear]="true"
+            ></p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Giá nhập sản phẩm</label>
+          <!-- <input type="number" class="form-control" placeholder="Giá nhập sản phẩm"
+            [value]="formGroupCreate.get('import_price').value | number:'1.0-0'" formControlName="import_price"> -->
+          <p-inputNumber class="input-number" inputId="integeronly" formControlName="import_price">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Giá bán sản phẩm</label>
+          <!-- <input type="number" class="form-control" placeholder="Giá bán sản phẩm" formControlName="price"> -->
+          <p-inputNumber class="input-number" inputId="integeronly" formControlName="price">
+          </p-inputNumber>
+        </div>
+        <div class="form-group" *appHasRole="['VOUCHER-create']">
+          <label class="form-label" for="Admin_user">Giá khuyến mại</label>
+          <!-- <input type="number" class="form-control" placeholder="Giá bán sản phẩm" formControlName="price"> -->
+          <p-inputNumber class="input-number" inputId="integeronly" formControlName="sale_price">
+          </p-inputNumber>
+        </div>
+
+        <div class="form-group pt-4">
+          <div class="field-checkbox" *appHasRole="['PURCHASE-purchase-create']">
+            <p-checkbox [(ngModel)]="itemDetail.is_weigh" [binary]="true" inputId="binary" formControlName="is_weigh"></p-checkbox>
+            <label for="binary">Sản phẩm cân</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " (click)="close()">
+          Bỏ qua
+        </button>
+        <button type="submit" class="btn btn-primary btn-smartgap">
+          <i class="fa fa-save"></i>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-container>

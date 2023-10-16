@@ -1,0 +1,21 @@
+"Name": "abc9000",
+
+	"Name": "b001",
+               	"EndpointID": "b684467f682fbc43ad7e65b00c87061544819e479d4854678ed009a0e074599b",
+                	"MacAddress": "02:42:ac:15:00:03",
+                	"IPv4Address": "172.21.0.3/16",
+    "Name": "b000",
+                	"EndpointID": "0aca90aac0ac7ae63289a0053726176fed6b669f220b3b478cd457fa8ceb977b",
+                	"MacAddress": "02:42:ac:15:00:02",
+                	"IPv4Address": "172.21.0.2/16",
+
+docker exec -it b000 bash
+docker exec -it b001 bash
+
+apt update
+apt install iputils-ping
+
+ping b001 \ ping 172.21.0.3
+ping b000 \ ping 172.21.0.2
+
+docker network connect abc9000 a001

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="row px-8">
+      <div class="col-12 pt-3">
+        <h6>Kho kiểm</h6>
+        <input
+            type="text"
+            pInputText
+            [(ngModel)]="item.warehouse_name"
+            [disabled]="true"
+          />
+      </div>
+      <div class="col-12 pt-3">
+        <h6>Thời gian kiểm kho</h6>
+        <p-calendar [(ngModel)]="item.inventory_date" showTime="true" [hourFormat]="24" appendTo="body" [showIcon]="true"></p-calendar>
+    </div>
+      <div class="col-12 pt-3">
+          <h6>Nội dung kiểm kho</h6>
+          <textarea pInputTextarea [(ngModel)]="item.content" [rows]="5"></textarea>
+      </div>
+  </div>
+</div>
+<div class="pt-3 flex justify-content-center">
+  <div class="px-3"><button pButton type="button" label="Đóng" (click)="onCloseClick()"></button></div>
+  <div class="px-3"><button pButton type="button" class="p-button-success"label="Thêm kiểm kho"
+    (click)="onSaveClick()"></button></div>
+</div>

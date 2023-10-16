@@ -1,0 +1,395 @@
+<div class="mt-4">
+<h3 *ngIf="item.type == 1">Phiếu xuất kho trả nhà cung cấp</h3>
+<h3 *ngIf="item.type == 2">Phiếu xuất kho hủy</h3>
+<h3 *ngIf="item.type == 3">Phiếu xuất kho luân chuyển</h3>
+</div>
+<hr />
+<div class="grid">
+  <!-- <div>{{warehouseRequestLocal | json}}</div> -->
+  <div [ngClass]="{'wrap align-self-end':true, 'col-3':!(item?.type==2) , 'col-4':item?.type==2 }">
+    <h6>Mã phiếu</h6>
+    <input type="text" pInputText [(ngModel)]="item.code" [disabled]="true" />
+  </div>
+  <div class="col-3" [hidden]="item.type == 2 || item.type == 3">
+    <h6>Đối tác</h6>
+    <p-dropdown
+      [options]="partners"
+      [(ngModel)]="item.partner_id"
+      placeholder="Chọn đối tác"
+      [showClear]="true"
+      [disabled]="disableForm"
+      filter="true"
+      (onChange)="searchPartner(item.partner_id)"
+    ></p-dropdown>
+  </div>
+  <div [ngClass]="{'wrap align-self-end':true, 'col-3':!(item?.type==2) , 'col-4':item?.type==2 }">
+    <h6>Kho nguồn</h6>
+    <p-dropdown
+      [options]="warehouses"
+      [(ngModel)]="item.warehouse_id"
+      placeholder="Chọn kho nguồn"
+      [showClear]="true"
+      filter="true"
+      [disabled]="disableForm"
+      (onChange)="getProductWarehouse()"
+    >
+    </p-dropdown>
+  </div>
+  <div class="col-3" [hidden]="item.type == 1 || item.type == 2">
+    <h6>Kho đích</h6>
+    <p-dropdown
+      [options]="warehouses"
+      [(ngModel)]="item.warehouse_destination_id"
+      placeholder="Chọn kho đích"
+      [showClear]="true"
+      filter="true"
+      [disabled]="disableForm"
+    >
+    </p-dropdown>
+  </div>
+  <div [ngClass]="{'wrap align-self-end':true, 'col-3':!(item?.type==2) , 'col-4':item?.type==2 }">
+    <h6>Ngày bắt đầu gửi</h6>
+    <p-calendar
+      [(ngModel)]="item.export_date"
+      [showIcon]="false"
+      [disabled]="disableForm"
+    ></p-calendar>
+  </div>
+
+    <div class="col-md-4 col-lg-3 col-xxl-3 p-2" [hidden]="item.type == 2">
+      <h6>Địa chỉ giao</h6>
+      <textarea
+        pInputTextarea
+        [disabled]="disableForm"
+        [(ngModel)]="item.source_address"
+      ></textarea>
+    </div>
+    <div [ngClass]="{'wrap align-self-end p-2 col-md-4':true, ' col-lg-3 col-xxl-3 ':!(item?.type==2) , ' col-lg-4 col-xxl-4 ':item?.type==2 }">
+      <h6>Nội dung</h6>
+      <textarea
+        pInputTextarea
+        [disabled]="disableForm"
+        [(ngModel)]="item.content"
+      ></textarea>
+    </div>
+    <div [ngClass]="{'wrap align-self-end p-2 col-md-4':true, ' col-lg-3 col-xxl-3 ':!(item?.type==2) , ' col-lg-4 col-xxl-4 ':item?.type==2 }">
+      <h6>Ghi chú</h6>
+      <textarea
+        pInputTextarea
+        [disabled]="disableForm"
+        [(ngModel)]="item.note"
+      ></textarea>
+    </div>
+    <div [ngClass]="{'flex flex-column justify-content-end p-2 mb-2':true, 'col-md-12 col-lg-3 col-xxl-3':!(item?.type==2) , 'col-md-4 col-lg-4 col-xxl-4':item?.type==2 }">
+      <div class="flex flex-row justify-content-end">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Lưu"
+          class="p-button-success p-button-sm"
+          style="margin-right: 10px; min-width: 110px"
+          (click)="save()"
+          *ngIf="!disableForm"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Quay lại"
+          class="p-button-warning p-button-sm"
+          style="min-width: 110px"
+          (click)="cancel()"
+        ></button>
+      </div>
+    </div>
+  </div>
+<hr />
+<div>
+  <p-table [value]="item.products" styleClass="p-datatable-sm">
+    <ng-template pTemplate="colgroup">
+      <col />
+      <col />
+      <col />
+      <col width="120px" />
+      <col />
+      <col />
+      <col />
+      <col width="120px" />
+      <col width="120px" />
+      <col />
+      <col />
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>STT</th>
+        <th>Sản phẩm</th>
+        <th>Mã Sp</th>
+        <th>Giá nhập</th>
+        <th>Giá xuất</th>
+        <th>Số lượng</th>
+        <th>Đơn vị</th>
+        <th>Kiểu đóng gói</th>
+        <th>Hạn sử dụng</th>
+        <th>Số ngày cảnh báo</th>
+        <th>Lô hàng</th>
+        <th>Ghi chú</th>
+        <th></th>
+      </tr>
+      <tr *ngIf="!disableForm">
+        <td>#</td>
+        <td style="min-width: 250px">
+          <p-dropdown
+            *ngIf="products.length > 0"
+            [options]="products"
+            [(ngModel)]="newProduct.products_warehouse_id"
+            (onChange)="changeProductId(newProduct)"
+            placeholder="Chọn sản phẩm"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td style="min-width: 110px">
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newProduct.barcode"
+            [disabled]="disableForm"
+            (keyup)="searchBarcode(newProduct)"
+          />
+        </td>
+        <td style="min-width: 80px">
+          <p-inputNumber
+            [(ngModel)]="newProduct.import_price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td style="min-width: 80px">
+          <p-inputNumber
+            [(ngModel)]="newProduct.price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="newProduct.quantity"
+            mode="decimal"
+            mode="decimal"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="5"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <!-- <td>
+          <p-inputNumber
+            [(ngModel)]="newProduct.weight"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td> -->
+        <td>
+          <p-dropdown
+            [options]="units"
+            [(ngModel)]="newProduct.unit_code"
+            placeholder="Chọn đơn vị"
+            [disabled]="disableForm"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <p-dropdown
+            [options]="packings"
+            [(ngModel)]="newProduct.packing_code"
+            placeholder="Chọn kiểu đóng gói"
+            [disabled]="disableForm"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <p-calendar
+            [(ngModel)]="newProduct.exp_date"
+            [disabled]="disableForm"
+            [showIcon]="false"
+            aria-describedby="birth_day-help"
+          ></p-calendar>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="newProduct.warning_date"
+            mode="decimal"
+            [disabled]="disableForm"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newProduct.batch_number"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newProduct.note"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <i
+            class="pi pi-plus"
+            pTooltip="Thêm"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(45, 191, 16)"
+            (click)="addProduct()"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td style="min-width: 250px">
+          <p-dropdown
+            *ngIf="products.length > 0"
+            [options]="products"
+            [(ngModel)]="product.products_warehouse_id"
+            (onChange)="changeProductId(product)"
+            placeholder="Chọn sản phẩm"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="product.barcode"
+            [disabled]="disableForm"
+            (keyup)="searchBarcode(product)"
+          />
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.import_price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.quantity"
+            mode="decimal"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="5"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <!-- <td>
+          <p-inputNumber
+            [(ngModel)]="product.weight"
+            mode="decimal"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+        </td> -->
+        <td>
+          <p-dropdown
+            [options]="units"
+            [(ngModel)]="product.unit_code"
+            placeholder="Chọn đơn vị"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <p-dropdown
+            [options]="packings"
+            [(ngModel)]="product.packing_code"
+            placeholder="Chọn kiểu đóng gói"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <p-calendar
+            [(ngModel)]="product.exp_date"
+            [showIcon]="false"
+            [disabled]="disableForm"
+          ></p-calendar>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.warning_date"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="product.batch_number"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="product.note"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger mr-1 p-button-sm"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            (click)="deleteProduct(i)"
+            *ngIf="!disableForm"
+          ></button>
+          <!-- <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-print"
+            class="p-button-rounded p-button-success mr-1 p-button-sm"
+            pTooltip="In mã"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            (click)="printCodeProduct(i)"
+        ></button> -->
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

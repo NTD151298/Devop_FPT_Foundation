@@ -1,0 +1,142 @@
+<div class="modal-content">
+  <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <span *ngIf="!itemDetail">Tạo mới người dùng</span>
+        <span *ngIf="itemDetail">Sửa người dùng</span>
+      </h5>
+      <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="Admin_code">Mã người dùng</label>
+        <input type="string" formControlName="code" class="form-control" placeholder="Mã người dùng">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_username">Tên đăng nhập</label>
+        <input type="string" formControlName="username" class="form-control" placeholder="Nhập tên đăng nhập">
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('username')?.errors?.['required']" style="color: red">Tên đăng nhập là bắt
+            buộc</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_full_name">Tên hiển thị</label>
+        <input type="string" formControlName="full_name" class="form-control" placeholder="Nhập tên hiển thị">
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('full_name')?.errors?.['required']" style="color: red">Tên hiển thị là bắt
+            buộc</small>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="!itemDetail">
+        <label class="form-label" for="Admin_password">Mật khẩu</label>
+        <input type="string" formControlName="password" class="form-control" placeholder="Nhập mật khẩu">
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('password')?.errors?.['required']" style="color: red">Mật khẩu là bắt
+            buộc</small>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="!itemDetail">
+        <label class="form-label" for="Admin_pass_code">Xác nhận mật khẩu</label>
+        <input type="password" [(ngModel)]="confirmPassword.value" [ngModelOptions]="{standalone: true}"
+          class="form-control" placeholder="Xác nhận mật khẩu">
+        <div *ngIf="confirmPassword.error == true">
+          <small style="color: red" style="color: red">Mật khẩu không giống nhau!</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_email">Email</label>
+        <input type="string" formControlName="email" class="form-control" placeholder="Nhập email">
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('email')?.errors?.['required']" style="color: red">Email là bắt buộc</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_phone_number">Số điện thoại</label>
+        <input type="string" formControlName="phone_number" class="form-control" placeholder="Nhập số điện thoại">
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('phone_number')?.errors?.['required']" style="color: red">Số điện thoại là bắt
+            buộc</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_birthday">Ngày sinh</label>
+        <input type="date" formControlName="birthday" class="form-control" placeholder="Nhập ngày sinh">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_sex">Giới tính</label>
+        <select name="sex" id="sex" formControlName="sex" class="form-control">
+          <option [value]="null" disabled>Chọn giới tính</option>
+          <option *ngFor="let s of listSex" [ngValue]="s.id">{{s.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_is_active">Trạng thái</label>
+        <select name="is_active" id="is_active" formControlName="is_active" class="form-control">
+          <option *ngFor="let s of listStatus" [ngValue]="s.status">{{s.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_province_id">Tỉnh thành</label>
+
+        <select name="province_id" id="province_id" formControlName="province_id" class="form-control"
+          (change)="getDistrictByProvince($event)">
+          <option [value]="null" disabled>Chọn tỉnh thành</option>
+          <option *ngFor="let s of provinces" value="{{s.value}}">{{s.label}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="Admin_district_id">Quận huyện</label>
+        <select (change)="getWardsByDistrict($event)" name="status" id="status"
+          formControlName="district_id" class="form-control">
+          <option [value]="null" disabled>Chọn quận huyện</option>
+          <option *ngFor="let s of districts" [value]="s.value">{{s.label}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="Admin_ward_id">Phường xã</label>
+        <select name="status" id="status" formControlName="ward_id" class="form-control">
+          <option [value]="null" disabled>Chọn phường xã</option>
+          <option *ngFor="let s of wards" [value]="s.value">{{s.label}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_address">Địa chỉ</label>
+        <textarea formControlName="address" id="Admin_address" class="form-control" name="page_key_word">
+        </textarea>
+      </div>
+
+      <div class="form-group" [hidden]="true">
+        <label class="form-label" for="Admin_birthday">Ngày sinh</label>
+        <input type="string" formControlName="is_active" class="form-control" placeholder="Nhập ngày sinh">
+      </div>
+      <div class="form-group" [hidden]="true">
+        <label class="form-label" for="Admin_birthday">Ngày sinh</label>
+        <input type="string" formControlName="type" class="form-control" placeholder="Nhập ngày sinh">
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default " (click)="close()">
+        Bỏ qua
+      </button>
+      <button type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+        <i class="fa fa-save"></i>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </form>
+</div>

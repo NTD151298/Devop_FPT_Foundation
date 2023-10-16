@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+  deployment-practice-network:
+    driver: bridge
+
+services:
+
+  frontend:
+    environment:
+      - USER=${user_fe}
+      - env=${env}
+      - VITE_API_SERVER=${api_for_conect}
+    container_name: ${container_fe}
+    image: ${image_fe}
+    networks:
+      - ${net_day5}
+    ports:
+      - "${port_fe}"
+
+  backend:
+    environment:
+      - USER=${user_api}
+      - env=${env}
+    container_name: ${container_api}
+    image: ${image_api}
+    networks:
+      - ${net_day5}
+    ports:
+      - "${port_api}"

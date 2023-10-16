@@ -1,0 +1,22 @@
+Project Setup & Running:
+Prerequisites
+
+Install Node.js
+Install postgres
+Clone Repo https://github.com/MiguelLamas/to-do-app-pern-stack.git
+
+Before starting the project, follow these steps to create project and get your server up and running:
+
+mkdir server - starting our server
+cd server
+npm init - is going to keep track of all our packages inside the application
+npm install express pg cors - express allows us to quickly create a server in Node.js, cors allows different domain applications to interact with each other (server will be running on localhost:5000 & React App on localhost:3000, postgres is there to connect our server with our database in order to run postgres queries)
+touch index.js - require the libraries in this file, app.listen to start server, app.use to create middlewear (express, cors)
+npm install -g nodemon
+nodemon index - will watch index.js file, every time there's a change it will instantly restart it
+npx create-react-app client - setting up client side with React
+npm start - to get client side started
+To make your dev experience easier, download these VS code extensions:
+
+ES7 React/Redux/GraphQL/React-Native snippets
+ESLint

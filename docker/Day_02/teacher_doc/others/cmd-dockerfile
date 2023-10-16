@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+WORKDIR /app
+
+COPY guess-password.sh .
+
+RUN chmod +x guess-password.sh
+
+CMD ["secretpassword"]
+
+ENTRYPOINT ["./guess-password.sh"]

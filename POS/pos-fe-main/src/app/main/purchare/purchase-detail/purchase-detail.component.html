@@ -1,0 +1,138 @@
+<h3>Chi tiết phiếu mua hàng</h3>
+<hr />
+<!-- <div>{{ item | json }}</div> -->
+<div class="grid">
+  <div class="col-3">
+    <h6>Nội dung</h6>
+    <input type="text" pInputText [disabled]="disableForm" [(ngModel)]="item.content" />
+  </div>
+  <div class="col-3">
+    <h6>Ghi chú</h6>
+    <input type="text" pInputText [disabled]="disableForm" [(ngModel)]="item.note" />
+  </div>
+  <div class="col-3">
+    <h6>Nhà cung cấp</h6>
+    <p-dropdown [options]="partners" [(ngModel)]="item.partner_id" placeholder="Chọn nhà cung cấp" [showClear]="true"
+      [disabled]="disableForm" filter="true" (onChange)="searchPartner()"></p-dropdown>
+  </div>
+  <div class="col-3">
+    <h6>Kho đích</h6>
+    <p-dropdown *ngIf="warehouses.length > 0" [options]="warehouses" [(ngModel)]="item.warehouse_id"
+      placeholder="Chọn kho đích" [showClear]="true" [disabled]="disableForm" filter="true"
+      (onChange)="searchPartner()"></p-dropdown>
+  </div>
+  <div class="col-3">
+    <h6>Ngày bắt đầu gửi</h6>
+    <p-calendar [(ngModel)]="item.transfer_date" [showIcon]="false" [disabled]="disableForm"></p-calendar>
+  </div>
+  <div class="col-9 flex flex-column justify-content-end">
+    <div class="flex flex-row justify-content-end">     
+      <ng-container *ngIf="(item.id && item.status_id == 0 )|| readonly == 1">
+        <ng-container *appHasRole="['PURCHASE-purchase-modify']">
+          <button pButton pRipple type="button" label="Xuất excel" class="p-button-info p-button-sm"
+            (click)="exportExcel()" style="min-width: 110px; margin-right: 10px"></button>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="item.id && item.status_id == 0">        
+        <ng-container *appHasRole="['PURCHASE-purchase-modify']">
+          <button pButton pRipple type="button" label="Xác nhận" class="p-button-sm" (click)="save(1)"
+            *ngIf="!disableForm" style="min-width: 110px; margin-right: 10px"></button>
+        </ng-container>
+        <ng-container *appHasRole="['PURCHASE-purchase-modify']">
+          <button pButton pRipple type="button" label="Từ chối" class="p-button-danger p-button-sm" (click)="save(2)"
+            *ngIf="!disableForm" style="min-width: 110px; margin-right: 10px"></button>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="item.status_id == 0 || item.warehouse_request_id !== 0">
+        <ng-container *appHasRole="['PURCHASE-purchase-create']">
+          <button pButton pRipple type="button" label="Lưu" class="p-button-success p-button-sm" (click)="save(0)"
+            *ngIf="!disableForm" style="min-width: 110px; margin-right: 10px"></button>
+        </ng-container>
+      </ng-container>
+      <button pButton pRipple type="button" label="Quay lại" class="p-button-warning p-button-sm" (click)="cancel()"
+        style="min-width: 110px; margin-right: 10px"></button>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row col-12 flex flex-row">
+  <label class="flex justify-content-end font-bold">Tổng tiền bán: {{total_price|number:0}}</label>
+</div>
+<div>
+  <p-table responsiveLayout="scroll" [value]="item?.products" styleClass="p-datatable-sm w-100" [scrollable]="false"
+    [resizableColumns]="true" scrollHeight="520px">
+    <ng-template pTemplate="colgroup">
+      <col />
+      <col />
+      <col width="120px" />
+      <col width="90px" />
+      <col />
+      <col width="100px" />
+      <col />
+      <col />
+      <col width="90px" />
+      <col width="90px" />
+      <col />      
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>STT</th>
+        <th>Sản phẩm</th>
+        <th>Mã Sp</th>
+        <th>SL tồn kho</th>
+        <th>Số lượng mua</th>
+        <th>Giá nhập</th>
+        <th>Giá bán</th>
+        <th>Mã đơn vị</th>
+        <th>Kiểu đóng gói</th>
+        <th>Ghi chú</th>
+        <th>Sp cân</th>
+        <th>Sp Km</th>
+      </tr>  
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-i="rowIndex" let-record="$implicit" let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="record">
+        <td>{{ rowIndex + 1 }}</td>
+        <td style="min-width: 250px">
+          {{product.product_name}}
+        </td>
+        <td>
+          {{product.barcode}}
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="product.quantity_inventory" mode="decimal" [minFractionDigits]="1"
+            [maxFractionDigits]="3" [disabled]="true"></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="product.quantity" mode="decimal" [minFractionDigits]="1" [maxFractionDigits]="3"
+          [disabled]="product.disabled" placeholder="Số lượng" (onBlur)="get_total_price()"></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="product.import_price" mode="decimal" [minFractionDigits]="0" [disabled]="product.disabled"
+            placeholder="Giá nhập"></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="product.price" mode="decimal" [minFractionDigits]="0" [disabled]="product.disabled"
+            placeholder="Giá bán"></p-inputNumber>
+        </td>
+        <td style="max-width: 120px">
+          <p-dropdown [options]="units" [(ngModel)]="product.category_unit_code" placeholder="Chọn đơn vị"
+            [disabled]="true" [showClear]="true" filter="true"></p-dropdown>
+        </td>
+        <td style="max-width: 120px">
+          <p-dropdown [options]="packings" [(ngModel)]="product.category_packing_code" placeholder="Chọn kiểu đóng gói"
+            [disabled]="true" [showClear]="true" filter="true"></p-dropdown>
+        </td>
+        <td>
+          <input type="text" pInputText [(ngModel)]="product.note" [disabled]="product.disabled" placeholder="Ghi chú" />
+        </td>
+        <td>
+          <p-checkbox [(ngModel)]="product.is_weigh" [disabled]="product.disabled" [binary]="true" inputId="binary"></p-checkbox>
+        </td>
+        <td>
+          <p-checkbox [(ngModel)]="product.is_promotion" [disabled]="product.disabled" [binary]="true" inputId="binary"></p-checkbox>
+        </td>        
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

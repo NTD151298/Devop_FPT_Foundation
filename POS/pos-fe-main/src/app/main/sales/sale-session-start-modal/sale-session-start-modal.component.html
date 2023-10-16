@@ -1,0 +1,71 @@
+<div class="modal-content">
+  <div class="w-100 p-3 flex flex-row justify-content-end">
+  </div>
+  <div class="modal-body text-center">
+    <h3 class="m-0">Bắt đầu ca làm</h3>
+    <!-- <div class="flex flex-row justify-content-center align-items-center">
+      <h6 class="m-0">Ca:&nbsp;</h6>
+      <div class="w-3">
+        <p-calendar
+          [(ngModel)]="item.start"
+          [timeOnly]="true"
+          [hourFormat]="24"
+          inputId="timeonly"
+        ></p-calendar>
+      </div>
+      <div class="w-3">
+        <p-calendar
+          [(ngModel)]="item.end"
+          [timeOnly]="true"
+          [hourFormat]="24"
+          inputId="timeonly"
+        ></p-calendar>
+      </div>
+    </div> -->
+    <div class="grid text-left p-5 gap-3">
+      <div class="col-12">
+        <h6>Kho</h6>
+        <p-dropdown *ngIf="listWarehouse.length>0"
+          [options]="listWarehouse"
+          [(ngModel)]="item.warehouse_id"
+          placeholder="Chọn kho"
+          filter="true"
+        ></p-dropdown>
+      </div>
+      <div class="col-12">
+        <h6>Tên thu ngân</h6>
+        <input type="text" pInputText [(ngModel)]="item.full_name" disabled="true"/>
+      </div>
+      <div class="col-12">
+        <h6>Tiền mặt hiện có</h6>
+        <div class="p-inputgroup">
+          <p-inputNumber
+            class="w-100"
+            [(ngModel)]="item.opening_cash"
+            mode="decimal"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+          <button
+            type="button"
+            pButton
+            pRipple
+            icon="fa-solid fa-calculator"
+            class="p-button-success"
+          ></button>
+        </div>
+      </div>
+      <div class="col-12">
+        <h6>Ghi chú</h6>
+        <textarea pInputTextarea [(ngModel)]="item.note"></textarea>
+      </div>
+    </div>
+    <div
+      class="w-full flex flex-row justify-content-center align-items-center gap-3 pb-5"
+    >
+      <button pButton pRipple type="button" (click)="close()" label="Thoát" class="p-button-sm p-button-secondary w-3"
+      ></button>
+      <button pButton pRipple type="button" (click)="startSession()" label="Bắt đầu" class="p-button-sm p-button-success w-3"
+      ></button>
+    </div>
+  </div>
+</div>

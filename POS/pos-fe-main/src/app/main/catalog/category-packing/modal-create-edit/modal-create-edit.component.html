@@ -1,0 +1,105 @@
+<div class="modal-content">
+  <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <span *ngIf="isCreate">Tạo mới quy cách đóng gói</span>
+        <span *ngIf="!isCreate">Sửa quy cách đóng gói</span>
+      </h5>
+      <button
+        type="button"
+        class="close"
+        (click)="close()"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Name"
+          >Tên quy cách đóng gói</label
+        >
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Tên quy cách đóng gói"
+          [ngClass]="{
+            'is-invalid': formSubmitted && lf['name'].invalid,
+            'is-valid': formSubmitted && !lf['name'].invalid
+          }"
+          autofocus
+          required
+        />
+        <div *ngIf="formSubmitted">
+          <small
+            *ngIf="formGroupCreate.get('name').errors?.required"
+            class="text-error"
+            >Tên quy cách đóng gói không được rỗng !</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Code"
+          >Mã quy cách đóng gói</label
+        >
+        <input
+          type="text"
+          formControlName="code"
+          class="form-control"
+          placeholder="Mã quy cách đóng gói"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Code">Ghi chú</label>
+        <input
+          type="text"
+          formControlName="note"
+          class="form-control"
+          placeholder="Ghi chú"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Order">Sắp xếp</label>
+        <input
+          type="number"
+          formControlName="order"
+          class="form-control"
+          placeholder="Sắp xếp"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Status"
+          >Trạng thái</label
+        >
+        <select
+          name="status"
+          id="status"
+          formControlName="status_id"
+          class="form-control"
+        >
+          <option *ngFor="let s of listStatus" [ngValue]="s.id">
+            {{ s.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="close()">
+        Bỏ qua
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary btn-smartgap"
+        (click)="save()"
+      >
+        <i class="fa fa-save"></i>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </form>
+</div>

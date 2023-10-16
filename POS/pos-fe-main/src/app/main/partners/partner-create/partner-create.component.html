@@ -1,0 +1,65 @@
+<div class="modal-content">
+    <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span *ngIf="!itemDetail">Tạo mới thông tin đối tác</span>
+          <span *ngIf="itemDetail">Chỉnh sửa thông tin đối tác</span>
+        </h5>
+        <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" *ngIf="formGroupCreate.value.id==0">
+          <label class="form-label" for="Admin_code">Tỉnh thành</label>
+          <p-dropdown [options]="province" formControlName="province_code" placeholder="Chọn tỉnh thành"
+            [showClear]="true" filter="true"></p-dropdown>
+        </div>
+  
+        <div class="form-group" *ngIf="formGroupCreate.value.id>0">
+          <label class="form-label" for="Admin_code">Code</label>
+          <input type="string" formControlName="code" class="form-control" placeholder="Mã đối tác" disabled>
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_code">Name</label>
+          <input type="string" formControlName="name" class="form-control" placeholder="Tên đối tác">
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_code">Email</label>
+          <input type="string" formControlName="email" class="form-control" placeholder="Email">
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_username">Giới thiệu</label>
+          <input type="string" formControlName="introduce" class="form-control" placeholder="Giới thiệu">
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_code">Phone</label>
+          <input type="string" formControlName="phone" class="form-control" placeholder="Số điện thoại">
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_code">Mã thuế</label>
+          <input type="string" formControlName="taxcode" class="form-control" placeholder="Mã thuế">
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label" for="Admin_code">Trang website</label>
+          <input type="string" formControlName="website" class="form-control" placeholder="Trang website">
+        </div>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " (click)="close()">
+          Bỏ qua
+        </button>
+        <button type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+          <i class="fa fa-save"></i>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>

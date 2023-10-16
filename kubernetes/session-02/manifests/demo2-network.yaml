@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: demo2-01
+  name: demo2-network
+spec:
+  containers:
+    - image: redis:alpine
+      name: redis
+      resources: {}
+    - image: busybox
+      name: client
+      command: ["nc"]
+      args: ["-zv", "localhost", "6379"]
+      resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

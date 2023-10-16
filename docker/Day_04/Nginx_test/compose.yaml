@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx1:
+    image: nginx:latest
+    container_name: nginx-1
+    ports:
+      - "1000:80"
+    volumes:
+      - a001:/usr/share/nginx/html
+    command: [ "nginx", "-g", "daemon off;" ]
+  nginx2:
+    image: nginx:latest
+    container_name: nginx-2
+    ports:
+      - "1001:80"
+    volumes:
+      - a001:/usr/share/nginx/html
+    command: [ "nginx", "-g", "daemon off;" ]
+  nginx3:
+    image: nginx:latest
+    container_name: nginx-3
+    ports:
+      - "1002:80"
+    volumes:
+      - a001:/usr/share/nginx/html
+    command: [ "nginx", "-g", "daemon off;" ]
+volumes:
+  a001:
+    external: true

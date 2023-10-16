@@ -1,0 +1,187 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h3 class="mr-2">Chương trình khuyến mại</h3>
+  </div>
+  <div class="col-sm-12 col-md-6 flex flex-row justify-content-end">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Khuyến mại theo hàng hóa"
+      class="p-button-success p-button-sm"
+      style="min-width: 110px; margin-right: 10px"
+      (click)="createPromotion('promotion-by-goods')"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Khuyến mại theo hóa đơn"
+      class="p-button-success p-button-sm"
+      style="min-width: 110px; margin-right: 10px"
+      (click)="createPromotion('promotion-by-receipt')"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Khuyến mại hàng tặng hàng"
+      class="p-button-success p-button-sm"
+      style="min-width: 110px"
+      (click)="createPromotion('promotion-goods-by-goods')"
+    ></button>
+  </div>
+</div>
+<hr />
+<div class="flex flex-row">
+  <div class="w-12 flex flex-row gap-5">
+    <div class="row col-12">
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Loại khuyến mại</h6>
+        <p-dropdown
+          [options]="listType"
+          [(ngModel)]="filter.type"
+          placeholder="Chọn loại khuyến mại"
+          [showClear]="true"
+          (onChange)="getList(true)"
+          filter="true"
+        ></p-dropdown>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Tên chương trình</h6>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="filter.keyword"
+          (keyup.enter)="getList(true)"
+        />
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Trạng thái</h6>
+        <p-calendar
+          [showIcon]="true"
+          placeholder=" ... / ... / ..."
+          [(ngModel)]="filter.start_date"
+          (keyup.enter)="getList(true)"
+        ></p-calendar>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Từ khoá</h6>
+        <p-calendar
+          [showIcon]="true"
+          placeholder=" ... / ... / ..."
+          [(ngModel)]="filter.end_date"
+          (keyup.enter)="getList(true)"
+        ></p-calendar>
+      </div>
+      <div class="wrap col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-4">
+        <div class="flex flex-column justify-content-end">
+          <button
+            style="min-width: 110px; margin-right: 10px"
+            pButton
+            pRipple
+            type="button"
+            label="Tìm kiếm"
+            class="p-button-outlined p-button-rounded p-button-sm"
+            (click)="getList(true)"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-3">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="listPromotion"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px">STT</th>
+        <th>Mã chương trình</th>
+        <th>Tên chương trình</th>
+        <th>Loại khuyến mại</th>
+        <th>Từ ngày</th>
+        <th>Đến ngày</th>
+        <th>Người tạo</th>
+        <th>Trạng thái</th>
+        <th>Ghi chú</th>
+        <th style="width: 100px">Thao tác</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td class="text-center">
+          {{ paging.pageSize * (paging.pageIndex - 1) + i + 1 }}
+        </td>
+        <td class="user-table-th-big">{{ item.code }}</td>
+        <td class="user-table-th-big">
+          {{
+            item.type == 0
+              ? "Xuất bán hàng"
+              : item.type == 1
+              ? "Xuất trả nhà cung cấp"
+              : item.type == 2
+              ? "Xuất kho hủy"
+              : "Xuất kho smartgap"
+          }}
+        </td>
+        <td class="user-table-th-big">
+          {{ item.partner_name }}
+        </td>
+        <td class="user-table-th-big">{{ item.warehouse_name }}</td>
+        <td class="user-table-th-big">{{ item.warehouse_destination_name }}</td>
+        <td class="user-table-th-big">{{ item.total_amount | number }}</td>
+        <td class="user-table-th-big">
+          {{ item.export_date | date: "dd/MM/yyyy" }}
+        </td>
+        <td class="user-table-th-big">
+          <span *ngIf="item.status_id === 2">Xuất kho</span>
+          <span *ngIf="item.status_id === 1">Chờ xuất kho</span>
+          <span *ngIf="item.status_id === 0">Chờ duyệt</span>
+        </td>
+        <td class="text-center">
+          <ng-container>
+            <i
+              class="pi pi-check"
+              pTooltip="Duyệt chương trình"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(26, 172, 48); margin-right: 10px"
+              (click)="confirm(item)"
+            ></i>
+          </ng-container>
+          <ng-container>
+            <i
+            class="pi pi-trash"
+              pTooltip="Xóa chương trình khuyến mại"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(40, 122, 209); margin-right: 10px"
+              (click)="edit(item)"
+            ></i>
+          </ng-container>
+          <ng-container>
+            <i
+              class="pi pi-eye"
+              pTooltip="Chi tiết khuyến mại"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(52, 217, 37); margin-right: 10px"
+              (click)="edit(item)"
+            ></i>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <p-paginator
+      #paginator
+      [rows]="paging.pageSize"
+      [totalRecords]="paging.TotalItems"
+      (onPageChange)="getList(false, $event)"
+    ></p-paginator>
+  </div>
+</div>

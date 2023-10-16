@@ -1,0 +1,131 @@
+<div id="printDiv">
+  <div style="text-align: left; display: flex">
+    <div style="width: 50%">
+      <p>Siêu thị S1-Mart</p>
+      <p>{{modelPrint?.address}}</p>
+    </div>
+    <div style="width: 50%; text-align: center">
+      <p>Số chứng từ: {{ modelPrint?.code }}</p>
+    </div>
+  </div>
+  <div style="text-align: center">
+    <h3 style="text-transform: uppercase">Phiếu xuất kho</h3>
+  </div>
+  <div style="text-align: left; padding: 10px">
+    <p>Tên nhà cung cấp: {{ modelPrint?.partner_name }}</p>
+    <p>Địa chỉ: {{ modelPrint?.source_address }}</p>
+    <p>Số điện thoại: {{ modelPrint?.partner_phone }}</p>
+    <p>Người xuất hàng: {{ modelPrint?.user_name }}</p>
+    <p>Nội dung: {{ modelPrint?.content }}</p>
+  </div>
+  <table
+    style="
+      width: 100%;
+      padding: 0px;
+      border: 1px solid;
+      border-collapse: collapse;
+    "
+  >
+    <thead>
+      <tr>
+        <th style="border: 1px solid">STT</th>
+        <th style="border: 1px solid">Nhà cung cấp</th>
+        <th style="border: 1px solid">Mặt hàng</th>
+        <th style="border: 1px solid">Mã hàng</th>
+        <th style="border: 1px solid">ĐVT</th>
+        <th style="border: 1px solid">Đơn giá</th>
+        <th style="border: 1px solid">SL</th>
+        <th style="text-align: right; border: 1px solid">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of modelPrint?.products; let i = index">
+        <td style="border: 1px solid">{{ i + 1 }}</td>
+        <td style="border: 1px solid">
+          {{ modelPrint.partner_name }}
+        </td>
+        <td style="border: 1px solid">
+          {{ data.name }}
+        </td>
+        <td style="border: 1px solid">
+          {{ data.barcode }}
+        </td>
+        <td style="border: 1px solid">
+          {{ data.unit_code }}
+        </td>
+        <td style="text-align: right; border: 1px solid">
+          {{ data.price | number }} đ
+        </td>
+        <td style="text-align: right; border: 1px solid">
+          {{ data.quantity | number: "0.0-3" }}
+        </td>
+        <td style="text-align: right; border: 1px solid">
+          {{ data.price * data.quantity | number }}
+          đ
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" style="border: 1px solid"></td>
+        <td style="border: 1px solid"><b>Tổng:</b></td>
+        <td style="text-align: right; border: 1px solid"></td>
+        <td style="text-align: right; border: 1px solid">
+          <b>{{ modelPrint?.total_quantity | number: "0.0-3" }}</b>
+        </td>
+        <td style="text-align: right; border: 1px solid">
+          <b>{{ modelPrint?.total_price | number }} đ</b>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top: 20px; display: flex">
+    <div style="width: 50%"></div>
+    <div style="width: 50%; text-align: right">
+      <p>
+        Ngày {{ dateNow?.getDate() }} Tháng {{ dateNow?.getMonth() + 1 }} Năm
+        {{ dateNow?.getFullYear() }}
+      </p>
+    </div>
+  </div>
+  <div style="margin-top: 10px">
+    <table style="width: 100%; padding: 0px">
+      <tbody>
+        <tr>
+          <td style="text-align: center">
+            <p>Giám đốc</p>
+            <p>(Ký và ghi rõ họ tên)</p>
+          </td>
+          <td style="text-align: center">
+            <p>Người nhận hàng</p>
+            <p>(Ký và ghi rõ họ tên)</p>
+          </td>
+          <td style="text-align: center">
+            <p>Thủ kho</p>
+            <p>(Ký và ghi rõ họ tên)</p>
+          </td>
+          <td style="text-align: center">
+            <p>Người lập phiếu</p>
+            <p>(Ký và ghi rõ họ tên)</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align: center; margin-top: 120px">
+    <b>
+      (Quý khách vui lòng kiểm tra số lượng và chất lượng hàng trước khi nhận
+      hàng)
+    </b>
+  </div>
+</div>
+
+<button
+  pButton
+  pRipple
+  type="button"
+  #printBtn
+  hidden="true"
+  printSectionId="printDiv"
+  ngxPrint
+  label="In"
+></button>

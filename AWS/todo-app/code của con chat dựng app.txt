@@ -1,0 +1,47 @@
+Dưới đây là một bash script để cài đặt và chạy backend và frontend trên cổng 5000 và 1000:
+
+bash
+Copy code
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+
+# Use `set` command for debug
+set -x
+
+# Install Node.js
+curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+sudo yum install -y nodejs
+
+# Install postgres
+sudo amazon-linux-extras install postgresql15 -y
+
+# Clone backend repo and start backend server
+mkdir backend
+cd backend
+git clone https://github.com/MiguelLamas/to-do-app-pern-stack.git .
+npm install
+npm start &
+
+# Wait for backend server to start
+sleep 5
+
+# Clone frontend repo and start frontend server on port 1000
+cd ..
+mkdir frontend
+cd frontend
+npx create-react-app .
+npm install
+echo "PORT=1000" > .env
+npm start
+--------------------------------------------------------------------------------------------------------------------------
+Account
+125777342244
+KMS key ID
+12f74646-227a-4f2d-b4c6-c26f0bd4bdb8
+
+Lưu nội dung trên vào một tệp tin, ví dụ deploy.sh. Tiến hành cấp quyền thực thi cho tệp 
+tin bằng lệnh chmod +x deploy.sh. Sau đó, chạy script bằng lệnh ./deploy.sh. Nó sẽ tự động 
+cài đặt và chạy cả backend và frontend với frontend nghe trên cổng 1000.

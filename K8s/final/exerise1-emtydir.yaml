@@ -1,0 +1,36 @@
+# kubectl apply -f exerise1-emtydir.yaml
+# pod emtpydir
+# This section defines a Pod named "emptydir-pod" running a container named "nginx-emptydir-con" with
+# resource limits. It also defines an emptyDir volume named "my-volume-2" mounted at "/var/www/html."
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-pod # Name of the pod
+spec:
+  containers:
+    - name: container-1 # Name of the container 1
+      image: nginx:alpine # The image we will use for container 1
+      resources: # Resource limits for the container 1
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: my-volume-emty
+          mountPath: /data/shared # Mount path within the container 1
+    - name: container-2 # Name of the container 2
+      image: busybox # The image we will use for the container 2
+      resources: # Resource limits for the container 2
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: my-volume-emty
+          mountPath: /data/shared # Mount path within the container 2
+      command: ["/bin/sh"]
+      args: ["-c", "echo Hello from Container 2 > /data/shared/hello.txt"]
+      # The command will wirte file hello.txt to emtyvolume that
+      # 2 container will get shared data
+  volumes:
+    - name: my-volume-emty
+      emptyDir: {} # Defines an emptyDir volume
+

@@ -1,0 +1,30 @@
+Dành cho một số bạn vẫn chưa deploy được 
+source code todo app này lên EC2. Hoặc clone 
+về chạy local mà không biết chạy. Mình có viết 
+cho mọi người đoạn userdata để add vào con 
+instance thì nó sẽ tự clone source về. Cài 
+dependencies và start cái Front end và backend 
+lên.
+
+Flow mọi người làm lab deploy này cần làm 
+theo thứ tự sau:
+
+1. Dựng Infra - VPC, RDS
+
+2. Chạy migration script (Đây là script để khởi 
+tạo db schema mà backend cần dùng). thì trong 
+source này đoạn script đó nằm ở đây. 
+
+3. Start Backend với connection đến database 
+đã tạo. Truyền vào app thông qua biến môi 
+trường.
+
+4. Start Frontend lên với connection đến 
+backend. (Source này nó hardcode backend 
+endpoint là localhost nên không tách frontend 
+ra deploy riêng ở instance khác được)
+
+Sau khi deploy xong thì connect vào port 3000 
+của frontend để check nếu nó ra cái Web UI 
+todo app là oke nhé
+

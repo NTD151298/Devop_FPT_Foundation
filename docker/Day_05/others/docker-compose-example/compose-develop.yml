@@ -1,0 +1,26 @@
+version: "3.8"
+
+networks:
+  sample-webapp-network:
+
+services:
+  frontend:
+    container_name: sample-webapp-reactjs
+    image: "thainm/sample-webapp-reactjs:${LATEST_TAG}"
+    restart: always
+    env_file:
+      - frontend.env
+    ports:
+      - 127.0.0.1:8080:80
+    networks:
+      - sample-webapp-network
+  backend:
+    container_name: sample-webapp-nodejs
+    image: "thainm/sample-webapp-nodejs:${LATEST_TAG}"
+    restart: always
+    environment:
+      - USER=sample
+    ports:
+      - 127.0.0.1:3000:3000
+    networks:
+      - sample-webapp-network

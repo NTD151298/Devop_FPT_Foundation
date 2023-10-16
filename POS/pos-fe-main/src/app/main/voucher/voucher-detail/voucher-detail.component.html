@@ -1,0 +1,118 @@
+<h3>Chi tiết voucher</h3>
+<hr />
+<div class="w-8 m-auto">
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Lưu"
+      class="p-button-success p-button-sm"
+      (click)="save()"
+      [hidden]="disableForm"
+    ></button>
+  </div>
+  <div class="grid pt-3">
+    <div class="col-6">
+      <h6>Mã voucher</h6>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="item.code"
+        [disabled]="disableForm"
+      />
+    </div>
+    <div class="col-6">
+      <h6>Tên voucher</h6>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="item.name"
+        [disabled]="disableForm"
+      />
+    </div>
+    <div class="col-6">
+      <div class="flex align-items-center mb-2">
+        <p-radioButton
+          name="groupname"
+          [value]="0"
+          [(ngModel)]="item.type"
+          [disabled]="disableForm"
+        ></p-radioButton>
+        <h6 class="m-0 ml-2">Giảm theo tỷ lệ</h6>
+      </div>
+      <p-inputNumber
+        [(ngModel)]="item.reduction_rate"
+        mode="decimal"
+        suffix=" %"
+        [minFractionDigits]="0"
+        [disabled]="disableForm || item.type === 1"
+        class="w-100"
+      ></p-inputNumber>
+    </div>
+    <div class="col-6">
+      <h6>Giá trị tối đa</h6>
+      <p-inputNumber
+        [(ngModel)]="item.maximum_reduction"
+        mode="decimal"
+        suffix=" đ"
+        [minFractionDigits]="0"
+        [disabled]="disableForm || item.type === 1"
+        class="w-100"
+      ></p-inputNumber>
+    </div>
+    <div class="col-12">
+      <div class="flex align-items-center mb-2">
+        <p-radioButton
+          name="groupname"
+          [value]="1"
+          [(ngModel)]="item.type"
+          [disabled]="disableForm"
+        ></p-radioButton>
+        <h6 class="m-0 ml-2">Giảm theo giá</h6>
+      </div>
+      <p-inputNumber
+        [(ngModel)]="item.reduction_price"
+        mode="decimal"
+        suffix=" đ"
+        [minFractionDigits]="0"
+        [disabled]="disableForm || item.type === 0"
+        class="w-100"
+      ></p-inputNumber>
+    </div>
+    <div class="col-6">
+      <h6>Từ ngày</h6>
+      <p-calendar
+        [(ngModel)]="item.active_date"
+        [showTime]="true"
+        [showSeconds]="true"
+        [disabled]="disableForm"
+      ></p-calendar>
+    </div>
+    <div class="col-6">
+      <h6>Đến ngày</h6>
+      <p-calendar
+        [(ngModel)]="item.end_date"
+        [showTime]="true"
+        [showSeconds]="true"
+        [disabled]="disableForm"
+      ></p-calendar>
+    </div>
+    <div class="col-12">
+      <h6>Mô tả</h6>
+      <textarea pInputTextarea [disabled]="disableForm" [(ngModel)]="item.description"></textarea>
+    </div>
+    <!-- <div *ngIf="item.listDetail?.length !== 0" class="col-2 flex flex-column justify-content-end">
+    <div class="flex flex-row justify-content-end">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Lưu"
+        class="p-button-success p-button-sm"
+        (click)="save()"
+      ></button>
+    </div>
+  </div> -->
+  </div>
+</div>

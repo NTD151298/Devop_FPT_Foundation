@@ -1,0 +1,143 @@
+<!-- <div>{{ formGroupCreate.value | json }}</div> -->
+
+<form action="">
+  <div class="">
+    <h3>Khuyến mại hàng tặng hàng</h3>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Mã chương trình</h6>
+      <input type="text" pInputText formControlName="partner_code" />
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Tên chương trình</h6>
+      <input type="text" pInputText formControlName="partner_code" />
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Từ ngày</h6>
+      <p-calendar [showIcon]="true" placeholder=" ... / ... / ..."></p-calendar>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Đến ngày</h6>
+      <p-calendar [showIcon]="true" placeholder=" ... / ... / ..."></p-calendar>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Kho</h6>
+      <p-dropdown
+        placeholder="Chọn kho"
+        [showClear]="true"
+        [options]="[]"
+        formControlName="type"
+      ></p-dropdown>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+      <h6>Mô tả</h6>
+      <input type="text" pInputText formControlName="partner_taxcode" />
+    </div>
+
+    <div class="col-6 flex flex-column justify-content-end">
+      <div class="flex flex-row justify-content-end">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Lưu"
+          class="p-button-info p-button-sm"
+          style="min-width: 110px; margin-right: 10px"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Thêm"
+          class="p-button-success p-button-sm"
+          style="min-width: 110px; margin-right: 10px"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- <div>
+    <p-tabView>
+      <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
+      <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
+    </p-tabView>
+  </div> -->
+</form>
+
+<p-table
+responsiveLayout="scroll"
+[value]=""
+styleClass="p-datatable-sm w-100"
+>
+<ng-template pTemplate="header">
+  <tr>
+    <th style="width: 50px">STT</th>
+    <th colspan="5">Hàng khuyến mại</th>
+    <th colspan="5">Hàng tặng kèm</th>
+  </tr>
+  <tr>
+    <th style="width: 50px"></th>
+    <th>Tên sản phẩm</th>
+    <th>Mã barcode</th>
+    <th>Đơn vị tính</th>
+    <th>Số lượng</th>
+    <th>Thao tác</th>
+    <th>Tên sản phẩm</th>
+    <th>Mã barcode</th>
+    <th>Đơn vị tính</th>
+    <th>Số lượng</th>
+    <th>Thao tác</th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-item let-i="rowIndex">
+  <tr>
+    <td class="text-center">
+      <ng-container>
+        <i
+          class="pi pi-check"
+          pTooltip="Duyệt phiếu xuất"
+          tooltipPosition="bottom"
+          [showDelay]="1000"
+          style="color: rgb(26, 172, 48); margin-right: 10px"
+          (click)="confirm(item)"
+        ></i>
+      </ng-container>
+      <!-- <ng-container>
+        <i
+          class="pi pi-arrow-up-right"
+          pTooltip="Xác nhận xuất kho"
+          tooltipPosition="bottom"
+          [showDelay]="1000"
+          style="color: rgb(26, 172, 48); margin-right: 10px"
+          (click)="approve(item)"
+        ></i>
+      </ng-container> -->
+      <ng-container>
+        <i
+          class="pi pi-pencil"
+          pTooltip="Chỉnh sửa chương trình khuyến mại"
+          tooltipPosition="bottom"
+          [showDelay]="1000"
+          style="color: rgb(40, 122, 209); margin-right: 10px"
+          (click)="edit(item)"
+        ></i>
+      </ng-container>
+      <ng-container>
+        <i
+          class="pi pi-eye"
+          pTooltip="Chi tiết khuyến mại"
+          tooltipPosition="bottom"
+          [showDelay]="1000"
+          style="color: rgb(52, 217, 37); margin-right: 10px"
+          (click)="edit(item)"
+        ></i>
+      </ng-container>
+    </td>
+  </tr>
+</ng-template>
+</p-table>

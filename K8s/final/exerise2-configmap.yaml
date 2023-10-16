@@ -1,0 +1,37 @@
+# kubectl apply -f exerise2-configmap.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-configmap # Name of the pod
+spec:
+  containers:
+    - name: container-1 # Name of the container
+      image: nginx:alpine # Use the Nginx Alpine image
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      env:
+        # Set an environment variable "COURSE" from the "learn" data in the "configmap-final ConfigMap.
+        - name: COURSE
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-final
+              key: learn
+        # Set an environment variable "SESSION" from the "session" data in the "configmap-final" ConfigMap.
+        - name: SESSION
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-final
+              key: session
+---
+# Config map
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-final # Name of the ConfigMap
+data:
+  # Define a data key "learn" with a value.
+  learn: K8s-testing-is-some-thing-trying-too-code
+  # Define a data key "session" with a value has "" beacuse it not a strings.
+  session: "123456789"

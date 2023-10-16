@@ -1,0 +1,26 @@
+# All video files
+*.mp4
+
+# All pic files
+*.PNG
+
+# All world files
+*.doc
+
+# All exec files
+*.xlsx
+*.csv
+
+# All running files
+*.exe
+
+# Exclude specific files
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+.terraform/
+
+# Over storage github alow
+CICD/day3-terrafrom/terraform_1.5.7_windows_386
+K8s/final/vagrant_2.3.7_windows_amd64.msi
+CICD/jenkins-home/.terraform

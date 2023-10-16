@@ -1,0 +1,42 @@
+<ng-container *ngIf="!!roleList">
+  <div class="modal-content">
+    <form [formGroup]="formGroupCreate" (ngSubmit)="save()" novalidate autocomplete="off">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span>Chỉnh sửa phân quyền của nhóm</span>
+        </h5>
+        <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Nhóm</label>
+          <input type="string" class="form-control" placeholder="Quyền" value="{{group.name}} - {{group.code}}">
+        </div>
+
+        <div class="form-group">
+          <h4>Phân quyền</h4>
+          <div class="wrap">
+            <div class="item" *ngFor="let control of roleArray.controls; let i = index;">
+              <input [formControl]="control" type="checkbox" (change)="getSelectedRole()" class="value" />
+              <label class="label" for="inlineCheckbox{{i}}">{{roleList[i].name}}</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " (click)="close()">
+          Bỏ qua
+        </button>
+        <button type="submit" class="btn btn-primary btn-smartgap">
+          <i class="fa fa-save"></i>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+</ng-container>

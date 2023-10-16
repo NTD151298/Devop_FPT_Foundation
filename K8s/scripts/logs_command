@@ -1,0 +1,526 @@
+PS D:\Devops_FPT_Foudations\K8s\scripts> vagrant up    
+
+# Bringing machine 'controlplane-1' up with 'virtualbox' provider...
+# Bringing machine 'worker-1' up with 'virtualbox' provider...
+# ==> controlplane-1: Box 'ubuntu/focal64' could not be found. Attempting to find and install...
+#     controlplane-1: Box Provider: virtualbox
+#     controlplane-1: Box Version: >= 0
+# ==> controlplane-1: Loading metadata for box 'ubuntu/focal64'
+#     controlplane-1: URL: https://vagrantcloud.com/ubuntu/focal64
+# ==> controlplane-1: Adding box 'ubuntu/focal64' (v20230915.0.0) for provider: virtualbox
+#     controlplane-1: Downloading: https://vagrantcloud.com/ubuntu/boxes/focal64/versions/20230915.0.0/providers/virtualbox.box
+# Download redirected to host: cloud-images.ubuntu.com
+#     controlplane-1:
+# An error occurred while downloading the remote file. The error
+# message, if any, is reproduced below. Please fix this error and try
+# again.
+
+PS D:\Devops_FPT_Foudations\K8s\scripts> vagrant up
+
+# Bringing machine 'controlplane-1' up with 'virtualbox' provider...
+# Bringing machine 'worker-1' up with 'virtualbox' provider...
+# ==> controlplane-1: Box 'ubuntu/focal64' could not be found. Attempting to find and install...
+#     controlplane-1: Box Provider: virtualbox
+#     controlplane-1: Box Version: >= 0
+# ==> controlplane-1: Loading metadata for box 'ubuntu/focal64'
+#     controlplane-1: URL: https://vagrantcloud.com/ubuntu/focal64
+# ==> controlplane-1: Adding box 'ubuntu/focal64' (v20230915.0.0) for provider: virtualbox
+#     controlplane-1: Downloading: https://vagrantcloud.com/ubuntu/boxes/focal64/versions/20230915.0.0/providers/virtualbox.box
+# ==> controlplane-1: Box download is resuming from prior download progress
+# Download redirected to host: cloud-images.ubuntu.com
+#     controlplane-1:
+# ==> controlplane-1: Successfully added box 'ubuntu/focal64' (v20230915.0.0) for 'virtualbox'!
+# ==> controlplane-1: Importing base box 'ubuntu/focal64'...
+# ==> controlplane-1: Matching MAC address for NAT networking...
+# ==> controlplane-1: Setting the name of the VM: controlplane-1
+# Vagrant is currently configured to create VirtualBox synced folders with
+# the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
+# guest is not trusted, you may want to disable this option. For more
+# information on this option, please refer to the VirtualBox manual:
+# 
+#   https://www.virtualbox.org/manual/ch04.html#sharedfolders
+# This option can be disabled globally with an environment variable:
+# 
+#   VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+# 
+# or on a per folder basis within the Vagrantfile:
+# 
+#   config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false
+# ==> controlplane-1: Clearing any previously set network interfaces...
+# ==> controlplane-1: Preparing network interfaces based on configuration...
+#     controlplane-1: Adapter 1: nat
+#     controlplane-1: Adapter 2: hostonly
+# ==> controlplane-1: Forwarding ports...
+#     controlplane-1: 22 (guest) => 2222 (host) (adapter 1)
+# ==> controlplane-1: Running 'pre-boot' VM customizations...
+# ==> controlplane-1: Booting VM...
+# ==> controlplane-1: Waiting for machine to boot. This may take a few minutes...
+#     controlplane-1: SSH address: 127.0.0.1:2222
+#     controlplane-1: SSH username: vagrant
+#     controlplane-1: SSH auth method: private key
+# Timed out while waiting for the machine to boot. This means that
+# Vagrant was unable to communicate with the guest machine within
+# the configured ("config.vm.boot_timeout" value) time period.
+# 
+# If you look above, you should be able to see the error(s) that
+# Vagrant had when attempting to connect to the machine. These errors
+# are usually good hints as to what may be wrong.
+# 
+# If you're using a custom box, make sure that networking is properly
+# working and you're able to connect to the machine. It is a common
+# problem that networking isn't setup properly in these boxes.
+# Verify that authentication configurations are also setup properly,
+# as well.
+# 
+# If the box appears to be booting properly, you may want to increase
+# the timeout ("config.vm.boot_timeout") value.
+
+PS D:\Devops_FPT_Foudations\K8s\scripts> vagrant up
+
+# Bringing machine 'controlplane-1' up with 'virtualbox' provider...
+# Bringing machine 'worker-1' up with 'virtualbox' provider...
+# ==> controlplane-1: Running provisioner: shell...
+#     controlplane-1: Running: C:/Users/ADMIN/AppData/Local/Temp/vagrant-shell20230918-3984-85mpfy.sh
+#     controlplane-1: |x| Setting common
+#     controlplane-1: --------
+#     controlplane-1: br_netfilter
+#     controlplane-1: net.bridge.bridge-nf-call-ip6tables = 1
+#     controlplane-1: net.bridge.bridge-nf-call-iptables = 1
+#     controlplane-1: * Applying /etc/sysctl.d/10-console-messages.conf ...
+#     controlplane-1: kernel.printk = 4 4 1 7
+#     controlplane-1: * Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+#     controlplane-1: net.ipv6.conf.all.use_tempaddr = 2
+#     controlplane-1: net.ipv6.conf.default.use_tempaddr = 2
+#     controlplane-1: * Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+#     controlplane-1: kernel.kptr_restrict = 1
+#     controlplane-1: * Applying /etc/sysctl.d/10-link-restrictions.conf ...
+#     controlplane-1: fs.protected_hardlinks = 1
+#     controlplane-1: fs.protected_symlinks = 1
+#     controlplane-1: * Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+#     controlplane-1: kernel.sysrq = 176
+#     controlplane-1: * Applying /etc/sysctl.d/10-network-security.conf ...
+#     controlplane-1: net.ipv4.conf.default.rp_filter = 2
+#     controlplane-1: net.ipv4.conf.all.rp_filter = 2
+#     controlplane-1: * Applying /etc/sysctl.d/10-ptrace.conf ...
+#     controlplane-1: kernel.yama.ptrace_scope = 1
+#     controlplane-1: * Applying /etc/sysctl.d/10-zeropage.conf ...
+#     controlplane-1: vm.mmap_min_addr = 65536
+#     controlplane-1: * Applying /usr/lib/sysctl.d/50-default.conf ...
+#     controlplane-1: net.ipv4.conf.default.promote_secondaries = 1
+#     controlplane-1: net.ipv4.ping_group_range = 0 2147483647
+#     controlplane-1: net.core.default_qdisc = fq_codel
+#     controlplane-1: fs.protected_regular = 1
+#     controlplane-1: fs.protected_fifos = 1
+#     controlplane-1: * Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+#     controlplane-1: kernel.pid_max = 4194304
+#     controlplane-1: * Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+#     controlplane-1: net.ipv6.conf.all.use_tempaddr = 0
+#     controlplane-1: net.ipv6.conf.default.use_tempaddr = 0
+#     controlplane-1: * Applying /etc/sysctl.d/99-sysctl.conf ...
+#     controlplane-1: * Applying /etc/sysctl.d/k8s.conf ...
+#     controlplane-1: * Applying /usr/lib/sysctl.d/protect-links.conf ...
+#     controlplane-1: fs.protected_fifos = 1
+#     controlplane-1: fs.protected_hardlinks = 1
+#     controlplane-1: fs.protected_regular = 2
+#     controlplane-1: fs.protected_symlinks = 1
+#     controlplane-1: * Applying /etc/sysctl.conf ...
+#     controlplane-1: sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+#     controlplane-1: Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+#     controlplane-1: Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+#     controlplane-1: Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+#     controlplane-1: Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+#     controlplane-1: Get:5 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+#     controlplane-1: Get:6 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [881 kB]
+#     controlplane-1: Get:7 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [185 kB]
+#     controlplane-1: Get:8 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [19.1 kB]
+#     controlplane-1: Get:9 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [23.6 kB]
+#     controlplane-1: Get:10 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5504 B]
+#     controlplane-1: Get:11 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [548 B]
+#     controlplane-1: Get:12 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+#     controlplane-1: Get:13 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+#     controlplane-1: Get:14 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+#     controlplane-1: Get:15 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+#     controlplane-1: Get:16 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+#     controlplane-1: Get:17 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [1111 kB]
+#     controlplane-1: Get:18 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [266 kB]
+#     controlplane-1: Get:19 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [25.5 kB]
+#     controlplane-1: Get:20 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [25.8 kB]
+#     controlplane-1: Get:21 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7484 B]
+#     controlplane-1: Get:22 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [620 B]
+#     controlplane-1: Get:23 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.7 kB]
+#     controlplane-1: Get:24 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+#     controlplane-1: Get:25 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+#     controlplane-1: Get:26 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+#     controlplane-1: Get:27 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [25.0 kB]
+#     controlplane-1: Get:28 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.3 kB]
+#     controlplane-1: Get:29 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [880 B]
+#     controlplane-1: Get:30 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+#     controlplane-1: Fetched 17.3 MB in 16s (1082 kB/s)
+#     controlplane-1: Reading package lists...
+#     controlplane-1: Reading package lists...
+#     controlplane-1: Building dependency tree...
+#     controlplane-1: Reading state information...
+#     controlplane-1: lsb-release is already the newest version (11.1.0ubuntu2).
+#     controlplane-1: lsb-release set to manually installed.
+#     controlplane-1: ca-certificates is already the newest version (20230311ubuntu0.20.04.1).
+#     controlplane-1: ca-certificates set to manually installed.
+#     controlplane-1: curl is already the newest version (7.68.0-1ubuntu2.19).
+#     controlplane-1: curl set to manually installed.
+#     controlplane-1: gnupg is already the newest version (2.2.19-3ubuntu2.2).
+#     controlplane-1: gnupg set to manually installed.
+#     controlplane-1: 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#     controlplane-1: Reading package lists...
+#     controlplane-1: Building dependency tree...
+#     controlplane-1: Reading state information...
+#     controlplane-1: The following additional packages will be installed:
+#     controlplane-1:   bridge-utils containerd dns-root-data dnsmasq-base libidn11 pigz runc
+#     controlplane-1:   ubuntu-fan
+#     controlplane-1: Suggested packages:
+#     controlplane-1:   ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
+#     controlplane-1:   rinse zfs-fuse | zfsutils
+#     controlplane-1: The following NEW packages will be installed:
+#     controlplane-1:   bridge-utils containerd dns-root-data dnsmasq-base docker.io libidn11 pigz
+#     controlplane-1:   runc ubuntu-fan
+#     controlplane-1: 0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+#     controlplane-1: Need to get 63.2 MB of archives.
+#     controlplane-1: After this operation, 267 MB of additional disk space will be used.
+#     controlplane-1: Get:1 http://archive.ubuntu.com/ubuntu focal/universe amd64 pigz amd64 2.4-1 [57.4 kB]
+#     controlplane-1: Get:2 http://archive.ubuntu.com/ubuntu focal/main amd64 bridge-utils amd64 1.6-2ubuntu1 [30.5 kB]
+#     controlplane-1: Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 runc amd64 1.1.7-0ubuntu1~20.04.1 [3819 kB]
+#     controlplane-1: Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 containerd amd64 1.7.2-0ubuntu1~20.04.1 [32.5 MB]
+#     controlplane-1: Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 dns-root-data all 2019052802 [5300 B]
+#     controlplane-1: Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libidn11 amd64 1.33-2.2ubuntu2 [46.2 kB]
+#     controlplane-1: Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 dnsmasq-base amd64 2.80-1.1ubuntu1.7 [315 kB]
+#     controlplane-1: Get:8 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 docker.io amd64 24.0.5-0ubuntu1~20.04.1 [26.4 MB]
+#     controlplane-1: Get:9 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 ubuntu-fan all 0.12.13ubuntu0.1 [34.4 kB]
+#     controlplane-1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+#     controlplane-1: Fetched 63.2 MB in 19s (3362 kB/s)
+#     controlplane-1: Selecting previously unselected package pigz.
+# (Reading database ... 63722 files and directories currently installed.)
+#     controlplane-1: Preparing to unpack .../0-pigz_2.4-1_amd64.deb ...
+#     controlplane-1: Unpacking pigz (2.4-1) ...
+#     controlplane-1: Selecting previously unselected package bridge-utils.
+#     controlplane-1: Preparing to unpack .../1-bridge-utils_1.6-2ubuntu1_amd64.deb ...
+#     controlplane-1: Unpacking bridge-utils (1.6-2ubuntu1) ...
+#     controlplane-1: Selecting previously unselected package runc.
+#     controlplane-1: Preparing to unpack .../2-runc_1.1.7-0ubuntu1~20.04.1_amd64.deb ...
+#     controlplane-1: Unpacking runc (1.1.7-0ubuntu1~20.04.1) ...
+#     controlplane-1: Selecting previously unselected package containerd.
+#     controlplane-1: Preparing to unpack .../3-containerd_1.7.2-0ubuntu1~20.04.1_amd64.deb ...
+#     controlplane-1: Unpacking containerd (1.7.2-0ubuntu1~20.04.1) ...
+#     controlplane-1: Selecting previously unselected package dns-root-data.
+#     controlplane-1: Preparing to unpack .../4-dns-root-data_2019052802_all.deb ...
+#     controlplane-1: Unpacking dns-root-data (2019052802) ...
+#     controlplane-1: Selecting previously unselected package libidn11:amd64.
+#     controlplane-1: Preparing to unpack .../5-libidn11_1.33-2.2ubuntu2_amd64.deb ...
+#     controlplane-1: Unpacking libidn11:amd64 (1.33-2.2ubuntu2) ...
+#     controlplane-1: Selecting previously unselected package dnsmasq-base.
+#     controlplane-1: Preparing to unpack .../6-dnsmasq-base_2.80-1.1ubuntu1.7_amd64.deb ...
+#     controlplane-1: Unpacking dnsmasq-base (2.80-1.1ubuntu1.7) ...
+#     controlplane-1: Selecting previously unselected package docker.io.
+#     controlplane-1: Preparing to unpack .../7-docker.io_24.0.5-0ubuntu1~20.04.1_amd64.deb ...
+#     controlplane-1: Unpacking docker.io (24.0.5-0ubuntu1~20.04.1) ...
+#     controlplane-1: Selecting previously unselected package ubuntu-fan.
+#     controlplane-1: Preparing to unpack .../8-ubuntu-fan_0.12.13ubuntu0.1_all.deb ...
+#     controlplane-1: Unpacking ubuntu-fan (0.12.13ubuntu0.1) ...
+#     controlplane-1: Setting up runc (1.1.7-0ubuntu1~20.04.1) ...
+#     controlplane-1: Setting up dns-root-data (2019052802) ...
+#     controlplane-1: Setting up libidn11:amd64 (1.33-2.2ubuntu2) ...
+#     controlplane-1: Setting up bridge-utils (1.6-2ubuntu1) ...
+#     controlplane-1: Setting up pigz (2.4-1) ...
+#     controlplane-1: Setting up containerd (1.7.2-0ubuntu1~20.04.1) ...
+#     controlplane-1: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+#     controlplane-1: Setting up docker.io (24.0.5-0ubuntu1~20.04.1) ...
+#     controlplane-1: Adding group `docker' (GID 121) ...
+#     controlplane-1: Done.
+#     controlplane-1: Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+#     controlplane-1: Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+#     controlplane-1: Setting up dnsmasq-base (2.80-1.1ubuntu1.7) ...
+#     controlplane-1: Setting up ubuntu-fan (0.12.13ubuntu0.1) ...
+#     controlplane-1: Created symlink /etc/systemd/system/multi-user.target.wants/ubuntu-fan.service → /lib/systemd/system/ubuntu-fan.service.
+#     controlplane-1: Processing triggers for systemd (245.4-4ubuntu3.22) ...
+#     controlplane-1: Processing triggers for man-db (2.9.1-1) ...
+#     controlplane-1: Processing triggers for dbus (1.12.16-2ubuntu2.3) ...
+#     controlplane-1: Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+#     controlplane-1: {
+#     controlplane-1:   "exec-opts": ["native.cgroupdriver=systemd"],
+#     controlplane-1:   "log-driver": "json-file",
+#     controlplane-1:   "log-opts": {
+#     controlplane-1:     "max-size": "100m"
+#     controlplane-1:   },
+#     controlplane-1:   "storage-driver": "overlay2"
+#     controlplane-1: }
+#     controlplane-1: Ign:1 https://download.docker.com/linux/debian focal InRelease
+#     controlplane-1: Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+#     controlplane-1: Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+#     controlplane-1: Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+#     controlplane-1: Err:5 https://download.docker.com/linux/debian focal Release
+#     controlplane-1:   404  Not Found [IP: 108.157.14.129 443]
+#     controlplane-1: Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+#     controlplane-1: Reading package lists...
+#     controlplane-1: E: The repository 'https://download.docker.com/linux/debian focal Release' does not have a Release file.
+#     controlplane-1: Reading package lists...
+#     controlplane-1: Building dependency tree...
+#     controlplane-1: Reading state information...
+#     controlplane-1: ca-certificates is already the newest version (20230311ubuntu0.20.04.1).
+#     controlplane-1: curl is already the newest version (7.68.0-1ubuntu2.19).
+#     controlplane-1: The following NEW packages will be installed:
+#     controlplane-1:   apt-transport-https
+#     controlplane-1: 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#     controlplane-1: Need to get 1704 B of archives.
+#     controlplane-1: After this operation, 162 kB of additional disk space will be used.
+#     controlplane-1: Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+#     controlplane-1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+#     controlplane-1: Fetched 1704 B in 1s (1610 B/s)
+#     controlplane-1: Selecting previously unselected package apt-transport-https.
+# (Reading database ... 64088 files and directories currently installed.)
+#     controlplane-1: Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+#     controlplane-1: Unpacking apt-transport-https (2.0.9) ...
+#     controlplane-1: Setting up apt-transport-https (2.0.9) ...
+#     controlplane-1: deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+#     controlplane-1: Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
+#     controlplane-1: Ign:2 https://download.docker.com/linux/debian focal InRelease
+#     controlplane-1: Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+#     controlplane-1: Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+#     controlplane-1: Err:6 https://download.docker.com/linux/debian focal Release
+#     controlplane-1:   404  Not Found [IP: 108.157.14.107 443]
+#     controlplane-1: Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+#     controlplane-1: Get:5 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [8993 B]
+#     controlplane-1: Get:8 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [69.9 kB]
+#     controlplane-1: Reading package lists...
+#     controlplane-1: E: The repository 'https://download.docker.com/linux/debian focal Release' does not have a Release file.
+#     controlplane-1: Reading package lists...
+#     controlplane-1: Building dependency tree...
+#     controlplane-1: Reading state information...
+#     controlplane-1: The following additional packages will be installed:
+#     controlplane-1:   conntrack cri-tools ebtables kubernetes-cni socat
+#     controlplane-1: Suggested packages:
+#     controlplane-1:   nftables
+#     controlplane-1: The following NEW packages will be installed:
+#     controlplane-1:   conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+#     controlplane-1: 0 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.
+#     controlplane-1: Need to get 85.9 MB of archives.
+#     controlplane-1: After this operation, 329 MB of additional disk space will be used.
+#     controlplane-1: Get:2 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+#     controlplane-1: Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.26.0-00 [18.9 MB]
+#     controlplane-1: Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+#     controlplane-1: Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+#     controlplane-1: Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 1.2.0-00 [27.6 MB]
+#     controlplane-1: Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.27.0-00 [18.8 MB]
+#     controlplane-1: Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.27.0-00 [10.2 MB]
+#     controlplane-1: Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.27.0-00 [9931 kB]
+#     controlplane-1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+#     controlplane-1: Fetched 85.9 MB in 27s (3220 kB/s)
+#     controlplane-1: Selecting previously unselected package conntrack.
+# (Reading database ... 64092 files and directories currently installed.)
+#     controlplane-1: Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+#     controlplane-1: Unpacking conntrack (1:1.4.5-2) ...
+#     controlplane-1: Selecting previously unselected package cri-tools.
+#     controlplane-1: Preparing to unpack .../1-cri-tools_1.26.0-00_amd64.deb ...
+#     controlplane-1: Unpacking cri-tools (1.26.0-00) ...
+#     controlplane-1: Selecting previously unselected package ebtables.
+#     controlplane-1: Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+#     controlplane-1: Unpacking ebtables (2.0.11-3build1) ...
+#     controlplane-1: Selecting previously unselected package kubernetes-cni.
+#     controlplane-1: Preparing to unpack .../3-kubernetes-cni_1.2.0-00_amd64.deb ...
+#     controlplane-1: Unpacking kubernetes-cni (1.2.0-00) ...
+#     controlplane-1: Selecting previously unselected package socat.
+#     controlplane-1: Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+#     controlplane-1: Unpacking socat (1.7.3.3-2) ...
+#     controlplane-1: Selecting previously unselected package kubelet.
+#     controlplane-1: Preparing to unpack .../5-kubelet_1.27.0-00_amd64.deb ...
+#     controlplane-1: Unpacking kubelet (1.27.0-00) ...
+#     controlplane-1: Selecting previously unselected package kubectl.
+#     controlplane-1: Preparing to unpack .../6-kubectl_1.27.0-00_amd64.deb ...
+#     controlplane-1: Unpacking kubectl (1.27.0-00) ...
+#     controlplane-1: Selecting previously unselected package kubeadm.
+#     controlplane-1: Preparing to unpack .../7-kubeadm_1.27.0-00_amd64.deb ...
+#     controlplane-1: Unpacking kubeadm (1.27.0-00) ...
+#     controlplane-1: Setting up conntrack (1:1.4.5-2) ...
+#     controlplane-1: Setting up kubectl (1.27.0-00) ...
+#     controlplane-1: Setting up ebtables (2.0.11-3build1) ...
+#     controlplane-1: Setting up socat (1.7.3.3-2) ...
+#     controlplane-1: Setting up cri-tools (1.26.0-00) ...
+#     controlplane-1: Setting up kubernetes-cni (1.2.0-00) ...
+#     controlplane-1: Setting up kubelet (1.27.0-00) ...
+#     controlplane-1: Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+#     controlplane-1: Setting up kubeadm (1.27.0-00) ...
+#     controlplane-1: Processing triggers for man-db (2.9.1-1) ...
+#     controlplane-1: kubelet set on hold.
+#     controlplane-1: kubeadm set on hold.
+#     controlplane-1: kubectl set on hold.
+# ==> controlplane-1: Running provisioner: shell...
+#     controlplane-1: Running: C:/Users/ADMIN/AppData/Local/Temp/vagrant-shell20230918-3984-zgkkhr.sh
+#     controlplane-1: |x| Setting controlplane
+#     controlplane-1: I0918 04:41:01.578497    5377 version.go:256] remote version is much newer: v1.28.2; falling back to: stable-1.27
+#     controlplane-1: [init] Using Kubernetes version: v1.27.6
+#     controlplane-1: [preflight] Running pre-flight checks
+#     controlplane-1: [preflight] Pulling images required for setting up a Kubernetes cluster
+#     controlplane-1: [preflight] This might take a minute or two, depending on the speed of your internet connection
+#     controlplane-1: [preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+#     controlplane-1: W0918 04:41:02.996185    5377 images.go:80] could not find officially supported version of etcd for Kubernetes v1.27.6, falling back to the nearest etcd version (3.5.7-0)
+#     controlplane-1: W0918 04:42:26.893136    5377 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.8" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
+#     controlplane-1: [certs] Using certificateDir folder "/etc/kubernetes/pki"
+#     controlplane-1: [certs] Generating "ca" certificate and key
+#     controlplane-1: [certs] Generating "apiserver" certificate and key
+#     controlplane-1: [certs] apiserver serving cert is signed for DNS names [controlplane kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local ubuntu-focal] and IPs [10.96.0.1 10.0.2.15]
+#     controlplane-1: [certs] Generating "apiserver-kubelet-client" certificate and key
+#     controlplane-1: [certs] Generating "front-proxy-ca" certificate and key
+#     controlplane-1: [certs] Generating "front-proxy-client" certificate and key
+#     controlplane-1: [certs] Generating "etcd/ca" certificate and key
+#     controlplane-1: [certs] Generating "etcd/server" certificate and key
+#     controlplane-1: [certs] etcd/server serving cert is signed for DNS names [localhost ubuntu-focal] and IPs [10.0.2.15 127.0.0.1 ::1]
+#     controlplane-1: [certs] Generating "etcd/peer" certificate and key
+#     controlplane-1: [certs] etcd/peer serving cert is signed for DNS names [localhost ubuntu-focal] and IPs [10.0.2.15 127.0.0.1 ::1]
+#     controlplane-1: [certs] Generating "etcd/healthcheck-client" certificate and key
+#     controlplane-1: [certs] Generating "apiserver-etcd-client" certificate and key
+#     controlplane-1: [certs] Generating "sa" key and public key
+#     controlplane-1: [kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+#     controlplane-1: [kubeconfig] Writing "admin.conf" kubeconfig file
+#     controlplane-1: [kubeconfig] Writing "kubelet.conf" kubeconfig file
+#     controlplane-1: [kubeconfig] Writing "controller-manager.conf" kubeconfig file
+#     controlplane-1: [kubeconfig] Writing "scheduler.conf" kubeconfig file
+#     controlplane-1: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+#     controlplane-1: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+#     controlplane-1: [kubelet-start] Starting the kubelet
+#     controlplane-1: [control-plane] Using manifest folder "/etc/kubernetes/manifests"
+#     controlplane-1: [control-plane] Creating static Pod manifest for "kube-apiserver"
+#     controlplane-1: [control-plane] Creating static Pod manifest for "kube-controller-manager"
+#     controlplane-1: [control-plane] Creating static Pod manifest for "kube-scheduler"
+#     controlplane-1: [etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+#     controlplane-1: W0918 04:43:34.517876    5377 images.go:80] could not find officially supported version of etcd for Kubernetes v1.27.6, falling back to the nearest etcd version (3.5.7-0)
+#     controlplane-1: [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+#     controlplane-1: [apiclient] All control plane components are healthy after 27.512759 seconds
+#     controlplane-1: [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+#     controlplane-1: [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+#     controlplane-1: [upload-certs] Skipping phase. Please see --upload-certs
+#     controlplane-1: [mark-control-plane] Marking the node ubuntu-focal as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+#     controlplane-1: [mark-control-plane] Marking the node ubuntu-focal as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+#     controlplane-1: [bootstrap-token] Using token: x74mwc.qwa23i1lhntvwunc
+#     controlplane-1: [bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+#     controlplane-1: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+#     controlplane-1: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+#     controlplane-1: [bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+#     controlplane-1: [bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+#     controlplane-1: [bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+#     controlplane-1: [kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+#     controlplane-1: [addons] Applied essential addon: CoreDNS
+#     controlplane-1: [addons] Applied essential addon: kube-proxy
+#     controlplane-1:
+#     controlplane-1: Your Kubernetes control-plane has initialized successfully!
+#     controlplane-1: 
+#     controlplane-1: To start using your cluster, you need to run the following as a regular user:
+#     controlplane-1: 
+#     controlplane-1:   mkdir -p $HOME/.kube
+#     controlplane-1:   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+#     controlplane-1:   sudo chown $(id -u):$(id -g) $HOME/.kube/config
+#     controlplane-1: 
+#     controlplane-1: Alternatively, if you are the root user, you can run:
+#     controlplane-1: 
+#     controlplane-1:   export KUBECONFIG=/etc/kubernetes/admin.conf
+#     controlplane-1: 
+#     controlplane-1: You should now deploy a pod network to the cluster.
+#     controlplane-1: Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+#     controlplane-1:   https://kubernetes.io/docs/concepts/cluster-administration/addons/
+#     controlplane-1: 
+#     controlplane-1: Then you can join any number of worker nodes by running the following on each as root:
+#     controlplane-1: 
+#     controlplane-1: kubeadm join 10.0.2.15:6443 --token x74mwc.qwa23i1lhntvwunc \
+#     controlplane-1:     --discovery-token-ca-cert-hash sha256:d32d01c0e80de308e875876ccf41d902ce93eabc1aeaa57ff86003401e415f7d
+#     controlplane-1: serviceaccount/calico-kube-controllers created
+#     controlplane-1: serviceaccount/calico-node created
+#     controlplane-1: serviceaccount/calico-cni-plugin created
+#     controlplane-1: configmap/calico-config created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/bgpfilters.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+#     controlplane-1: customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+#     controlplane-1: clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+#     controlplane-1: clusterrole.rbac.authorization.k8s.io/calico-node created
+#     controlplane-1: clusterrole.rbac.authorization.k8s.io/calico-cni-plugin created
+#     controlplane-1: clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+#     controlplane-1: clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+#     controlplane-1: clusterrolebinding.rbac.authorization.k8s.io/calico-cni-plugin created
+#     controlplane-1: daemonset.apps/calico-node created
+#     controlplane-1: deployment.apps/calico-kube-controllers created
+#     controlplane-1: /tmp/vagrant-shell: line 15: /vagrant/scripts/worker.sh: No such file or directory
+# The SSH command responded with a non-zero exit status. Vagrant
+# assumes that this means the command failed. The output for this command
+# should be in the log above. Please read the output to determine what
+# went wrong.
+
+PS D:\Devops_FPT_Foudations\K8s\scripts> vagrant up
+
+# Bringing machine 'worker-1' up with 'virtualbox' provider...
+# ==> controlplane-1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+# ==> controlplane-1: flag to force provisioning. Provisioners marked to run always will still run.
+# ==> worker-1: Importing base box 'ubuntu/focal64'...
+# ==> worker-1: Matching MAC address for NAT networking...
+# ==> worker-1: Setting the name of the VM: worker-1
+# ==> worker-1: Fixed port collision for 22 => 2222. Now on port 2200.
+# ==> worker-1: Clearing any previously set network interfaces...
+# ==> worker-1: Preparing network interfaces based on configuration...
+#     worker-1: Adapter 1: nat
+#     worker-1: Adapter 2: hostonly
+# ==> worker-1: Forwarding ports...
+#     worker-1: 22 (guest) => 2200 (host) (adapter 1)
+# ==> worker-1: Running 'pre-boot' VM customizations...
+# ==> worker-1: Booting VM...
+# ==> worker-1: Waiting for machine to boot. This may take a few minutes...
+#     worker-1: SSH address: 127.0.0.1:2200
+#     worker-1: SSH username: vagrant
+#     worker-1: SSH auth method: private key
+# Timed out while waiting for the machine to boot. This means that
+# Vagrant was unable to communicate with the guest machine within
+# the configured ("config.vm.boot_timeout" value) time period.
+# 
+# If you look above, you should be able to see the error(s) that
+# Vagrant had when attempting to connect to the machine. These errors
+# are usually good hints as to what may be wrong.
+# 
+# If you're using a custom box, make sure that networking is properly
+# working and you're able to connect to the machine. It is a common
+# problem that networking isn't setup properly in these boxes.
+# Verify that authentication configurations are also setup properly,
+# as well.
+# 
+# If the box appears to be booting properly, you may want to increase
+
+PS D:\Devops_FPT_Foudations\K8s\scripts> vagrant up
+
+# Bringing machine 'controlplane-1' up with 'virtualbox' provider...
+# Bringing machine 'worker-1' up with 'virtualbox' provider...
+# ==> controlplane-1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+# ==> controlplane-1: flag to force provisioning. Provisioners marked to run always will still run.
+# ==> worker-1: Running provisioner: shell...
+# An error occurred in the underlying SSH library that Vagrant uses.
+# The error message is shown below. In many cases, errors from this
+# library are caused by ssh-agent issues. Try disabling your SSH
+# agent or removing some keys and try again.
+# 
+# If the problem persists, please report a bug to the net-ssh project.
+# 
+# timeout during server version negotiating
+
+vagrant init
+vagrant up
+vagrant destroy
+controlplane-1: SSH address: 127.0.0.1:2222 
+name: vagrant "vagrant ssh controlplane-1"
+worker-1: SSH address: 127.0.0.1:2200
+vagrant ssh worker-1
+vagrant destroy --force

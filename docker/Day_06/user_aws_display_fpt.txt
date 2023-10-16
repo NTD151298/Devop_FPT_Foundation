@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# Use `set` command for debug
+set -x
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+
+yum update
+
+yum install httpd -y
+sudo service httpd start
+chconfig httpd on
+
+# yum install postgresql15 -y
+
+sudo export TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+cat > /var/www/html/index.html <<EOL
+<html>
+<h1>Welcome to Docker slave</h1>
+<h1>Server Metadata: </h1>
+<h2>Hostname: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/hostname) </h2>
+<h2>PrivateIP: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4) </h2>
+<h2>PublicIP: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-ipv4) </h2>
+</html>
+EOL
+
+# Debug: sudo tail -f  /var/log/cloud-init-output.log 
+
+sudo yum update
+sudo yum search docker
+sudo yum info docker
+sudo yum install docker
+sudo usermod -a -G docker ec2-user
+sudo id ec2-user
+sudo newgrp docker
+sudo wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) 
+sudo sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+sudo sudo chmod -v +x /usr/local/bin/docker-compose
+sudo systemctl enable docker service
+sudo systemctl start docker service
+sudo systemctl status docker service
+sudo docker version
+sudo docker-compose version
+
+
+
+
+
+
+
+#!/bin/bash
+
+# Use `set` command for debug
+set -x
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# Cài đặt các gói cần thiết để tự động update và upgrade
+sudo yum install -y epel-release
+sudo yum update -y
+
+# Cài đặt PostgreSQL 15 và HTTPD (Apache)
+sudo yum install -y postgresql15 httpd
+
+# Enable và start HTTPD (Apache)
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+# Lấy thông tin token để truy cập Metadata
+export TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+# Tạo file index.html với thông tin về instance và hiển thị trên trang web
+sudo cat > /var/www/html/index.html <<EOL
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Dương</title>
+</head>
+<body>
+    <h1>Chào bạn, tôi là Nguyễn Thái Dương</h1>
+    <p>Tôi năm nay 24 tuổi, email của tôi là: duongtn1512@gmail.com.</p>
+    <p>Tôi là một DevOps Engineer đam mê công nghệ và phát triển các giải pháp đám mây.</p>
+    <p>Dưới đây là các mục bạn có thể click để tìm hiểu thêm về Linux và AWS.</p>
+    <ul>
+        <li><a href="#" onclick="showLinux()">Linux</a></li>
+        <li><a href="#" onclick="showAWS()">AWS</a></li>
+    </ul>
+    <div id="linuxInfo" style="display:none;">
+        <h2>Linux</h2>
+        <p>Linux là một hệ điều hành mã nguồn mở phổ biến được sử dụng rộng rãi trên các máy tính và máy chủ.</p>
+        <p>Nó có tính linh hoạt cao, bảo mật và thích hợp cho nhiều mục đích sử dụng, từ máy tính cá nhân đến hạ tầng đám mây.</p>
+    </div>
+    <div id="awsInfo" style="display:none;">
+        <h2>AWS</h2>
+        <p>Amazon Web Services (AWS) là một nền tảng đám mây phổ biến cung cấp nhiều dịch vụ đám mây linh hoạt và mạnh mẽ.</p>
+        <p>Được phát triển bởi Amazon, AWS cung cấp các dịch vụ như tính toán, lưu trữ, cơ sở dữ liệu, trí tuệ nhân tạo và nhiều hơn nữa.</p>
+    </div>
+    <h1>Server Metadata: </h1>
+    <h2>Hostname: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/hostname) </h2>
+    <h2>PrivateIP: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4) </h2>
+    <h2>PublicIP: $(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-ipv4) </h2>
+
+    <script>
+        function showLinux() {
+            document.getElementById("linuxInfo").style.display = "block";
+            document.getElementById("awsInfo").style.display = "none";
+        }
+
+        function showAWS() {
+            document.getElementById("linuxInfo").style.display = "none";
+            document.getElementById("awsInfo").style.display = "block";
+        }
+    </script>
+</body>
+</html>
+EOL
+
+# Debug: Xem log cloud-init
+sudo tail -f /var/log/cloud-init-output.log

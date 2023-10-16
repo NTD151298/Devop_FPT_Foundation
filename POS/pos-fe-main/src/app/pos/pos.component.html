@@ -1,0 +1,194 @@
+<div style="padding: 27px; height: 100vh" id="pos-content">
+  <div class="grid">
+    <div class="col-8 bg-green-500">
+      <p-autoComplete [(ngModel)]="model.Product" [suggestions]="filteredProducts" styleClass="w-12"
+        (onDropdownClick)="searchProducts()" (completeMethod)="filterProducts($event)" field="nameView"
+        placeholder="Search" [dropdownIcon]="'pi pi-search'" (onKeyUp)="keyPressSearchProduct($event)" [dropdown]="true"
+        (onSelect)="onSelectProduct()" [delay]="400" [minLength]="2">
+      </p-autoComplete>
+    </div>
+    <div class="col-4 bg-green-500 flex justify-content-end">
+      <button pButton type="button" class="p-button-success mr-2" (click)="onAhomeClick()">
+        <i class="pi pi-home"></i>
+      </button>
+      <button pButton type="button" class="mr-2" (click)="onAddPaymentClick()">
+        <i class="pi pi-plus"></i>
+      </button>
+      <button pButton type="button" class="p-button-danger" (click)="onCloseClick()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-8">
+      <p-table [value]="productsSelected" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Mã vạch (SKU)</th>
+            <th>Sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Giá khuyến mại</th>
+            <th>Số lượng</th>
+            <th>Đơn vị</th>
+            <th>Thành tiền</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td class="p-ml-2">{{ product.barcode }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price | number }} đ</td>
+            <td>
+              {{
+              product.sale_price > 0
+              ? (product.sale_price | number) + "đ"
+              : ""
+              }}
+            </td>
+            <td>
+              <p-inputNumber [(ngModel)]="product.quantity" inputId="minmax-buttons" mode="decimal"
+                [minFractionDigits]="1" [maxFractionDigits]="5" class="w-7rem" (ngModelChange)="onChangeQuantity()">
+              </p-inputNumber>
+            </td>
+            <td>{{ product.unit_code }}</td>
+            <td>
+              {{
+              product.sale_price > 0
+              ? (product.sale_price * product.quantity | number)
+              : (product.price * product.quantity | number)
+              }}
+              đ
+            </td>
+            <td>
+              <a (click)="deleteRow(product.index)" class="cursor-pointer"><i class="pi pi-trash"></i></a>
+            </td>
+          </tr>
+          <tr *ngFor="let item of product.childs">
+            <td>{{ item.barcode }}</td>
+            <td>
+              <div class="ml-3">
+                {{ item.product_name }}
+              </div>
+            </td>
+            <td>
+              0 đ
+            </td>
+            <td>
+            </td>
+            <td>
+              {{product.quantity}}
+            </td>
+            <td>{{ item.unit_code }}</td>
+            <td>
+              0 đ
+            </td>
+            <td>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="col-4 mt-3">
+      <div class="pt-0">
+        <h5>Khách hàng</h5>
+        <div class="p-inputgroup">
+          <p-autoComplete [(ngModel)]="model.Customer" [suggestions]="filteredCustomers" styleClass="w-full"
+            (completeMethod)="filterCustomers($event)" field="nameView" placeholder="Search"
+            (onKeyUp)="validateFormPos()" (onSelect)="onSelectCustomer()" [delay]="400" [minLength]="2">
+          </p-autoComplete>
+          <button type="button" pButton pRipple (click)="showCreateCustomer()" style="padding: 0.3rem 0.65rem">
+            <i class="pi pi-user-plus"></i>
+          </button>
+        </div>
+        <div class="flex justify-content-end pt-2">
+          <p class="px-2">
+            Số lần mua hàng: {{ model.Customer?.count_purchases }}
+          </p>
+          <p class="px-2">
+            Tổng tiền mua hàng: {{ model.Customer?.total_price | number }} đ
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <h5>Phương thức thanh toán</h5>
+        <div class="flex">
+          <div class="field-radiobutton p-2">
+            <p-radioButton name="cash" value="cash" (onClick)="onChangePayment()" [(ngModel)]="model.TypePayment"
+              inputId="cash">
+            </p-radioButton>
+            <label for="cash">Tiền mặt</label>
+          </div>
+          <div class="field-radiobutton p-2">
+            <p-radioButton name="bank" value="bank" (onClick)="onChangePayment()" [(ngModel)]="model.TypePayment"
+              inputId="bank">
+            </p-radioButton>
+            <label for="bank">Ngân hàng</label>
+          </div>
+          <div class="field-radiobutton p-2">
+            <p-radioButton name="pos" value="pos" (onClick)="onChangePayment()" [(ngModel)]="model.TypePayment"
+              inputId="pos"></p-radioButton>
+            <label for="pos">Quẹt thẻ</label>
+          </div>
+        </div>
+        <div [hidden]="activeBankAccount">
+          <h5>Tài khoản nhận</h5>
+          <p-dropdown [options]="banks" styleClass="w-full" [(ngModel)]="model.NumberBank" optionLabel="account_number"
+            filter="true">
+          </p-dropdown>
+          <h5>Mã giao dịch</h5>
+          <input id="phone" type="text" pInputText [(ngModel)]="model.TranCode" />
+        </div>
+      </div>
+      <div class="pt-2">
+        <h5>Mã khuyến mại</h5>
+        <p-autoComplete [(ngModel)]="model.Voucher" [suggestions]="vouchers" styleClass="w-full"
+          (completeMethod)="getListVouchers($event)" (onSelect)="onSelectVoucher()" (onClear)="onClearVoucher()"
+          field="nameView" placeholder="Search" [delay]="400" [minLength]="2" [showClear]="true">
+        </p-autoComplete>
+      </div>
+      <div class="pt-2" [hidden]="!activeVoucherPrice">
+        <h5>Giảm giá</h5>
+        <p-inputNumber [(ngModel)]="model.Discount" mode="decimal" [min]="0" class="w-6"
+          (ngModelChange)="changeDiscount()"></p-inputNumber>
+        đ
+      </div>
+      <div class="pt-4">
+        <h5>
+          Tổng tiền hàng: <b>{{ model.TotalAmount | number }} đ</b>
+        </h5>
+      </div>
+      <div class="pt-2" [hidden]="!activeBankAccount">
+        <h5>Khách đưa</h5>
+        <p-inputNumber [(ngModel)]="cashReceiver" class="w-6" mode="decimal" [min]="0"
+          (ngModelChange)="changeCashReceiver()"></p-inputNumber>
+        đ
+        <h5 class="pt-2">Tiền thừa: {{ cashReturn | number }}</h5>
+      </div>
+      <div class="pt-2">
+        <h5>Ghi chú</h5>
+        <textarea pInputTextarea [(ngModel)]="model.Note"></textarea>
+        <div class="pt-3 flex justify-content-end">
+          <div class="px-3" [hidden]="!activeBtnPayment">
+            <button [disabled]="enableConfirm" pButton type="button" label="Thanh toán đơn hàng"
+              (click)="createOrder()"></button>
+          </div>
+          <div class="px-3" [hidden]="activeBtnPayment">
+            <button pButton type="button" label="In lại biên lai" (click)="printInvoid()"></button>
+          </div>
+          <div class="px-3" [hidden]="activeBtnPayment">
+            <button pButton type="button" label="Quản lý đơn hàng" (click)="backOrder()"></button>
+          </div>
+          <div class="px-3" [hidden]="activeBtnPayment">
+            <button pButton type="button" label="Tiếp tục" class="p-button-success" (click)="setDefaultForm()"></button>
+          </div>
+        </div>
+      </div>
+      <p-confirmDialog icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    </div>
+  </div>
+  <p-toast></p-toast>
+</div>
+<app-pos-invoid [modelInvoid]="modelInvoid"></app-pos-invoid>

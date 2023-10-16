@@ -1,0 +1,210 @@
+<div class="flex flex-row justify-content-between">
+  <h3>Báo cáo doanh thu theo sản phẩm</h3>
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Xuất báo cáo"
+      class="p-button-rounded p-button-sm"
+      (click)="exportExcel()"
+    ></button>
+  </div>
+</div>
+<hr />
+<div class="flex flex-row gap-5">
+  <div class="row col-12">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Ngành hàng</h6>
+      <p-dropdown
+        [options]="product_categories"
+        [(ngModel)]="filter.category_code"
+        placeholder="Chọn ngành hàng"
+        [showClear]="true"
+        filter="true"
+      ></p-dropdown>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Kho</h6>  
+      <p-dropdown
+        *ngIf="listWarehouse.length>0"
+        [options]="listWarehouse"
+        [(ngModel)]="filter.warehouse_id"
+        placeholder="Chọn kho"
+        [showClear]="true"
+        filter="true"
+      ></p-dropdown>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Từ ngày</h6>
+      <p-calendar
+        [(ngModel)]="filter.start_date"
+        [showIcon]="true"
+      ></p-calendar>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Đến ngày</h6>
+      <p-calendar [(ngModel)]="filter.end_date" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Từ khoá</h6>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="filter.keyword"
+        (keyup.enter)="getList()"
+      />
+    </div>
+    <div class="wrap col-sm-12 col-md-4 col-lg-9 col-xl-2 col-xxl-2">
+      <div class="flex flex-column justify-content-end" style="width: 110px">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Tìm kiếm"
+          class="p-button-outlined p-button-rounded p-button-sm"
+          (click)="getList()"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-3 user-table">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="summary.products"
+    styleClass="p-datatable-sm w-100"
+    [scrollable]="true"
+    scrollHeight="600px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="user-table-th-big" style="max-width: 50px">STT</th>
+        <th class="user-table-th-big" style="min-width: 200px" pSortableColumn="name">
+          Tên <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th class="user-table-th-big">Mã bán hàng</th>
+        <th class="user-table-th-big" pSortableColumn="quantity">
+          Số lượng <p-sortIcon field="quantity"></p-sortIcon>
+        </th>
+        <th class="user-table-th-big">Giá</th>
+        <th class="user-table-th-big">Giá KM</th>
+        <th class="user-table-th-big" style="max-width: 80px">Đơn vị</th>
+        <th class="user-table-th-big">Ngành hàng</th>
+        <th class="user-table-th-big">Tiền hàng</th>
+        <th class="user-table-th-big">Tiền khuyến mại</th>
+        <th class="user-table-th-big">Doanh thu</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-i="rowIndex">
+      <tr>
+        <td style="max-width: 50px">{{ i + 1 }}</td>
+        <td style="min-width: 200px">{{ product.name }}</td>
+        <td>{{ product.code }}</td>
+        <td>{{ product.quantity | number: "0.0-2" }}</td>
+        <td>{{ product.price | number }}</td>
+        <td>{{ product.sale_price | number }}</td>
+        <td style="max-width: 80px">{{ product.unit_code }}</td>
+        <td>{{ product.category_name }}</td>
+        <td>{{ product.amount | number: "0.0-0" }}</td>
+        <td>{{ product.sale_amount | number: "0.0-0" }}</td>
+        <td>{{ product.revenue | number: "0.0-0" }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td style="max-width: 50px"></td>
+        <td style="min-width: 200px"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="max-width: 80px"></td>
+        <td></td>
+        <td>Khuyến mại voucher</td>
+        <td></td>
+        <td>{{ summary.total_voucher | number: "0.0-0" }} đ</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="max-width: 50px"></td>
+        <td style="min-width: 200px"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="max-width: 80px"></td>
+        <td></td>
+        <td>Tổng</td>
+        <td>{{ summary.total_amount | number: "0.0-0" }} đ</td>
+        <td>
+          {{ summary.total_sale + summary.total_voucher | number: "0.0-0" }} đ
+        </td>
+        <td>{{ summary.total_revenue | number: "0.0-0" }} đ</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<table #export style="display: none">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên</th>
+      <th>Mã bán hàng</th>
+      <th>Số lượng</th>
+      <th>Giá</th>
+      <th>Giá KM</th>
+      <th>Đơn vị</th>
+      <th>Ngành hàng</th>
+      <th>Tiền hàng</th>
+      <th>Tiền khuyến mại</th>
+      <th>Doanh thu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of summary.products; let i = index">
+      <td>
+        {{ i + 1 }}
+      </td>
+      <td style="min-width: 200px">{{ item.name }}</td>
+      <td>{{ item.code }}</td>
+      <td>{{ item.quantity | number: "0.0-2" }}</td>
+      <td>{{ item.price | number }} đ</td>
+      <td>{{ item.sale_price | number }} đ</td>
+      <td>{{ item.unit_code }}</td>
+      <td>{{ item.category_name }}</td>
+      <td>{{ item.amount | number: "0.0-0" }} đ</td>
+      <td>{{ item.sale_amount | number: "0.0-0" }} đ</td>
+      <td>{{ item.revenue | number: "0.0-0" }} đ</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td style="max-width: 50px"></td>
+      <td style="min-width: 200px"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="max-width: 80px"></td>
+      <td></td>
+      <td>Khuyến mại voucher</td>
+      <td></td>
+      <td>{{ summary.total_voucher | number: "0.0-0" }} đ</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="max-width: 50px"></td>
+      <td style="min-width: 200px"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="max-width: 80px"></td>
+      <td></td>
+      <td>Tổng</td>
+      <td>{{ summary.total_amount | number: "0.0-0" }} đ</td>
+      <td>
+        {{ summary.total_sale + summary.total_voucher | number: "0.0-0" }} đ
+      </td>
+      <td>{{ summary.total_revenue | number: "0.0-0" }} đ</td>
+    </tr>
+  </tfoot>
+</table>

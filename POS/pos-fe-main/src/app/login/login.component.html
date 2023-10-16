@@ -1,0 +1,60 @@
+<div style="padding: 27px; height: 100vh" class="flex">
+  <div class="col flex flex-column justify-content-center">
+    <div class="login-content flex flex-row flex-wrap justify-content-center">
+      <div class="login-form-container text-center">
+        <div class="grid h-100">
+          <div class="col-7 flex flex-column justify-content-center">
+            <img
+              src="/assets/img/login.png"
+              width="100%"
+              alt=""
+              style="width: 100%"
+            />
+          </div>
+          <div class="col-5 pb-5 flex flex-column justify-content-end">
+            <img
+              src="/assets/img/logo.png"
+              width="64px"
+              alt=""
+              style="margin: 0px auto"
+            />
+            <h4 class="mb-1">Xin chào!</h4>
+            <p class="text-400">Vui lòng đăng nhập tài khoản!</p>
+            <div class="flex flex-column text-left">
+              <label class="login-label">Tài khoản</label>
+              <input
+                type="text"
+                placeholder="Tên đăng nhập"
+                (keyup.enter)="login()"
+                [(ngModel)]="account.UserName"
+                class="p-inputtext-sm"
+                pInputText
+              />
+              <label class="login-label mt-3"> Mật khẩu</label>
+              <input
+                type="password"
+                pPassword
+                placeholder="Mật khẩu"
+                class="p-inputtext-sm"
+                [showPassword]="seePass"
+                (keyup.enter)="login()"
+                [(ngModel)]="account.Password"
+                [feedback]="false"
+              />
+              <div>
+                <button
+                  (click)="login()"
+                  pButton
+                  type="button"
+                  class="p-button-success"
+                  style="width: 100%; margin-top: 75px"
+                  label="Đăng nhập"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

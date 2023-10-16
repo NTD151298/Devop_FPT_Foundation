@@ -1,0 +1,167 @@
+FPT SOFTWARE ACADEMY HỒ CHÍ MINH
+
+Xin chào các bạn học viên,
+
+Chào mừng các bạn đã đến với khóa học DevOps Foundation tại FPT Software Academy Hồ Chí Minh. Để khóa học được bắt đầu thuận lợi và hiệu quả, mình gửi các bạn một số thông tin như sau:
+
+(Mail dài lớp mình lưu ý đọc hết để nắm được nhé)
+
+1.        Lịch đào tạo:
+
+Ø  Time: thứ 2-4-6 từ ngày 03/07/2023
+
+Ø  Link học tập: Team Online Tại đây
+
+Ø  Training calenda: file đính kèm (đây là plan học tập, nên sẽ có thể có thay đổi, TH có thay đổi mình sẽ thông tin ngay đến cho lớp nhen)
+
+Ø  Điểm số: sẽ tinh theo module, mỗi module sẽ có bài tập cần hoàn thành như sau
+
+o   Quiz (nếu có, tổng điểm các bài quiz chiếm 10%)
+
+o   Assignment (nếu có, tổng điểm các bài ASM chiếm 20%)
+
+o   Audit Final (nếu có, chiếm 15%)
+
+o   Quiz Final (nếu có, chiếm 15%)
+
+o   Practice Final (nếu có, chiếm 40%)
+à  Các bạn cần hoàn thành tất cả các bài để lấy điểm cho từng module. Điểm pass mỗi module >=6  (và final practice >=6). Pass tất cả module học viên sẽ đủ điều kiện được cấp chứng chỉ vào cuối khóa.
+
+Ø  Nội quy chi tiết của học viên đào tạo: Khi làm việc và học tập tại FA các bạn lưu ý tuân thủ các quy định đào tạo. Để đảm bảo tính nghiêm túc và chất lượng của khóa học, học viên vi phạm sẽ bị xử lí kỉ luật theo đúng quy định. (file đính kèm)
+
+2.       Một số quy định cần chú ý, cụ thể như sau:
+
+Ø  Xin muộn/sớm, vắng mặt, nghỉ các bạn vui lòng MAIL cho admin trước 2-3 ngày trong giờ làm việc và nêu rõ lí do nghỉ. Trong trường hợp khẩn cấp có thể gọi hoặc chat cho em để thông báo lí do.
+
+Ø  Các hành vi vi phạm nội quy sau sẽ bị đề xuất hình thức kỉ luật dừng đào tạo:
+
+Ø  Vi phạm mức độ nhẹ như làm việc riêng trong giờ, không tập trung trong giờ, nộp muộn bài assignment, không làm quizz, nghỉ học có lý do,… đến lần thứ 3/1 tháng
+
+Ø  Đi muộn về sớm không báo đến lần thứ 5/ 1 tháng
+
+Ø  Vi phạm nội quy ở mức độ nặng như sao chép bài làm của bạn, không nộp bài assignment, không tham gia thi audit, final practice không báo, nghỉ học không lí do, sử dụng phần mềm vượt proxy,.. đến lần thứ 2
+
+Ø  KHÔNG sử dụng GITHUB trong quá trình đào tạo.
+
+3.       Quy định về việc bảo lưu
+
+Ø  Học viên chỉ được bảo lưu 1 lần duy nhất trong suốt khóa học và phải có sự đồng ý của Học viện.
+
+Ø  Học viên phải hoàn thành việc đống phí xử lý thủ tục (300,000vnđ đối với khóa 1 giai đoạn và 600,000vnđ đối với khóa hai giai đoạn). Đối với lớp Professional React Developer là khóa 2 giai đoạn nên mức phí bảo lưu là 600,000vnđ.
+
+Ø  Học viên đã học quá 50% số giờ học của khóa sẽ không được bảo lưu.
+
+Ø  Học viện sẽ xem xét và chỉ đồng ý bảo lưu cho Học viên trong các trường hợp:
+
+·         Học viên thực hiện các nghĩa vụ theo yêu cầu của Nhà Nước.
+
+·         Học viên phải nghỉ vì lý do sức khỏe buộc phải điều trị thời gian dài có giấy tờ chứng minh hợp pháp của cơ sở khám bệnh, chữa bệnh được thành lập và hoạt động theo quy định của pháp luật.
+
+·         Học viên phải nghỉ chăm sóc người thân (Bố/mẹ đẻ, bố/mẹ chồng/vợ, vợ/chồng, con) điều trị bệnh thời gian dài có giấy tờ chứng minh hợp pháp của cơ sở khám bệnh, chữa bệnh được thành lập và hoạt động theo quy định của pháp luật.
+
+Ø  Thời gian bảo lưu:
+
+·         Trong trường hợp bảo lưu để thực hiện các nghĩa vụ theo yêu cầu của cơ quan nhà nước thì thời hạn bảo lưu của học viên bằng với thời gian thực hiện nghĩa vụ nhưng tối đa không quá 24 tháng kể từ ngày Học viên xác nhận bảo lưu cho học viên.
+
+·         Trong các trường hợp khác, thời gian bảo lưu tối đa là 06 tháng kể từ ngày Học viên xác nhận bảo lưu cho học viên.
+
+4.      Đánh giá xếp loại
+
+Academic Mark
+
+Graduate level
+
+90%
+
+A+
+
+80% - 89%
+
+A
+
+70% - 79%
+
+B
+
+60% - 69%
+
+C
+
+Nhỏ hơn 60%
+
+D
+
+Note: Đối với trường hợp học viên có ghi nhận kết quả Module là Failed, học viên sẽ được tổ chức buổi thi lần 2 (một lần duy nhất/Module). Trung tâm sẽ sắp xếp lịch thi lần 2 và thông báo đến học viên trước ngày thi ít nhất 1 tuần (chỉ thi lần 2, không học lại)
+
+ 
+
+5.       Thông tin thư mục chia sẻ tài liệu
+
+·         Microsoft Team: Tại đây
+
+·         Group chat lớp trên Facebook: group chat để nhận thông báo mới nhất và kịp thời, trao đổi tài liệu và trao đổi khi gặp vấn đề về technical với trainer và học viên khác. Mọi người tham gia Tại đây nhé
+
+6.       Đội ngũ đào tạo
+
+Đội ngũ đào tạo hỗ trợ lớp mình trong quá trình khóa học bao gồm:
+
+ü  Quản lí lớp: hỗ trợ các vấn đề về kỉ luật, update chương trình học, giảng viên.
+
+Phạm Thị Hồng Thắm                Mail: ThamPTH2@fsoft.com.vn                    Mobile phone: 097.132.0132
+
+ü  Giảng viên:
+
+Module
+
+Họ và Tên
+
+Email
+
+SĐT
+
+Linux
+
+Phạm Thanh Bạch
+
+BachPT3@fpt.com
+
+0582674475
+
+AWS Basic
+
+Nguyễn Minh Mẫn
+
+ManNM6@fpt.com
+
+0342464195
+
+Docker
+
+Nguyễn Minh Thái
+
+ThaiNM5@fpt.com
+
+0868466825
+
+K8S
+
+Trần Hoài Nhật
+
+NhatTH4@fpt.com
+
+0974312565
+
+CICD
+
+Trần Đức Luân
+
+LuanTD@fpt.com
+
+0396540033
+
+ 
+
+Trong quá trình thực hiện, nếu cần hỗ trợ thêm thông tin gì thì lớp có thể liên lạc với em qua email/ số điện thoại ở phía trên nhé.
+
+Trong trường hợp gọi điện vui lòng gọi điện trong giờ làm việc trừ trường hợp khẩn cấp.
+Hẹn gặp mọi người vào thứ 2 tới nhen. Chúc anh chị sẽ có khóa học thật hiệu quả và hoàn thành tốt mục tiêu của mình.

@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  cleaning-service-network:
+services:
+  frontend:
+    container_name: cleaning-svc-frontend
+    image: thainm/cleaning-service-frontend:latest
+    restart: always
+    volumes:
+      - type: bind
+        source: ./others
+        target: /tmp/static
+    ports:
+      - 127.0.0.1:10080:80
+    networks:
+      - cleaning-service-network
+  
+
+  backend:
+    container_name: cleaning-svc-backend
+    image: thainm/cleaning-service-backend:latest
+    restart: always
+    ports:
+      - 127.0.0.1:18080:8080
+    networks:
+      - cleaning-service-network
+
+volumes:
+  docker-volume:

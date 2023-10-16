@@ -1,0 +1,16 @@
+.warehouse{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.item{
+  width: 50%;
+  /* position: relative; */
+}
+
+.item-children{
+  margin-left: 20px;
+}

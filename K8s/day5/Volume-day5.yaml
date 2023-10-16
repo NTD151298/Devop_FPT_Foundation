@@ -1,0 +1,107 @@
+# kubectl apply -f Volume-day5.yaml
+# Pod vp
+
+# Specifying the Kubernetes resource as a Pod, and giving it the name "vp-pod".
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vp-pod
+spec:
+  # Defining the containers that will run inside the Pod. In this case, there's one container with the name "nginx-vp-con".
+  containers:
+    - name: nginx-vp-con
+      # Specifying the Docker image to be used for this container, which is the lightweight "nginx:alpine" image.
+      image: nginx:alpine
+      # Setting resource limits for the container, including memory and CPU limits.
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      # Specifying volume mounts for this container, in this case, a volume with the name "my-volume-1" will be mounted.
+      volumeMounts:
+        - name: my-volume-1
+          # Defining the path where the volume will be mounted inside the container.
+          mountPath: /var/www/html
+  # Defining a volume with the name "my-volume-1" and associating it with a PersistentVolumeClaim (PVC) named "vpcday5".
+  volumes:
+    - name: my-volume-1
+      persistentVolumeClaim:
+        claimName: vpcday5
+---
+# VPC
+# This section defines a PersistentVolumeClaim (PVC) named "vpcday5" with resource requests for 1 gigabyte of
+# storage. It specifies "ReadWriteOnce" access mode.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vpcday5
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+# VP
+# This section defines a PersistentVolume (PV) named "pvday5" with a capacity of 5 gigabytes. It also specifies
+#"ReadWriteOnce" access mode and uses a hostPath at "/tmp/pv-data" for storage.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvday5
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  hostPath:
+    path: "/tmp/pv-data"
+---
+# pod emtpydir
+# This section defines a Pod named "emptydir-pod" running a container named "nginx-emptydir-con" with
+# resource limits. It also defines an emptyDir volume named "my-volume-2" mounted at "/var/www/html."
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-pod
+spec:
+  containers:
+    - name: nginx-emptydir-con
+      image: nginx:alpine
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: my-volume-2
+          mountPath: /var/www/html
+  volumes:
+    - name: my-volume-2
+      emptyDir: {}
+---
+# {od hostpath
+# This section defines a Pod named "hostpath-pod" running a container named "nginx-hostpath-con"
+# with resource limits. It also defines a hostPath volume named "my-volume-3" mounted at "/data" with
+# the host's path at "/tmp/node-data."
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+    - name: nginx-hostpath-con
+      image: nginx:alpine
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: my-volume-3
+          mountPath: /data
+  volumes:
+    - name: my-volume-3
+      hostPath:
+        path: /tmp/node-data

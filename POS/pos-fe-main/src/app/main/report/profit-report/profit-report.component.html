@@ -1,0 +1,80 @@
+<div class="flex flex-row justify-content-between">
+    <h3>Báo cáo lợi nhuận</h3>
+    <div>
+        <button pButton pRipple type="button" label="Xuất báo cáo" class="p-button-rounded p-button-sm"
+            (click)="exportExcel()"></button>
+    </div>
+</div>
+<hr />
+<div class="flex flex-row gap-5">
+    <div class="row col-12">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+            <h6>Kho</h6>
+            <p-dropdown *ngIf="listWarehouse.length>0" [options]="listWarehouse" [(ngModel)]="filter.warehouse_id"
+                placeholder="Chọn kho" [showClear]="true" filter="true"></p-dropdown>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+            <h6>Từ ngày</h6>
+            <p-calendar [(ngModel)]="filter.start_date" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+            <h6>Đến ngày</h6>
+            <p-calendar [(ngModel)]="filter.end_date" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+            <h6>Từ khoá</h6>
+            <input type="text" pInputText [(ngModel)]="filter.keyword" (keyup.enter)="getList()" />
+        </div>
+        <div class="wrap col-sm-12 col-md-8 col-lg-12 col-xl-4 col-xxl-4">
+            <div class="flex flex-column justify-content-end" style="width: 110px">
+                <button pButton pRipple type="button" label="Tìm kiếm"
+                    class="p-button-outlined p-button-rounded p-button-sm" (click)="getList()"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pt-3 user-table">
+    <p-table responsiveLayout="scroll" [value]="summary.products" styleClass="p-datatable-sm w-100" [scrollable]="false"
+        [resizableColumns]="true" scrollHeight="600px">
+        <ng-template>
+            <col style="width: 5%">
+            <col style="width: 30%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="user-table-th-big">STT</th>
+                <th class="user-table-th-big" pSortableColumn="name">
+                    Nội dung <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th class="user-table-th-big">Doanh thu</th>
+                <th class="user-table-th-big" pSortableColumn="price">
+                    Giá vốn <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th class="user-table-th-big">Lợi nhuận gộp</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price | number }}</td>
+                <td>{{ product.sale_price | number }}</td>
+                <td>{{ product.revenue | number }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">     
+        <tr>
+          <td></td>
+          <td>Tổng</td>        
+          <td>{{ summary.total_amount | number: "0.0-0" }} đ</td>
+          <td>
+            {{ summary.total_sale + summary.total_voucher | number: "0.0-0" }} đ
+          </td>
+          <td>{{ summary.total_revenue | number: "0.0-0" }} đ</td>
+        </tr>
+      </ng-template>
+    </p-table>
+</div>

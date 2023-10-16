@@ -1,0 +1,42 @@
+
+.wrap{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.center{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row li{
+  color: rgb(49, 121, 180);
+}
+
+.user-table th {
+  background-color: aliceblue;
+  height: 3rem;
+}
+
+.user-table td {
+  height: 2.5rem;
+}
+
+@media screen and (max-width: 850px) {
+  .user-login-ipad {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .user-table-th-big {
+    min-width: 150px;
+  }
+
+  .user-table-th-sm {
+    min-width: 100px;
+
+  }
+
+}

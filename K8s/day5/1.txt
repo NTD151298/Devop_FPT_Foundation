@@ -1,0 +1,45 @@
+config map
+quản lý tập chung, không có thì để tùm lum dữ liệu
+khi gặp sự cố thì ta cần tìm config thế lên có cái để tập chung
+lại thì là nó config map
+vẫn sài yaml file ok rồi chọn server
+có nó rồi thì làm sao để dùng nó trong cái pod thế nó trong pod rồi
+
+
+secret
+dùng bên thứ 3 để quản lý nó che đi và mã hóa 
+rồi nó rotain đảo ngược để sử dụng khi thuật toán giải mã
+2 cái object trên thường dùng 
+
+cách sử dụng 2 thằng
+viết file yaml có những thứ cơ bản tên nó rồi dữ liệu trong data
+learn là k8s và session 6 
+cái kia thì nó vẫn là user name và pass 
+có vẻ không căng lắm nếu phải báo lỗi
+
+vd pod nginx thôi đang muốn truyền config map và secress
+vào pod đó thì cấu hình đặt tên là server 
+chúng ta thấy nó truyền data ta thấy tên là server rồi valuFrom
+config mapkyeref rồi tên và key  nó gọi ? docker tạo manifest đang thử
+nhảy vào cái pod lệnh lấy cái os-release rồi
+kiếm cái env là post gress  nó truyền vào cái pod nó biết dường nào mà tạo
+hỗ trợ cái việc app đọc thẳng vào biến môi trường  bên mấy ông dùng biến env nào để cho tôi tôi truyền vào cho
+
+volume storage class
+pod tạo trên node ? biến thành trạng thái nào đó nó phải mount vào một cái
+gì đó cái thằng emptyDir thì phải có một thằng pod nào đó xài cái 
+consumer nữa thì nó sẽ bị xóa nếu còn 1 thằng consumer thì nó vẫn phục vụ
+pod nằm trên pod node1 và node2 nếu có một con volum có 2 cái gì nhiều 
+connect với một cái gì đó bên ngoài map moutn trên could ok 2 thằng kia engider và host path
+dùng local muốn dùng tới cloud có một cái nữa 
+dựa vào một cloud provider ok rồi provisioner ok nó sẽ tạo thư mục cho chúng ta rồi thằng sysyetem volume chỉ có kết nối và sài
+tạo đường kết nối 2 thằng nằm trên cloud  presistent volume là thằng k8s admin có người còn dynamic list các api ra thằng đó pv
+cái quan trọng nữa  tắt vòng đời nó 2 thằng bị tách ra để khi pod chết tgufk thì không có vấn đề gì cả thằng pv không phụ thuộc vào namespace nào cả
+nó là storage class hỗ trợ tạo pv làm sao để pod sài được thì còn 1 thằng nữa đợi nhận request pod cần bao nhiêu gb lưu data pv request pvc có các cấu hình khác nhau của nó 
+pvc muốn request được pvc pv ok thì thằng kia như thế nào link tới cloud 2 thằng không cần nhau nếu trên cloud pvc còn có thể static hoặc dynamic
+p in deployments đợi request vpc đợi system đợi thaayd demo
+thằng nào đó bị mất ok lưu lại thằng state full set ok rồi thằng nào đăt theo thứ tự ok cũng đã hiểu thêm nhiều rồi
+tắt cái gì đó cấu hình khi tạo node ? cài container động cơ engie ok docker rồi làm gì nữa chỉ có niềm tin và sự cố gắng thôi chúng ta nhìn được xa chứ để sử dụng được kubeadm
+cài cái gì nữa đó là cài kubelet  rồi cài 3 thằng nó rồi các phiên bản khác nhau chạy cái gì đó
+rồi sau đó setup network rồi kệ thôi không quan trọng ở họ nghĩ đến chúng ta chứ có gì chúng ta đã cố gắng hết rồi có phải đâu mọi thứ rồi thay đổi có đi được bao lâu do chúng ta solo mà
+đã cố rồi quan trọng ở họ thấy đoạn joint node joint xong thì nó init rồi chạy các lệnh đã có cái tool và mọi thứ bottstrap copy config này

@@ -1,0 +1,33 @@
+.group{
+  border: 1px solid rgb(9, 139, 20);
+  background-color: rgb(9, 139, 20);
+  color:aliceblue;
+  outline: none;
+  border-radius: 3px;
+  margin-left: 5px;
+  }
+
+
+.group-table th {
+  background-color: aliceblue;
+  height: 3rem;
+}
+
+.group-table td {
+  height: 2.5rem;
+}
+
+
+@media screen and (max-width: 850px) {
+    .group-table {
+      overflow-x: scroll;
+    }
+
+    .group-table-th-big {
+      min-width: 150px;
+    }
+
+    .group-table-th-sm {
+      min-width: 100px;
+    }
+}

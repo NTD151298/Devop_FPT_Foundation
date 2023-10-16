@@ -1,0 +1,136 @@
+<h3>Quản lý hợp đồng</h3>
+<hr />
+<div class="flex justify-content-center">
+  <form
+    [formGroup]="formGroupCreate"
+    class="w-100 justify-content-between align-items-end row"
+    style="margin: 0;"
+
+  >
+    <div class="col-lg-5 col-md-6 col-sm-8 col-xs-8" style="padding-left: 0;">
+      <h6>Từ khóa</h6>
+      <input
+        type="text"
+        pInputText
+        formControlName="keyword"
+        (keyup)="getListContract()"
+        style="width: 100%;"
+        placeholder="Nhập tìm kiếm..."
+      />
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 flex justify-content-end" style="padding-right: 0;">
+      <div class="flex flex-column justify-content-end" style="margin-top: 18px">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Tìm kiếm"
+            class="p-button-outlined p-button-rounded p-button-sm"
+            style="width: 6rem"
+            (click)="getListContract()"
+          ></button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-end pt-4 pb-2"
+>
+  <div class="flex align-items-center">
+    <h5 class="m-0" style="font-size: 1.2rem;">Danh sách hợp đồng</h5>
+  </div>
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Thêm"
+      class="p-button-sm p-button-success"
+      style="width: 6rem"
+      (click)="addContract()"
+    ></button>
+  </div>
+</div>
+
+
+<div class="pt-1 contract-table">
+  <div class="table-contract" style="border-bottom: 1px solid #dee2e6;">
+    <p-table
+    responsiveLayout="scroll"
+    [value]="contractList"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 38px; text-align: center;">STT</th>
+        <th class="contract-table-mobile-big">Nhà cung cấp</th>
+        <th class="contract-table-mobile-sm">Số điện thoại</th>
+        <th >Mã code</th>
+        <th  class="contract-table-mobile-big ">Địa chỉ</th>
+        <th class="contract-table-mobile-big " >Loại hợp đồng</th>
+        <th class="contract-table-mobile-sm" >Thao tác</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td style="text-align: center;" scope="">{{ page.stt + (i + 1) }}</td>
+        <td class="">{{ item.partner_name }}</td>
+        <td>
+          {{ item.partner_phone }}
+        </td>
+        <td>
+          {{ item.partner_code }}
+        </td>
+        <td class="">{{ item.partner_address }}</td>
+        <td>
+          <span *ngIf="item.type === 1" class="text-primary-400"
+            >Hợp đồng thương mại</span
+          >
+          <span *ngIf="item.type === 2" class="text-green-400"
+            >Hợp đồng ký gửi</span
+          >
+        </td>
+        <td>
+          <!-- <i
+            class="pi pi-eye"
+            pTooltip="Chi tiết voucher"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(26, 172, 48); margin-right: 10px"
+            (click)="viewContract(item.id)"
+          ></i> -->
+          <i
+            class="pi pi-pencil"
+            pTooltip="Chi tiết voucher"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 10px"
+            (click)="viewContract(item.id)"
+          ></i>
+
+          <i
+            class="pi pi-trash"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="delete(item.id)"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </div>
+  <div class="row">
+    <p-paginator
+      #paginator
+      [rows]="page.pageSize"
+      [totalRecords]="page.totalItem"
+      (onPageChange)="onChangedPage($event)"
+    ></p-paginator>
+  </div>
+
+</div>
+

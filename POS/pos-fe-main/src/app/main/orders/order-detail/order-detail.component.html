@@ -1,0 +1,65 @@
+<h3>Chi tiết đơn hàng</h3>
+<hr />
+<div class="grid">
+    <div class="col-4">
+        <h6>Mã đơn</h6>
+        <p>{{data.code}}</p>
+    </div>
+    <div class="col-4">
+        <h6>Khách hàng</h6>
+        <p>{{data.customer_name}} - {{data.customer_phone}}</p>
+    </div>
+    <div class="col-4">
+        <h6>Phương thức thanh toán</h6>
+        <p>{{data.payment_type == 0? "Tiền mặt": (data.payment_type==2?"Ngân hàng":"Quẹt thẻ")}}</p>
+        <p>{{data.payment_type == 0? "": data.bank_account}}</p>
+        <p>{{data.payment_type == 0? "": data.transaction_code}}</p>
+    </div>
+    <div class="col-4">
+        <h6>Tổng tiền hàng</h6>
+        <p>{{data.product_total_cost|number}} đ</p>
+    </div>
+    <div class="col-4">
+        <h6>Tiền khuyến mại</h6>
+        <p>{{data.voucher_cost|number}} đ</p>
+    </div>
+    <div class="col-4">
+        <h6>Tiền thanh toán</h6>
+        <p>{{data.total_amount|number}} đ</p>
+    </div>
+    <div class="col-4">
+        <h6>Thời gian thanh toán</h6>
+        <p>{{data.dateAdded|date:'dd/MM/yyyy hh:mm:ss'}}</p>
+    </div>
+    <div class="col-4">
+        <h6>Ghi chú</h6>
+        <p>{{data.note}}</p>
+    </div>
+</div>
+<hr />
+<div>
+    <p-table [value]="data.products" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>STT</th>
+                <th>Mã sản phẩm</th>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Đơn vị</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>
+                    {{product.barcode}}
+                </td>
+                <td> {{product.name}} </td>
+                <td> {{product.price|number}} đ </td>
+                <td> {{product.quantity|number}} </td>
+                <td> {{product.unit_code}} </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

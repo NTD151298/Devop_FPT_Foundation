@@ -1,0 +1,10 @@
+.wrap{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+app-order-invoid {
+  display: none;
+}
+ 

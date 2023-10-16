@@ -1,0 +1,363 @@
+<!-- <div>{{ formGroupCreate.value | json }}</div> -->
+
+<form action="" [formGroup]="formGroupCreate">
+    <div class="">
+      <h3>Chi tiết hợp đồng</h3>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>Nhà cung cấp</h6>
+        <p-dropdown
+          placeholder="Chọn nhà cung cấp"
+          [showClear]="true"
+          [disabled]="disableForm"
+          [options]="supplierList"
+          formControlName="partner_id"
+          filter="true"
+          (onChange)="updateSupplierInfor($event)"
+        ></p-dropdown>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>Loại hợp đồng</h6>
+        <p-dropdown
+          placeholder="Chọn loại hợp đồng"
+          [showClear]="true"
+          [disabled]="disableForm"
+          formControlName="type"
+          [options]="typeContractList"
+        ></p-dropdown>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>Mã nhà cung cấp</h6>
+        <input
+          type="text"
+          pInputText
+          [disabled]="disableForm"
+          formControlName="partner_code"
+        />
+      </div>
+  
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>Mã số thuế nhà cung cấp</h6>
+        <input
+          type="text"
+          pInputText
+          [disabled]="disableForm"
+          formControlName="partner_taxcode"
+        />
+      </div>
+  
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>SĐT nhà cung cấp</h6>
+        <input
+          type="text"
+          pInputText
+          [disabled]="disableForm"
+          formControlName="partner_phone"
+        />
+      </div>
+  
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-2">
+        <h6>Địa chỉ nhà cung cấp</h6>
+        <input
+          type="text"
+          pInputText
+          [disabled]="disableForm"
+          formControlName="partner_address"
+        />
+      </div>
+    </div>
+  
+    <hr />
+  
+    <div>
+      <tabset>
+        <tab heading="Danh sách sản phẩm" id="tab1">
+          <div class="contract-create-mobile">
+            <div
+              class="flex justify-content-between align-items-center"
+              style="margin-right: 20px"
+            >
+              <div style="margin-top: 20px">Danh sách các sản phẩm</div>
+              <i
+                class="pi pi-plus"
+                style="color: rgb(31, 236, 48)"
+                pTooltip="Thêm"
+                tooltipPosition="bottom"
+                (click)="addProduct()"
+              ></i>
+            </div>
+            <p-table>
+              <ng-template pTemplate="header">
+                <tr >
+                  <th>STT</th>
+                  <th>Sản phẩm</th>
+                  <th>Barcode</th>
+                  <th>Mã code hợp đồng</th>
+                  <th>Giá bán</th>
+                  <th>Số lượng</th>
+                  <th>Thao tác</th>
+                  <th></th>
+                </tr>
+                <ng-container formArrayName="listProduct">
+                  <ng-container
+                    *ngFor="
+                      let product of listProductArray.controls;
+                      let i = index
+                    "
+                  >
+                    <tr
+                      [formGroup]="product"
+                      *ngIf="listProductArray.value[i].is_delete === false"
+                    >
+                      <td>{{ i + 1 }}</td>
+                      <td style="min-width: 300px">
+                        <p-dropdown
+                          (onChange)="updateProductInfor($event, i)"
+                          [options]="productSelect"
+                          placeholder="Chọn sản phẩm"
+                          [showClear]="true"
+                          [disabled]="disableForm"
+                          [filter]="true"
+                          class="dropdown"
+                          formControlName="product_id"
+                        ></p-dropdown>
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <input
+                          (keypress)="numberOnly($event)"
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="barcode"
+                        />
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <input
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="contract_code"
+                        />
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <p-inputNumber
+                          mode="decimal"
+                          [disabled]="disableForm"
+                          [minFractionDigits]="0"
+                          formControlName="price"
+                        ></p-inputNumber>
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <p-inputNumber
+                          mode="decimal"
+                          [disabled]="disableForm"
+                          [minFractionDigits]="0"
+                          formControlName="quantity"
+                        ></p-inputNumber>
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <i
+                          class="pi pi-trash"
+                          style="color: rgb(236, 55, 31)"
+                          pTooltip="Thêm"
+                          tooltipPosition="bottom"
+                          [showDelay]="1000"
+                          (click)="removeProduct(i)"
+                        ></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </p-table>
+          </div>
+        </tab>
+        <tab heading="Điều lệ hợp đồng">
+          <div class="contract-create-mobile">
+            <div
+              class="flex justify-content-between align-items-center"
+              style="margin-right: 20px"
+            >
+              <div style="margin-top: 20px">Danh sách các điều lệ</div>
+              <i
+                class="pi pi-plus"
+                style="color: rgb(31, 236, 48)"
+                pTooltip="Thêm"
+                tooltipPosition="bottom"
+                (click)="addContractRule()"
+              ></i>
+            </div>
+            <p-table>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>STT</th>
+                  <th>Tên điều lệ</th>
+                  <th style="min-width: 200px">Kiểu điều lệ</th>
+                  <th style="min-width: 400px">Mô tả</th>
+                  <th>Thao tác</th>
+                  <th></th>
+                </tr>
+  
+                <ng-container formArrayName="contractRule">
+                  <ng-container
+                    *ngFor="
+                      let contractRule of contractRule.controls;
+                      let i = index
+                    "
+                  >
+                    <tr [formGroup]="contractRule">
+                      <td>{{ i + 1 }}</td>
+                      <td style="min-width: 300px">
+                        <input
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="name"
+                        />
+                      </td>
+                      <td style="max-width: 100px">
+                        <p-dropdown
+                          placeholder="Chọn điều lệ"
+                          [disabled]="disableForm"
+                          [showClear]="true"
+                          filter="true"
+                          [options]="contractRuleList"
+                          formControlName="type"
+                        ></p-dropdown>
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <input
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="description"
+                        />
+                      </td>
+                      <td>
+                        <i
+                          class="pi pi-trash"
+                          style="color: rgb(236, 55, 31)"
+                          pTooltip="Thêm"
+                          tooltipPosition="bottom"
+                          [showDelay]="1000"
+                          (click)="removeContractRule()"
+                        ></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </p-table></div
+        ></tab>
+        <tab heading="Điều khoản thanh toán">
+          <div class="contract-create-mobile">
+            <div
+              class="flex justify-content-between align-items-center"
+              style="margin-right: 20px"
+            >
+              <div style="margin-top: 20px">Danh sách các điều khoản</div>
+              <i
+                class="pi pi-plus"
+                style="color: rgb(31, 236, 48)"
+                pTooltip="Thêm"
+                tooltipPosition="bottom"
+                (click)="addTermsOfPayment()"
+              ></i>
+            </div>
+            <p-table>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>STT</th>
+                  <th>Tên điều khoản</th>
+                  <th style="min-width: 200px">Kiểu điều khoản</th>
+                  <th style="min-width: 400px">Mô tả</th>
+                  <th>Thao tác</th>
+                  <th></th>
+                </tr>
+                <ng-container formArrayName="termsOfPayment">
+                  <ng-container
+                    *ngFor="
+                      let termOfPayment of termsOfPayment.controls;
+                      let i = index
+                    "
+                  >
+                    <tr [formGroup]="termOfPayment">
+                      <td>{{ i + 1 }}</td>
+                      <td style="min-width: 300px">
+                        <input
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="name"
+                        />
+                      </td>
+                      <td style="max-width: 100px">
+                        <p-dropdown
+                          placeholder="Chọn điều khoản"
+                          [disabled]="disableForm"
+                          [showClear]="true"
+                          filter="true"
+                          [options]="termOfPaymentList"
+                          formControlName="type"
+                        ></p-dropdown>
+                      </td>
+                      <td class="contract-create-mobile-big">
+                        <input
+                          type="text"
+                          pInputText
+                          [disabled]="disableForm"
+                          formControlName="description"
+                        />
+                      </td>
+                      <td>
+                        <i
+                          class="pi pi-trash"
+                          style="color: rgb(236, 55, 31)"
+                          pTooltip="Thêm"
+                          tooltipPosition="bottom"
+                          [showDelay]="1000"
+                          (click)="removeTermsOfPayment()"
+                        ></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </p-table></div
+        ></tab>
+      </tabset>
+  
+      <div class="col-12 flex flex-column justify-content-end">
+        <div class="flex flex-row justify-content-end">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Thoát"
+            class="p-button-sm"
+            style="margin-right: 10px"
+            (click)="exit()"
+          ></button>
+          <!-- <button
+            pButton
+            pRipple
+            type="button"
+            label="Duyệt"
+            class="p-button-danger p-button-sm"
+            style="margin-right: 10px"
+          ></button> -->
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Lưu"
+            (click)="save()"
+            class="p-button-success p-button-sm"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </form>
+  

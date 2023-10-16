@@ -1,0 +1,5 @@
+FROM nginx:1.22
+
+COPY others/example-bind-mount.html /usr/share/nginx/html
+
+CMD [ "nginx", "-g", "daemon off;" ]

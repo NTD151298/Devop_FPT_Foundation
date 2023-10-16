@@ -1,0 +1,587 @@
+
+[LINUX]HCM_FRF.V_Devops_02_Quiz Converted_Final
+Tổng điểm
+825/1000
+ 
+ExtendedForms Id (skip this field)
+DO NOT EDIT this field or your score will not recorded.
+99a0d1df-5c7d-4169-95b9-8ee72115f687
+Họ và tên
+*
+Nguyễn Thái Dương
+Email
+*
+duongtn1512@gmail.com
+ 
+1. ________ command is used to count the total number of lines, words and character in a file?
+25/25
+A. countw
+B. wcount
+C. wc
+ 
+D. count p
+E. None of the above
+ 
+2.  Which is the correct syntax for sed on command line?
+25/25
+a) sed ‘[command]’ [filename] [options].
+b) sed ‘[command]’ [options] [filename].
+c) sed [filename] [options] ‘[command]’
+d) sed [options] ‘[command]’ [filename].
+ 
+ 
+3.  Which symbol is used to comment a line in a shell script?
+25/25
+A) #
+ 
+B) //
+C) ;
+D) *
+ 
+4. _______ hardware architectures are not supported by Red Hat?
+
+A.	SPARC
+B.	IBM-compatible
+C.	Macintosh
+D.	Alpha
+E.	None of the above
+0/25
+A
+B
+C
+D
+E
+ 
+Câu trả lời đúng
+C
+ 
+5.  Which command is used to read user input in a shell script?
+25/25
+A) read
+ 
+B) input
+C) get
+D) take
+ 
+6. Macintosh is a variant of
+
+A.	Linux
+B.	Windows
+C.	Unix
+D.	Apple
+E.	Steve Jobs
+25/25
+A
+B
+C
+ 
+D
+E
+ 
+7. Which of the following is not a communication command?
+
+A.	grep
+B.	mail
+C.	mesg
+D.	write
+E.     None of the above
+0/25
+A
+B
+C
+D
+ 
+E
+Câu trả lời đúng
+A
+ 
+8. What command is used to add printing jobs to the queue?
+
+A.	lpd
+B.	lpr
+C.	lpq
+D.	lpc
+E.	None of the above
+0/25
+A
+B
+C
+ 
+D
+E
+Câu trả lời đúng
+B
+ 
+9. #!/bin/bash is commonly called as
+
+A.	shebang
+B.	hashbang
+C.	Script Initialiser
+D.	(a) and (b) is correct
+E.	None of the Above
+0/25
+A
+ 
+B
+C
+D
+Câu trả lời đúng
+D
+ 
+10.  What does GNU stands for?
+
+A.	Gnu’s not Unix
+B.	Geek Needed Unix
+C.	General Unix
+D.	None of the Above
+25/25
+A
+ 
+B
+C
+D
+ 
+11.  Which command is used to redirect the standard output to a file?
+25/25
+A) >
+ 
+B) <>
+C) |
+D) &
+ 
+12. Which of the following is a command in Linux?
+
+A.	w
+B.	x
+C.	t
+D.	All of the Above
+E.	None of the Above
+25/25
+A
+ 
+B
+C
+D
+E
+ 
+13. ______ command is used to remove jobs from the print queue?
+
+A.	lpq
+B.	lpr
+C.	lprm
+D.	lpc
+E.	None of the above
+25/25
+A
+B
+C
+ 
+D
+E
+ 
+14. _________ makes it possible to run Windows and Linux Kernel simultaneously in parallel on the same machine.
+
+A.	Virtualbox
+B.	Vmware
+C.	Cooperative Linux (coLinux)
+D.	LAN
+E.	None of the Above
+0/25
+A
+ 
+B
+C
+D
+E
+Câu trả lời đúng
+C
+ 
+15. _____ is the world’s largest non-commercial Linux distribution
+
+A.	Debian
+B.	Ubuntu
+C.	Fedora
+D.	Mint
+E.	Slackware
+25/25
+A
+ 
+B
+C
+D
+E
+ 
+16. Which one is used to see how much memory is being used? (Select Three)
+
+A.	chmod
+B.	free
+C.	ethtools
+D.	vmstat
+E.	top
+25/25
+A
+B
+ 
+C
+D
+ 
+E
+ 
+ 
+17. Which command do we use, to look at the content of compressed file, abc.z?
+
+A.	zcat sample.z
+B.	cat sample.z
+C.	zip sample.z
+D.	vi sample.z
+E.	none of them
+25/25
+A
+ 
+B
+C
+D
+E
+ 
+18. Which ones are modes of vi editor? (Select three)
+
+A.	insert mode
+B.	monitor mode
+C.	owner mode
+D.	ex mode
+E.	command mode
+25/25
+A
+ 
+B
+C
+D
+ 
+E
+ 
+ 
+19. To terminate all processes, we use … in Linux
+
+A.	kill 0
+B.	terminate 0
+C.	dead 0
+D.	end 0
+E.	stop 0
+25/25
+A
+ 
+B
+C
+D
+E
+ 
+20. With which command can you change permissions in Linux?
+
+A.	du
+B.	dstat
+C.	mkdir
+D.	chmod
+E.	pwd
+25/25
+A
+B
+C
+D
+ 
+E
+ 
+21. How do you refer to the parallel port that our printer is connected?
+
+A.	/sys/dvc
+B.	/dev/lp
+C.	/usr/local
+D.	None of them
+E.	/device/usb
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+22. Which regular expression used in Linux is False?
+
+A.	* - Match zero or more characters
+B.	? - Match exactly one more characters
+C.	$ - Match the end of the String
+D.	^ - Match the beginning of the String
+E.	None of them
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+23. What is the appreciation command for print working directory
+
+A.	dir
+B.	print
+C.	pow
+D.	pwd
+E.	prt
+25/25
+A
+B
+C
+D
+ 
+E
+ 
+24. ifconfig is the command is used for ______________
+25/25
+A. shutting down the computer
+B. pinging the other machine
+C. knowing the ipaddress of the machine
+ 
+D. restarting the machine
+ 
+25. How do you check how much space left in current drive?
+
+A.	ds
+B.	df
+C.	w
+D.	ls
+25/25
+A
+B
+ 
+C
+D
+ 
+26. Comments are created by typing the … symbol before the actual command
+A.     /
+
+B.     *
+
+C.    &
+
+D.    #
+
+E.    -
+
+25/25
+A
+B
+C
+D
+ 
+E
+ 
+27. What is the space that holds running programs when RAM does not have enough space?
+
+A.	System space
+B.	Swap space
+C.	Buffer space
+D.	Idle space
+E.	Ram space
+0/25
+A
+B
+C
+ 
+D
+E
+Câu trả lời đúng
+B
+ 
+28. Question 6: Write the command to display the current date in the form dd/mm/yyyy.
+
+A. date +%d/%m/%Y
+B. date +”%H/%m/%y”
+C. date +/%d/%m/20%y
+D. date +”/%d/%m/20%y”
+25/25
+A
+ 
+B
+C
+D
+ 
+29. How can we open file abc.txt in read-only mode using vim editor?
+
+A.	exc –r abc.txt
+B.	vim –R abc.txt
+C.	vi –R abc.txt
+D.	show –r abc.txt
+E.	none of them
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+30. How to identify which shell you are using in Linux?
+
+A.	show $SHELL
+B.	echo $SHELL
+C.	pwd $SHELL
+D.	cat $SHELL
+E.	vi $SHELL
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+31. Which system call is used to create a new process?
+
+A.	wait()
+B.	exit()
+C.	run()
+D.	fork()
+E.	exec()
+25/25
+A
+B
+C
+D
+ 
+E
+ 
+32. Which one saves current work and exist in vi editor
+
+A.	:w!
+B.	:q!
+C.	:q
+D.	:wq!
+25/25
+A
+B
+C
+D
+ 
+ 
+33. What are the filenames that are preceded by a dot?
+
+A.	Hidden Files
+B.	Draft Files
+C.	Run Files
+D.	System Files
+E.	Critical Files
+25/25
+A
+ 
+B
+C
+D
+E
+ 
+34. Which Linux command combines ping and track path into a single command?
+
+A.	traceping
+B.	mtr
+C.	pintrc
+D.	traceroute
+E.	ping
+25/25
+A
+B
+ 
+C
+D
+E
+ 
+35. Which one gives read, write, and execute to owner while read to group and everyone?
+
+A.	754
+B.	544
+C.	744
+D.	755
+E.	655
+25/25
+A
+B
+C
+ 
+D
+E
+ 
+36. "ls  -l  myfolder"  gives the following output:
+
+-rw-r--r--     1 Mark  staff  1040  11 Feb 15:50  good_file.txt
+-rwxr-xr-x   1 Frank  staff   522   27 Feb 13:52  funct.sh
+
+Regarding the file  "good_file.txt" :
+
+A. It is an executable
+B. It is an belongs to Frank
+C. The user Mark has the permission to write on it
+D. None of the above 
+
+25/25
+A
+B
+C
+ 
+D
+ 
+37. If you want to remove all the folders:  " a1_data"  "a2_data"   "a3_data"  in your present working directory you can type:  
+
+A. rm a1
+B. rm - R*data
+C. rm*data
+D. None of the above
+0/25
+A
+B
+C
+D
+ 
+Câu trả lời đúng
+B
+ 
+38. After the command:   ls  myfolder  |  tail  -4  >  mystuff
+"mystuff "  will be:
+
+A. a file where there are written the first 4 elements contained in "myfolder"
+B. a folder that contains the last 4 elements present in "myfolder"
+C. a file where there are written the last 4 elements contained in "myfolder"
+D. None of the above
+25/25
+A
+B
+C
+ 
+D
+ 
+39. 
+myhost $: v1="nice cat"
+myhost $: v2="red cat"
+myhost $: v3="gray cat"
+myhost $: unset v1 v3
+myhost $: echo "I have a $v1 $v2 $v3"
+Question: The  output  of the last command will be?
+
+A. I have a $v1 $v2 $v3
+B. I have a nice cat red cat gray cat
+C. I have a nice cat gray cat
+D. I have a red cat
+25/25
+A
+B
+C
+D
+ 
+ 
+40. A command must always be followed by an option?
+
+A. TRUE
+B. FALSE
+25/25
+True
+False
+ 
+Nội dung này không phải do Google tạo ra hay xác nhận. - Điều khoản Dịch vụ - Chính sách quyền riêng tư
+Google Biểu mẫu

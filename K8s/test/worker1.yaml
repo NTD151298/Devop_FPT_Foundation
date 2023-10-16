@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-node
+  template:
+    metadata:
+      labels:
+        app: worker-node
+    spec:
+      containers:
+        - name: backend-container
+          image: busybox:latest  # Example image for the backend
+          command: [ "sh", "-c", "echo Hello from the backend! && sleep 3600" ]  # Example command
+          ports:
+            - containerPort: 8080
+        - name: frontend-container
+          image: nginx:latest  # Example image for the frontend
+          ports:
+            - containerPort: 80

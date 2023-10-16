@@ -1,0 +1,129 @@
+<div class="modal-content">
+  <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <span *ngIf="!itemDetail">Tạo mới quyền</span>
+        <span *ngIf="itemDetail">Sửa quyền</span>
+      </h5>
+      <button
+        type="button"
+        class="close"
+        (click)="close()"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- <div>{{ formGroupCreate.value | json }}</div> -->
+      <div class="form-group">
+        <label class="form-label" for="Admin_code">Mã quyền</label>
+        <input
+          type="string"
+          formControlName="code"
+          class="form-control"
+          placeholder="Mã quyền"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_name">Tên quyền</label>
+        <input
+          type="string"
+          formControlName="name"
+          class="form-control"
+          placeholder="Nhập tên quyền"
+        />
+      </div>
+
+      <table style="width: 100%">
+        <h4 style="margin-top: 20px">Danh sách quyền con</h4>
+        <tr>
+          <td>Mã quyền</td>
+          <td>Tên quyền</td>
+          <td style="text-align: end">
+            <i
+              class="pi pi-plus"
+              style="color: rgb(45, 191, 16)"
+              pTooltip="Thêm"
+              tooltipPosition="bottom"
+              (click)="addRoleDetail()"
+            ></i>
+          </td>
+        </tr>
+        <tr
+          style="text-align: end"
+          *ngFor="let role of role_Details_Array.controls; let i = index"
+        >
+          <ng-container [formGroup]="role">
+            <ng-container *ngIf="role.value.is_delete == false">
+              <td>
+                <input
+                  type="text"
+                  placeholder="Nhập mã quyền"
+                  pInputText
+                  formControlName="code"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Nhập tên quyền"
+                  pInputText
+                  formControlName="name"
+                />
+              </td>
+              <td>
+                <i
+                  class="pi pi-trash"
+                  pTooltip="Xoá"
+                  tooltipPosition="bottom"
+                  style="color: rgb(217, 37, 37)"
+                  (click)="removeRoleDetails(role.value.id, i)"
+                ></i>
+              </td>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_note">Ghi chú</label>
+        <input
+          type="string"
+          formControlName="note"
+          class="form-control"
+          placeholder="Nhập ghi chú"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="Admin_status">Trạng thái</label>
+        <select
+          name="status"
+          id="status"
+          formControlName="is_delete"
+          class="form-control"
+        >
+          <option *ngFor="let s of listStatus" [ngValue]="s.status">
+            {{ s.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="close()">
+        Bỏ qua
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary btn-smartgap"
+        (click)="save()"
+      >
+        <i class="fa fa-save"></i>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </form>
+</div>

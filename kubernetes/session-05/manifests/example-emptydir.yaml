@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-pod
+spec:
+  containers:
+    - name: emptydir
+      image: nginx
+      command:
+        - "/bin/sh"
+        - "-c"
+        - "sleep 30; curl localhost:80"
+      volumeMounts:
+        - name: my-volume
+          mountPath: /data
+  volumes:
+    - name: my-volume
+      emptyDir:
+        medium: Memory

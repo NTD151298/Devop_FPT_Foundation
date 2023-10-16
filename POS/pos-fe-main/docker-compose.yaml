@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  pos-fe:
+    environment:
+      - API_URL=${API_URL}
+    container_name: pos-fe
+    image: smartgapjsc/pos-fe:tag
+    networks:
+      - smartgapjsc-pos-network
+    ports:
+      - target: 80
+        published: 8212
+    labels:
+      service: pos-fe
+      env: ${ENVIRONMENT}
+      project: pos
+networks:
+  smartgapjsc-pos-network:
+    driver: bridge

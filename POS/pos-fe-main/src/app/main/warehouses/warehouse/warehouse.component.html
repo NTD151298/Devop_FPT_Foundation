@@ -1,0 +1,143 @@
+<h3>Quản lý danh sách kho</h3>
+<hr />
+<div class="flex flex-row gap-5 justify-content-center">
+  <form
+    [formGroup]="filterFormCreate"
+    class="row w-full flex flex-wrap justify-content-start align-items-end"
+  >
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Kiểu kho</h6>
+      <select name="type" id="type" formControlName="type" class="form-control">
+        <option [value]="99" selected>Chọn kiểu kho</option>
+        <option *ngFor="let s of typeWarehouse" value="{{ s.id }}">
+          {{ s.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Từ khóa</h6>
+      <input formControlName="keyword" type="text" class="form-control"/>
+    </div>
+
+    <div class="wrap col-sm-12 col-md-4 col-lg-6 col-xl-6 col-xxl-8">
+      <div
+        class="flex flex-column justify-content-end"
+        style="width: 110px; margin-right: 10px"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Tìm kiếm"
+          class="p-button-outlined p-button-rounded p-button-sm"
+          (click)="search()"
+        ></button>
+      </div>
+      <div class="flex flex-column justify-content-end" style="width: 110px">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Thêm mới"
+          class="p-button-success p-button-sm"
+          (click)="modalCreateModifyWarehouse(0)"
+          *appHasRole="['WAREHOUSE-create']"
+        ></button>
+      </div>
+    </div>
+  </form>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-center pt-3 pb-2"
+>
+  <div>
+    <h5 class="m-0">Danh sách kho</h5>
+  </div>
+</div>
+
+<div class="pt-1 user-table">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="warehouses"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col" sortable="name">Tên kho</th>
+        <th scope="col" sortable="area">Mã kho</th>
+        <th scope="col" sortable="area">Kiểu kho</th>
+        <th scope="col" sortable="area">Kho cha</th>
+        <th scope="col" sortable="area">Địa chỉ</th>
+        <th scope="col" sortable="area">Trạng thái</th>
+        <th scope="col" sortable="area">Thao tác</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr class="ng-star-inserted">
+        <td scope="row">{{ stt + (i + 1) }}</td>
+        <td>
+          {{ item.name }}
+        </td>
+        <td>
+          {{ item.code }}
+        </td>
+        <td>
+          {{
+            item.type == 0
+              ? "Kho hủy"
+              : item.type == 1
+              ? "Kho smartgap"
+              : "Kho ảo"
+          }}
+        </td>
+        <td>
+          {{ item.parent_name }}
+        </td>
+        <td>
+          {{ item.address }}
+        </td>
+        <td>
+          {{ item.is_active ? "kích hoạt" : "Tạm dừng" }}
+        </td>
+
+        <td _ngcontent-qnv-c278="" class="text-truncate">
+          <i
+            class="pi pi-pencil"
+            pTooltip="Chỉnh sửa kho"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 10px"
+            (click)="modalCreateModifyWarehouse(item.id)"
+            *appHasRole="['WAREHOUSE-modify']"
+          ></i>
+          <!-- <i
+            class="pi pi-trash"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="warehouseDelete(item)"
+          ></i> -->
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <pagination
+      [totalItems]="totalRows"
+      [maxSize]="5"
+      [itemsPerPage]="filterFormCreate.value.page_size"
+      class="pagination-sm"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+      [boundaryLinks]="true"
+      (pageChanged)="onChangedPage($event)"
+      class="pull-right center"
+      style="margin-top: 10px"
+    ></pagination>
+  </div>
+</div>

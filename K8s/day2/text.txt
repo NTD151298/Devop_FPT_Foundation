@@ -1,0 +1,30 @@
+kubectl exec -it httpd-pod-node1 -- /bin/sh
+
+apt update
+apt install iputils-ping
+
+nginx-pod-node1     10.244.0.5   duong1-control-plane   
+nginx-pod-node2-1   10.244.2.5   duong1-worker 
+nginx-pod-node2-2   10.244.2.6   duong1-worker 
+nginx-pod-node3     10.244.1.5   duong1-worker2 
+redis-pod-node3     10.244.1.7   duong1-worker2  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

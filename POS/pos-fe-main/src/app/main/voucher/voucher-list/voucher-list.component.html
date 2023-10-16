@@ -1,0 +1,181 @@
+<h3>Quản lý voucher</h3>
+<hr />
+<div class="flex flex-row gap-5">
+  <div class="row col-12">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Mã voucher</h6>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="filter.keyword"
+        (keyup.enter)="getList(true)"
+      />
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Trạng thái</h6>
+      <p-dropdown
+        [options]="listStatus"
+        [(ngModel)]="filter.status"
+        placeholder="Chọn trạng thái"
+        [showClear]="true"
+        (onChange)="getList(true)"
+      ></p-dropdown>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Từ ngày</h6>
+      <p-calendar
+        [(ngModel)]="filter.start_date"
+        (onSelect)="getList(true)"
+        [showIcon]="true"
+      ></p-calendar>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Đến ngày</h6>
+      <p-calendar
+        [(ngModel)]="filter.end_date"
+        (onSelect)="getList(true)"
+        [showIcon]="true"
+      ></p-calendar>
+    </div>
+    <div class="wrap col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
+      <div
+        class="flex flex-column justify-content-end"
+        style="margin-top: 18px"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Tìm kiếm"
+          class="p-button-outlined p-button-rounded p-button-sm"
+          (click)="getList(true)"
+          style="min-width: 110px; margin-right: 10px"
+        ></button>
+      </div>
+      <div class="flex flex-column justify-content-end" style="width: 110px">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Thêm"
+          class="p-button-sm p-button-success"
+          (click)="add()"
+          style="min-width: 110px"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="flex flex-row gap-5 justify-content-between align-items-center pt-3"
+>
+  <div>
+    <h5 class="m-0">Danh sách voucher</h5>
+  </div>
+</div>
+<div class="pt-1">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="items"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-center" style="width: 50px">STT</th>
+        <th class="user-table-th-big">Mã voucher</th>
+        <th class="user-table-th-big">Tên voucher</th>
+        <th class="user-table-th-big text-center">Mô tả</th>
+        <th class="user-table-th-big text-center">Người tạo</th>
+        <th class="user-table-th-big text-center">Trạng thái</th>
+        <th class="user-table-th-big text-center">Ngày áp dụng</th>
+        <th class="user-table-th-big text-center">Ngày kết thúc</th>
+        <th class="user-table-th-big text-center" style="width: 150px">Thao tác</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td class="text-center">
+          {{ paging.pageSize * (paging.pageIndex - 1) + i + 1 }}
+        </td>
+        <td class="">{{ item.code }}</td>
+        <td class="">{{ item.name }}</td>
+        <td class="">{{ item.description }}</td>
+        <td class="text-center">{{ item.created_name }}</td>
+        <td class="text-center">
+          <span *ngIf="item.status_id === 0" class="text-primary-400"
+            >Đang xét duyệt</span
+          >
+          <span *ngIf="item.status_id === 1" class="text-green-400"
+            >Đang áp dụng</span
+          >
+          <span *ngIf="item.status_id === 2" class="text-red-400"
+            >Đã từ chối</span
+          >
+        </td>
+        <td class="text-center">
+          {{ item.active_date | date: "dd/MM/yyyy HH:mm" }}
+        </td>
+        <td class="text-center">
+          {{ item.end_date | date: "dd/MM/yyyy HH:mm" }}
+        </td>
+        <td class="text-center">
+          <i
+            *ngIf="item.status_id === 1 || item.status_id === 2"
+            class="pi pi-eye"
+            pTooltip="Chi tiết voucher"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(26, 172, 48); margin-right: 10px"
+            (click)="detail(item)"
+          ></i>
+          <i
+            *ngIf="item.status_id === 0"
+            class="pi pi-pencil"
+            pTooltip="Chi tiết voucher"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(40, 122, 209); margin-right: 10px"
+            (click)="detail(item)"
+          ></i>
+          <i
+            *ngIf="item.status_id === 0"
+            class="pi pi-check"
+            pTooltip="Áp dụng"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(26, 172, 48); margin-right: 10px"
+            (click)="changeStatus(item, 1)"
+          ></i>
+          <i
+            *ngIf="item.status_id === 0"
+            class="pi pi-times"
+            pTooltip="Từ chối"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="changeStatus(item, 2)"
+          ></i>
+          <i
+            *ngIf="item.status_id === 1"
+            class="pi pi-trash"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="delete(item)"
+          ></i>
+          <!-- <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm" (click)="delete(item)"></button> -->
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <p-paginator
+      #paginator
+      [rows]="paging.pageSize"
+      [totalRecords]="paging.TotalItems"
+      (onPageChange)="getList(false, $event)"
+    ></p-paginator>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+button{
+    min-width: 100px;
+  }
+  
+  
+  @media screen and (max-width: 570px) {
+  
+      .contract-create-mobile {
+        overflow-x: scroll;
+      }
+  
+      .contract-create-mobile-big {
+        min-width: 100px;
+      }
+  }

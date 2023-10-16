@@ -1,0 +1,31 @@
+.forgotPassword, .group{
+  border: 1px solid rgb(9, 139, 20);
+  background-color: rgb(9, 139, 20);
+  color:aliceblue;
+  outline: none;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+.role-table th {
+  background-color: aliceblue;
+  height: 3rem;
+}
+
+.role-table td {
+  height: 2.5rem;
+}
+
+@media screen and (max-width: 850px) {
+  .role-func-ipad {
+    margin-bottom: 1rem;
+  }
+
+  .role-table-th-big {
+    min-width: 250px;
+  }
+
+  .role-table-th-sm {
+    min-width: 100px;
+  }
+}

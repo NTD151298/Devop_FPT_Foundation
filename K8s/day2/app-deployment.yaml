@@ -1,0 +1,80 @@
+# Apply the configuration defined in this YAML file using the kubectl apply command
+# kubectl apply -f app-deployment.yaml
+
+# Pod on First Node (control-plane node)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-node1 # The name of the pod
+spec:
+  nodeName: duong1-control-plane # Specify the name of the control-plane node
+  containers:
+    - name: nginx # Name of the container
+      image: nginx # Use the official Nginx image
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+
+---
+# Pods on Second Node (worker node)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-node2-1 # The name of the first pod on the second node
+spec:
+  nodeName: duong1-worker # Specify the name of the worker node
+  containers:
+    - name: nginx # Name of the container
+      image: nginx # Use the official Nginx image
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-node2-2 # The name of the second pod on the second node
+spec:
+  nodeName: duong1-worker # Specify the name of the worker node
+  containers:
+    - name: nginx # Name of the container
+      image: nginx # Use the official Nginx image
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+
+---
+# Pods on Third Node (worker node)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-node3 # The name of the pod on the third node
+spec:
+  nodeName: duong1-worker2 # Specify the name of the second worker node
+  containers:
+    - name: nginx # Name of the container
+      image: nginx # Use the official Nginx image
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod-node3 # The name of the Node.js pod on the third node
+spec:
+  nodeName: duong1-worker2 # Specify the name of the second worker node
+  containers:
+    - name: redis # Name of the container
+      image: redis # Use the Redis official image
+      resources:
+        limits:
+          cpu: "0.5" # Limit CPU usage to 0.5 CPU cores
+          memory: "512Mi" # Limit memory usage to 512 megabytes
+

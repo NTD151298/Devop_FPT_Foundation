@@ -1,0 +1,46 @@
+.no-price {
+    background-color: yellow !important;
+}
+
+.is-warning {
+  background-color: rgb(204, 29, 29) !important;
+  color: #ffff !important;
+}
+
+.is-danger {
+  background-color: rgb(34, 31, 31) !important;
+  color: #ffff !important;
+}
+
+/* button{
+  min-height: 40px !important;
+} */
+.row li{
+  color: rgb(49, 121, 180);
+}
+
+.user-table th {
+  background-color: aliceblue;
+  height: 3rem;
+}
+
+.user-table td {
+  height: 2.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .user-login-ipad {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .user-table-th-big {
+    min-width: 150px;
+  }
+
+  .user-table-th-sm {
+    min-width: 100px;
+
+  }
+
+}

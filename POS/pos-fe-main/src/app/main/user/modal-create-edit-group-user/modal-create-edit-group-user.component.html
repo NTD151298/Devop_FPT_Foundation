@@ -1,0 +1,60 @@
+<ng-container *ngIf="!!itemList">
+  <div class="modal-content">
+    <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span *ngIf="!user">Chỉnh sửa người dùng của nhóm</span>
+          <span *ngIf="user">Chỉnh sửa nhóm của người dùng</span>
+        </h5>
+        <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <ng-container *ngIf="!!user">
+          <div class="form-group">
+            <label class="form-label" for="Admin_user">Người dùng</label>
+            <input type="string" class="form-control" placeholder="Người dùng" value="{{user.username}} - {{user.code}}" disabled="true">
+          </div>
+
+          <div class="form-group">
+            <h4>Nhóm</h4>
+            <div class="wrap">
+              <div class="item" *ngFor="let control of groupArray.controls; let i = index;">
+                <input [formControl]="control" type="checkbox" (change)="getSelectedGroup()" class="value" />
+                <label class="label" for="inlineCheckbox{{i}}">{{itemList[i].name}}: {{itemList[i].code}}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="group">
+          <div class="form-group">
+            <label class="form-label" for="Admin_user">Nhóm</label>
+            <input type="string" class="form-control" placeholder="Nhóm" value="{{group.name}} - {{group.code}}" disabled="true">
+          </div>
+
+          <div class="form-group">
+            <h4>Người dùng</h4>
+            <div class="wrap">
+              <div class="item" *ngFor="let control of userArray.controls; let i = index;">
+                <input [formControl]="control" type="checkbox" (change)="getSelectedUser()" class="value" />
+                <label class="label" for="inlineCheckbox{{i}}">{{itemList[i].username}}: {{itemList[i].code}}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " (click)="close()">
+          Bỏ qua
+        </button>
+        <button type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+          <i class="fa fa-save"></i>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-container>

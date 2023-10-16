@@ -1,0 +1,291 @@
+
+.mobile {
+  display: none;
+}
+
+.left-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    height: 60px;
+  }
+}
+
+.navbar-list {
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  background-color: white;
+  color: greenwhite;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgb(228, 228, 228);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  z-index: 10;
+  padding: 0 !important;
+  background-color: rgb(255, 255, 255);
+  height: calc(100% - 70px);
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  width: 16.666667%;
+  color: rgba(16, 16, 16, 0.05) !important;
+}
+
+.wrap {
+  position: absolute;
+  background-color: #d1e1e3;
+  border: 1px solid #11bc6c;
+  // color: #04A2BB;
+  z-index: 5;
+  right: 0px;
+  top: 60px;
+  width: 200px;
+  height: auto;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+  p {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  p:first-child {
+    border-bottom: 1px solid #11bc6c;
+  }
+
+  p:hover {
+    background-color: #70b818;
+    color: #ffffff;
+  }
+
+  &.active {
+    display: flex;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.content {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  padding: 0;
+  padding: 0 10px 0 20px;
+}
+
+ul {
+  position: relative;
+  margin-left: -30px;
+  // border-right: 1px solid rgb(228, 228, 228);
+}
+
+ul>li {
+  // display: flex;
+  // justify-content: flex-start;
+  // align-items: center;
+  color: #8D99A7;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  border-right: 1px solid rgb(233, 233, 233);
+  font-size: 15px;
+  position: relative;
+  z-index: 2;
+
+  mat-icon,
+  fa-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  &.active {
+    background-color: #11bc6c;
+  }
+
+  div:first-child {
+    // background-color: #0EB569;
+    // margin-bottom: 20px;
+  }
+
+  &.dialog {
+    width: 100%;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    color: rgb(16, 16, 16) !important;
+
+    .child {
+      padding: 15px 15px 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .notchild {
+      padding: 15px 15px 10px 20px;
+      // border-bottom: 1px solid rgb(233, 233, 233);
+
+      &.active {
+        background-color: #30b878;
+      }
+
+      &:hover {
+        background-color: #58ba8d;
+      }
+    }
+
+    mat-icon:last-child,
+    fa-icon,
+    i:last-child {
+      margin-right: 0 !important;
+      font-size: 16px;
+    }
+  }
+}
+
+.dropdown--menu {
+  padding-left: 20px;
+  width: calc(100% + 30px);
+
+  &.non-active {
+    display: none;
+    // animation: non-showMenuDropDown 0.7s;
+    // animation-direction: reverse;
+  }
+
+  &.active {
+    display: block;
+    // animation: showMenuDropDown 0.7s;
+  }
+
+  li {
+    padding: 10px 0 10px 60px;
+    font-size: 13px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: rgb(16, 16, 16) !important;
+
+    .wrap-icon {
+      width: 25px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      mat-icon,
+      fa-icon,
+      i {
+        font-size: 14px !important;
+      }
+    }
+
+    &:hover {
+      background-color: #58ba8d;
+    }
+  }
+}
+
+@keyframes non-showMenuDropDown {
+  from {
+    height: 49px;
+  }
+
+  to {
+    height: 0px;
+  }
+}
+
+@keyframes showMenuDropDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 119px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .logo {
+    display: none;
+  }
+
+  .modal-turn-off-mobile {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    z-index: 9;
+  }
+
+  .pc {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .left-navbar {
+    padding-left: 1.5rem;
+  }
+
+  .nav-title {
+    display: none;
+  }
+
+  .content {
+    position: relative;
+    width: 100% !important;
+  }
+
+  .sidebar {
+    width: auto;
+  }
+
+  .sidebar-back {
+    transform: translateX(-100%);
+    transition: transform linear 0.3s;
+  }
+
+  .sidebar-open {
+    transform: translateX(0);
+    transition: transform linear 0.3s;
+  }
+
+}

@@ -1,0 +1,405 @@
+body {
+  font-size: 14px;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  font-family: Open Sans, sans-serif !important;
+  margin: 0 !important;
+}
+body table{
+  font-size: 14px;
+}
+
+/* .dropdown {
+  min-width: 400px;
+} */
+
+i{
+  cursor: pointer;
+}
+
+
+.p-inputnumber-input{
+  text-align: left !important;
+}
+
+app-root {
+  display: block;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+body * {
+  user-select: none;
+  /* background-color: rgb(255, 255, 255); */
+}
+
+#header {
+  display: block;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white !important;
+  z-index: 100;
+  transition: all 1s;
+}
+
+#header img {
+  transition: all 1s;
+}
+
+#header.scrolled {
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--main09);
+  transition: all 1s;
+  -webkit-box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.8);
+}
+
+#header.scrolled img {
+  transform: scale(0.5) translateX(-50%);
+  transition: all 1s;
+}
+
+#content1 {
+  display: block;
+  min-height: 100vh;
+  background-color: white;
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+p-panelmenu .p-panelmenu-header-link {
+  background-color: var(--main09_light08) !important;
+  color: green !important;
+  /* padding: 10px !important; */
+  /* font-size: 14px; */
+}
+
+p-panelmenu .p-panelmenu-header-link:hover,
+.p-panelmenu-header-link.p-menuitem-link-active {
+  background-color: #ccc !important;
+  /* color: white  !important;
+  padding: 10px !important;
+  font-size: 14px; */
+}
+
+.p-inputtext {
+  width: 100% !important;
+  padding: 0.4rem 0.65rem !important;
+  font-size: 0.9rem !important;
+}
+.p-inputnumber-input{
+  text-align: right ;
+}
+
+.p-calendar {
+  display: flex !important;
+  min-width: 110px;
+}
+
+p-calendar>span>button {
+  padding: 0.3rem 0 !important;
+}
+
+.p-dropdown {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+.p-datatable-sm th,td{
+  padding: 3px !important
+}
+.p-button.p-button-icon-only.p-button-sm{
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+}
+
+
+.disable {
+  pointer-events: none;
+  color: #ccc;
+}
+
+td > i{
+  font-size: 16px !important;
+}
+
+.text-red {
+  color: red;
+}
+
+.card-title {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ececec;
+}
+
+.table-responsive {
+  overflow: auto;
+  max-width: 100% !important;
+}
+
+.table-responsive th, td {
+  max-width: 200px;
+}
+
+.table-responsive td {
+  padding: 8px 10px !important;
+  vertical-align: middle;
+}
+
+.modal.fade.show {
+  z-index: 1500;
+}
+
+.modal.show .modal-dialog {
+  z-index: 1000;
+}
+
+.app-sidebar {
+  z-index: 5;
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+.modal-dialog {
+  margin-top: 60px;
+}
+
+@media (min-width: 992px) {
+  .modal-big {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-big {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .modal-big {
+    max-width: 1350px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .modal-big {
+    max-width: 1400px;
+  }
+}
+
+.modal.fade {
+  background: rgba(0, 0, 0, 0.74)
+}
+
+.toast-message,
+.toast-title {
+  color: #000;
+}
+
+.menu-expanded .app-sidebar {
+  width: 290px;
+}
+
+.vertical-layout .main-panel .main-content {
+  margin-left: 290px;
+}
+
+@media (min-width: 1200px) {
+  body.nav-collapsed:not(.sidebar-sm):not(.sidebar-lg) .app-sidebar:hover {
+    width: 290px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .vertical-layout.navbar-sticky nav.header-navbar {
+    width: calc(100% - 290px);
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .vertical-menu .navbar {
+    margin-left: 290px;
+    transition: all 0.3s ease;
+  }
+}
+
+.row-title {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.actions {
+  float: right;
+}
+
+.btn-smartgap {
+  background-color: #6DB746 !important;
+  border-color: #6DB746 !important;
+}
+
+.btn-smartgap:hover {
+  background-color: #7fba5f !important;
+  border-color: #7fba5f !important;
+}
+
+.card-title-actions {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+form label,
+.form-group label {
+  text-transform: none !important;
+}
+
+
+.page-link {
+  color: #000;
+}
+
+.page-link:hover {
+  color: #7fba5f;
+}
+
+.app-sidebar[data-background-color=man-of-steel] .navigation i,
+.app-sidebar[data-background-color=man-of-steel] .navigation li>a {
+  color: #000 !important;
+}
+
+.toggle-icon {
+  color: #7fba5f !important;
+}
+
+body .app-sidebar .navigation li>a:before {
+  border-right: solid 5px #7fba5f !important;
+}
+
+body[data-menu=vertical-menu] .app-sidebar .navigation li.active>a:before {
+  border-right: solid 5px #7fba5f !important;
+}
+
+.input-search {
+  border-right: 0 !important;
+}
+
+.btn-seach {
+  border: solid 1px #ccc;
+  border-left: 0;
+  padding-left: 0;
+  padding-right: 4px;
+}
+
+.btn-seach:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.btn-seach i {
+  color: #7fba5f !important;
+}
+
+.smart-gap-color {
+  color: #7fba5f;
+}
+
+.btn-smartgap>span {
+  padding-left: 4px;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #7fba5f !important;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 2px solid #7fba5f !important;
+}
+
+.smart-gap-tabs li>a {
+  color: #000 !important;
+}
+
+.form-control:focus {
+  border-color: #7fba5f !important;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  color: #fff;
+  background-color: #7fba5f;
+  border-color: #7fba5f;
+}
+
+.cate-img {
+  width: 50px;
+}
+
+.smart-gap-color-deActive {
+  color: red;
+}
+
+.remove-banner {
+  color: red;
+}
+
+.box-banner {
+  border: solid 1px #ccc;
+  padding: 10px;
+}
+
+.add-banner {
+  padding-top: 10px;
+}
+
+.p-datepicker-group-container{
+  min-width: 300px;
+}
+
+.p-inputnumber{
+  width: 100% !important;
+}
+:disabled{
+  cursor: no-drop !important;
+}
+.loading{
+  cursor: wait;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 9999;
+}
+
+.row>* {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}

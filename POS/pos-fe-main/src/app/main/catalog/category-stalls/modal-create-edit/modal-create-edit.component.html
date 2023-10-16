@@ -1,0 +1,77 @@
+<div class="modal-content">
+  <form [formGroup]="formGroupCreate" novalidate autocomplete="off">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <span *ngIf="isCreate">Tạo mới gian hàng</span>
+        <span *ngIf="!isCreate">Sửa gian hàng</span>
+      </h5>
+      <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Name">Tên gian hàng *</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="Tên gian hàng" [ngClass]="{
+            'is-invalid': formSubmitted && lf['name'].invalid,
+            'is-valid': formSubmitted && !lf['name'].invalid
+          }" autofocus required />
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('name').errors?.required" class="text-error">Tên gian hàng không được rỗng
+            !</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Code">Mã gian hàng *</label>
+        <input type="text" formControlName="code" class="form-control" placeholder="Mã gian hàng" [ngClass]="{
+          'is-invalid': formSubmitted && lf['code'].invalid,
+          'is-valid': formSubmitted && !lf['code'].invalid
+        }" autofocus required />
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('code').errors?.required" class="text-error">Mã gian hàng không được rỗng
+            !</small>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="!itemDetail">
+        <label class="form-label" for="CategoryProduct_Order">Mã ngành hàng *</label>
+        <select name="category_id" id="category_id" formControlName="category_id" class="form-control" placeholder="Mã ngành hàng"
+          [ngClass]="{
+            'is-invalid': formSubmitted && lf['category_id'].invalid,
+            'is-valid': formSubmitted && !lf['category_id'].invalid
+          }" required>
+          <option disabled>Mã ngành hàng</option>
+          <option *ngFor="let s of product_categories" [ngValue]="s.id">
+            {{ s.name }}
+          </option>
+        </select>
+        <div *ngIf="formSubmitted">
+          <small *ngIf="formGroupCreate.get('category_id').errors?.required" class="text-error">Chọn mã ngành hàng
+            !</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Code">Ghi chú</label>
+        <input type="text" formControlName="note" class="form-control" placeholder="Ghi chú" />
+      </div>
+
+
+      <!-- <div class="form-group">
+        <label class="form-label" for="CategoryProduct_Status"
+          >Trạng thái</label
+        >
+       
+      </div> -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="close()">
+        Bỏ qua
+      </button>
+      <button type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+        <i class="fa fa-save"></i>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </form>
+</div>

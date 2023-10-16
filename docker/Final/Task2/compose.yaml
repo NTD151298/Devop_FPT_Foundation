@@ -1,0 +1,27 @@
+version: '3'
+services:
+  # nginx container and enviroment config 
+  nginx:
+    image: ${nginx_image}
+    container_name: ${nginx_container}
+    environment:
+      - ENV=${nginx_env}
+      - APP=${nginx_app}
+    ports:
+      - "${nginx_port}"
+    networks:
+      - task_02
+  # httpd container and enviroment config
+  httpd:
+    image: ${http_image}
+    container_name: ${http_conatainer}
+    environment:
+      - ENV=${http_env}
+      - APP=${http_app}
+    ports:
+      - "${http_port}"
+    networks:
+      - task_02
+# network use for 2 container
+networks:
+  task_02:

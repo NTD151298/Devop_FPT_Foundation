@@ -1,0 +1,42 @@
+<ng-container *ngIf="!!groupList">
+  <div class="modal-content">
+    <form [formGroup]="formGroupCreate" (ngSubmit)="save()" novalidate autocomplete="off">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span>Chỉnh sửa nhóm phân quyền</span>
+        </h5>
+        <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label class="form-label" for="Admin_user">Quyền</label>
+          <input type="string" class="form-control" placeholder="Quyền" value="{{role.name}} - {{role.code}}">
+        </div>
+
+        <div class="form-group">
+          <h4>Nhóm</h4>
+          <div class="wrap">
+            <div class="item" *ngFor="let control of groupArray.controls; let i = index;">
+              <input [formControl]="control" type="checkbox" (change)="getSelectedGroup()" class="value" />
+              <label class="label" for="inlineCheckbox{{i}}">{{groupList[i].name}}: {{groupList[i].code}}</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " (click)="close()">
+          Bỏ qua
+        </button>
+        <button type="submit" class="btn btn-primary btn-smartgap">
+          <i class="fa fa-save"></i>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+</ng-container>

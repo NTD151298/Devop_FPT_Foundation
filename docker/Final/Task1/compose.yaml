@@ -1,0 +1,9 @@
+version: '3'
+services:
+  task1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fist_task_webapp
+    ports:
+      - "1512:80"

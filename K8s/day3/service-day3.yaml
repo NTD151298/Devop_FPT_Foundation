@@ -1,0 +1,29 @@
+# kubectl apply -f service-day3.yaml
+# Service for nginx
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginxport-service # The name of the Service is "my-nginxport-service"
+spec:
+  selector:
+    app: nginx # The Service selects Pods with the label "app: nginx"
+  type: NodePort # The Service type is NodePort, exposing the Service on a port on each node.
+  ports:
+    - port: 80 # The port exposed by the Service on the cluster.
+      targetPort: 80 # The port to which traffic is forwarded within the selected Pods.
+      nodePort: 30080 # The port on each node where the Service is exposed.
+---
+# Service for httpd
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-httpdport-service # The name of the Service is "my-httpdport-service"
+spec:
+  selector:
+    app: httpd # The Service selects Pods with the label "app: httpd"
+  type: NodePort # The Service type is NodePort, exposing the Service on a port on each node.
+  ports:
+    - port: 81 # The port exposed by the Service on the cluster.
+      targetPort: 80 # The port to which traffic is forwarded within the selected Pods.
+      nodePort: 30081 # The port on each node where the Service is exposed.
+

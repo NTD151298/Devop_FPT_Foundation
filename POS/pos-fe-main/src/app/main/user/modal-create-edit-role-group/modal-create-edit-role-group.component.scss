@@ -1,0 +1,24 @@
+.wrap{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .item{
+    width: 50%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .value{
+      width: 20px;
+      height: 20px;
+
+    }
+
+    .label{
+      width: 90%;
+    }
+  }
+}

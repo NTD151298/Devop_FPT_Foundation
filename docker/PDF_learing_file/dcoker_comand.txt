@@ -1,0 +1,14 @@
+docker images
+docker push  smartgapjsc/ecom-admin-service:dev-thanhnt 
+docker login
+smartgapjsc
+truongnv123
+docker build -f ECom.API\Admin.Services\Dockerfile -t  smartgapjsc/ecom-admin-service:dev-thanhnt .
+wsl --list --verbose
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                  NAMES
+4699eb39ae08   nginx:latest   "/docker-entrypoint.…"   5 minutes ago   Up 5 minutes   0.0.0.0:1111->80/tcp   1a   
+docker exec -it 4699eb39ae08 /bin/bash
+docker run -it --rm ubuntu
+Để thoát khỏi terminal mà không đóng container, bạn có thể sử dụng tổ hợp phím Ctrl + P sau đó là Ctrl + Q
+docker attach <container_id>
+

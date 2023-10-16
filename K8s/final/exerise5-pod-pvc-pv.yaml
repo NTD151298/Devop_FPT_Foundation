@@ -1,0 +1,61 @@
+# kubectl apply -f exerise5-pod-pvc-pv.yaml
+
+# Pod vp
+# Specifying the Kubernetes resource as a Pod, and giving it the name "vp-pod".
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vp-pod
+spec:
+  # Defining the containers that will run inside the Pod. In this case, there's one container with the name "nginx-vp-con".
+  containers:
+    - name: nginx-vp-con
+      # Specifying the Docker image to be used for this container, which is the lightweight "nginx:alpine" image.
+      image: nginx:alpine
+      # Setting resource limits for the container, including memory and CPU limits.
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      # Specifying volume mounts for this container, in this case, a volume with the name "my-volume-1" will be mounted.
+      volumeMounts:
+        - name: my-volume-5
+          # Defining the path where the volume will be mounted inside the container.
+          mountPath: /var/www/html
+  # Defining a volume with the name "my-volume-1" and associating it with a PersistentVolumeClaim (PVC) named "vpcday5".
+  volumes:
+    - name: my-volume-5
+      persistentVolumeClaim:
+        claimName: vpcday-final
+---
+# PVC
+# This section defines a PersistentVolumeClaim (PVC) named "vpcday5" with resource requests for 1 gigabyte of
+# storage. It specifies "ReadWriteOnce" access mode.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vpcday-final
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+# PV
+# This section defines a PersistentVolume (PV) named "pvday5" with a capacity of 5 gigabytes. It also specifies
+#"ReadWriteOnce" access mode and uses a hostPath at "/tmp/pv-data" for storage.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-final
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  hostPath:
+    path: "/tmp/pv-data"

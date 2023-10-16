@@ -1,0 +1,33 @@
+# kubectl apply -f exerise4-nginx-statefullset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-statefulset # Name of the StatefulSet
+spec:
+  replicas: 3 # Desired number of replicas for the StatefulSet
+  selector:
+    matchLabels:
+      app: nginx # Selector for matching pods with the "app: nginx" label
+  serviceName: "nginx" # Name of the Kubernetes service associated with this StatefulSet
+  template:
+    metadata:
+      labels:
+        app: nginx # Label applied to pods created from this template
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest # Docker image to use for the Nginx container
+          ports:
+            - containerPort: 80 # Port to expose in the container
+          volumeMounts:
+            - name: nginx-data # Name of the volume to mount
+              mountPath: /usr/share/nginx/html # Mount path in the container
+  volumeClaimTemplates:
+    - metadata:
+        name: nginx-data # Name of the volume claim template
+      spec:
+        accessModes: ["ReadWriteOnce"] # Access mode for the volume claim
+        storageClassName: "standard" # Storage class name for dynamic provisioning
+        resources:
+          requests:
+            storage: 1Gi # Requested storage size for each replica's volume

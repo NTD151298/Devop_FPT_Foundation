@@ -1,0 +1,128 @@
+<h3>Danh sách bán hàng</h3>
+<hr />
+<div class="flex flex-row gap-5">
+  <div class="row col-12">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Tên người bán</h6>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="filter.keyword"
+        (keyup.enter)="getList(true)"
+      />
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+      <h6>Từ ngày</h6>
+      <p-calendar
+        [(ngModel)]="filter.start_date"
+        (onSelect)="getList(true)"
+        [showIcon]="true"
+      ></p-calendar>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+      <h6>Đến ngày</h6>
+      <p-calendar
+        [(ngModel)]="filter.end_date"
+        (onSelect)="getList(true)"
+        [showIcon]="true"
+      ></p-calendar>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+      <h6>Trạng thái</h6>
+      <p-dropdown
+        [options]="listStatus"
+        [(ngModel)]="filter.status"
+        placeholder="Chọn trạng thái"
+        [showClear]="true"
+        (onChange)="getList(true)"
+      ></p-dropdown>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
+      <h6>Kho</h6>
+      <p-dropdown 
+        *ngIf="listWarehouse.length>0"
+        [options]="listWarehouse"
+        [(ngModel)]="filter.warehouse_id"
+        (onChange)="getList(true)"
+        placeholder="Chọn kho"
+        [showClear]="true"
+        filter="true"
+      ></p-dropdown>
+    </div>
+    <div class="wrap col-sm-12 col-md-4 col-lg-3 col-xl-12 col-xxl-2">
+      <div class="flex flex-column justify-content-end">
+        <button
+          style="min-width: 110px"
+          pButton
+          pRipple
+          type="button"
+          label="Tìm kiếm"
+          class="p-button-outlined p-button-rounded p-button-sm"
+          (click)="getList(true)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-3">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="items"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-center w-6rem">ID Phiên</th>
+        <th class="text-center user-table-th-big">Tên siêu thị</th>
+        <th class="text-center user-table-th-big">Tên người bán</th>
+        <th class="text-center user-table-th-big">Bắt đầu</th>
+        <th class="text-center user-table-th-big">Kết thúc</th>
+        <th class="text-center user-table-th-big">Tiền mặt bắt đầu</th>
+        <th class="text-center user-table-th-big">Tiền mặt kết thúc</th>
+        <th class="text-center user-table-th-big">Tổng tiền thẻ</th>
+        <th class="text-center user-table-th-big">Tổng tiền chuyển khoản</th>
+        <th class="text-center user-table-th-big">Tổng tiền thu</th>
+        <th class="text-center user-table-th-big">Trạng thái</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr [ngClass]="{ 'bg-cyan-100': item.status === 0 }">
+        <td class="text-center">{{ item.id }}</td>
+        <td >{{ item.warehouse_name}}</td>
+        <td >{{ item.staff_name }}</td>
+        <td class="text-center">
+          {{ item.start_time | date: "dd/MM/yyyy HH:mm" }}
+        </td>
+        <td class="text-center">
+          {{ item.end_time | date: "dd/MM/yyyy HH:mm" }}
+        </td>
+        <td class="text-right">
+          {{ item.opening_cash | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+          {{ item.closing_cash | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+          {{ item.closing_card | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+          {{ item.closing_online_transfer | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-right">
+          {{ item.closing_total_proceeds | number: "0.0-0" }}&nbsp;đ
+        </td>
+        <td class="text-center">
+          {{ item.status === 0 ? "Đang hoạt động" : "Kết thúc" }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <p-paginator
+      #paginator
+      [rows]="paging.pageSize"
+      [totalRecords]="paging.TotalItems"
+      (onPageChange)="getList(false, $event)"
+    ></p-paginator>
+  </div>
+</div>

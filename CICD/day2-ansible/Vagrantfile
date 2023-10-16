@@ -1,0 +1,34 @@
+Vagrant.configure("2") do |config| #  Đây là một khối cấu hình Vagrant, và nó sử dụng phiên 
+  # bản cấu hình "2" của Vagrant.
+
+  config.vm.box = "ubuntu/focal64" #  Dòng này xác định box (hình ảnh máy ảo cơ bản) được sử dụng. 
+  # Trong trường hợp này, bạn đang sử dụng box có tên "ubuntu/focal64," đây là một phiên bản Ubuntu 20.04.
+
+  config.vm.box_check_update = false # Dòng này tắt tính năng kiểm tra cập nhật box khi bạn khởi động máy ảo. 
+  # Bạn có thể tắt tính năng này để giảm thời gian khởi động.
+
+  # Worker Nodes
+  WorkerCount = 2 # Đặt 1 máy ảo worker node cho k8s
+  (1..WorkerCount).each do |i| # Đây là một vòng lặp sẽ chạy một lần (với i bằng 1) vì bạn đã đặt 
+    # WorkerCount thành 1. Vòng lặp này dùng để tạo và cấu hình máy ảo cho worker node.
+
+      config.vm.define "worker-#{i}" do |worker| # Dòng này định nghĩa một máy ảo và đặt tên cho nó dựa trên biến i. 
+      # Ví dụ, nếu i là 1, tên máy ảo sẽ là "worker-1." Nếu bạn có nhiều worker nodes 
+      # (điều này phụ thuộc vào giá trị của WorkerCount), bạn sẽ có các máy ảo "worker-1," "worker-2,"...
+
+          worker.vm.hostname = "worker-#{i}" #  Dòng này đặt hostname của máy ảo thành "worker-1" (hoặc tương tự nếu i khác 1).
+
+          worker.vm.network "private_network", ip: "172.16.2.1#{i}" # Dòng này xác định một mạng riêng tư và gán 
+          # địa chỉ IP cho máy ảo worker. Địa chỉ IP sẽ bắt đầu từ "172.16.2.11" (nếu i là 1) và sẽ tăng lên mỗi 
+          # lần vòng lặp thực hiện.
+
+          worker.vm.provider "virtualbox" do |vb| # Đây là cách xác định rằng bạn đang sử dụng VirtualBox 
+            # làm nhà cung cấp máy ảo cho máy ảo worker.
+
+              vb.name = "worker-#{i}" # Tên máy ảo 
+              vb.memory = 562 # Ram cho máy ảo
+              vb.cpus = 1 # Lõi cpu
+          end
+      end
+  end
+end

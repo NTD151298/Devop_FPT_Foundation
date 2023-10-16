@@ -1,0 +1,116 @@
+<ng-container>
+    <div class="flex flex-row justify-content-between">
+        <h3>Báo cáo sổ quỹ doanh thu</h3>
+        <div>
+            <button pButton pRipple type="button" label="Xuất báo cáo" class="p-button-rounded p-button-sm"
+                (click)="exportExcel()"></button>
+        </div>
+    </div>
+    <hr />
+    <div class="flex flex-row">
+        <div class="row col-12">
+            <!-- {{ filter | json }} -->
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+                <h6>Kho</h6>
+                <p-dropdown [options]="listWarehouse" [(ngModel)]="filter.warehouse_id" (onChange)="getList(true)"
+                    placeholder="Chọn kho" [showClear]="true" *ngIf="!loading"></p-dropdown>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+                <h6>Từ ngày</h6>
+                <p-calendar [(ngModel)]="filter.start_date" (onSelect)="getList(true)" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+                <h6>Đến ngày</h6>
+                <p-calendar [(ngModel)]="filter.end_date" (onSelect)="getList(true)" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="wrap col-sm-6 col-md-12 col-lg-3 col-xl-9 col-xxl-6">
+                <div class="flex flex-column justify-content-end" style="width: 110px">
+                    <button pButton pRipple type="button" label="Tìm kiếm"
+                        class="p-button-outlined p-button-rounded p-button-sm" (click)="getList(true)"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-3">
+        <div class="flex justify-content-end">
+            <div class="flex m-2">
+                <label class="font-bold">Dư đầu kỳ:</label> {{items.opening_cash| number: "0.0-0"}}
+            </div>
+            <div class="flex m-2">
+                <label class="font-bold">Tồn Trong Kỳ:</label> {{items.closing_cash| number: "0.0-0"}}
+            </div>
+            <div class="flex m-2">
+                <label class="font-bold">Dư cuối kỳ:</label> {{items.session_cash| number: "0.0-0"}}
+            </div>
+        </div>
+        <p-table responsiveLayout="scroll" [value]="items.details" styleClass="p-datatable-sm w-100">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="" style="width: 50px">STT</th>
+                    <th class="">Mã kho</th>
+                    <th class="">Tên kho</th>
+                    <th class="">Ngày chứng từ</th>
+                    <th class="">Mã chứng từ</th>
+                    <th class="">Mã khách hàng</th>
+                    <th class="">Tên khách hàng</th>
+                    <th class="">Tổng tiền hàng</th>
+                    <th class="">Tổng tiền giảm qua sản phẩm</th>
+                    <th class="">Tổng tiền giảm qua voucher</th>
+                    <th class="text-center">Tiền mặt</th>
+                    <th class="text-center">Quẹt thẻ</th>
+                    <th class="text-center">Chuyển khoản</th>
+                    <th class="text-center">Ví momo</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>
+                        {{ i + 1 }}
+                    </td>                   
+                    <td>{{ item.warehouse_code }}</td>
+                    <td>{{ item.warehouse_name }}</td>
+                    <td>
+                        {{ item.date|date:'dd/MM/yyyy'}}
+                    </td>
+                    <td>{{ item.code }}</td>
+                    <td>
+                        {{ item.customer_code}}
+                    </td>
+                    <td>
+                        {{ item.customer_name}}
+                    </td>
+                    <td class="text-right">
+                        {{ item.product_total_cost | number: "0.0-0" }} đ
+                    </td> 
+                    <td class="text-right">
+                        {{ item.sale_cost | number: "0.0-0" }} đ
+                    </td>              
+                    <td class="text-right">
+                        {{ item.voucher_cost | number: "0.0-0" }} đ
+                    </td>
+
+                    <td class="text-right">
+                        <div *ngIf="item.payment_type==0">
+                            {{ item.total_amount | number: "0.0-0" }} đ
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div *ngIf="item.payment_type==1">
+                            {{ item.total_amount | number: "0.0-0" }} đ
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div *ngIf="item.payment_type==2">
+                            {{ item.total_amount | number: "0.0-0" }} đ
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div *ngIf="item.payment_type==3">
+                            {{ item.total_amount | number: "0.0-0" }} đ
+                        </div>
+                    </td>                   
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</ng-container>

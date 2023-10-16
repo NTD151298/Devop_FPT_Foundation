@@ -1,0 +1,14 @@
+docker storage driver
+\\wsl.localhost\docker-desktop-data\data\docker\volumes\A1
+docker run -it --rm -v A1/data alpine bash
+docker run -d --name a1 alpine tail -f /dev/null
+docker container run -d --name aa1 -v A1 alpine tail -f /dev/null
+echo "Hello from A1 volume storage" > A1/data/test.txt
+
+# Tạo thư mục cha "data" trong volume A1 và mount nó vào container
+docker run -it -v A1:/A1 alpine sh
+
+# Sau đó trong container
+mkdir /A1/data
+echo "Hello from A1 volume storage" > /A1/data/test.txt
+

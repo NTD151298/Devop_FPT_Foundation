@@ -1,0 +1,12 @@
+version: '3'
+services:
+
+  chess:
+    image: duongtn1512/devops_fpt_learn:day2_task3
+    container_name: bb1
+    volumes:
+      - a001:/app
+
+volumes:
+  a001:
+    external: true

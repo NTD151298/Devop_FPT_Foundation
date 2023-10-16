@@ -1,0 +1,491 @@
+<div class="flex flex-row justify-content-between">
+  <h3>Chi tiết phiếu nhập kho</h3>
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Xuất báo cáo"
+      class="p-button-rounded p-button-sm"
+      (click)="exportExcel()"
+    ></button>
+  </div>
+</div>
+<hr />
+<!-- <div>{{item | json}}</div> -->
+<div class="grid">
+  <div class="col-3">
+    <h6>Mã phiếu</h6>
+    <input type="text" pInputText [(ngModel)]="item.code" [disabled]="true" />
+  </div>
+  <div class="col-3">
+    <h6>Loại phiếu nhập</h6>
+    <p-dropdown
+    [options]="listTypeReceipt"
+    [(ngModel)]="item.type"
+    placeholder="Chọn loại"
+    [showClear]="true"
+  ></p-dropdown>
+  </div>
+  <div class="col-3">
+    <h6>Đối tác</h6>
+    <p-dropdown
+      [options]="partners"
+      [(ngModel)]="item.partner_id"
+      placeholder="Chọn đối tác"
+      [showClear]="true"
+      [disabled]="disableForm"
+      filter="true"
+    ></p-dropdown>
+  </div>
+  
+  <div class="col-3">
+    <h6>Kho đích</h6>
+    <p-dropdown
+      [options]="warehouses"
+      [(ngModel)]="item.warehouse_id"
+      placeholder="Chọn kho đích"
+      [showClear]="true"
+      [disabled]="disableForm"
+      (onChange)="getProductRequestWarehouseList(item.warehouse_id)"
+      filter="true"
+    ></p-dropdown>
+  </div>
+  <div class="col-3">
+    <h6>Ngày bắt đầu gửi</h6>
+    <p-calendar
+      [(ngModel)]="item.transfer_date"
+      [showIcon]="false"
+      [disabled]="disableForm"
+    ></p-calendar>
+  </div>
+  <div class="col-3">
+    <h6>Địa chỉ giao</h6>
+    <textarea
+      pInputTextarea
+      [disabled]="disableForm"
+      [(ngModel)]="item.delivery_address"
+    ></textarea>
+  </div>
+  <div class="col-3">
+    <h6>Nội dung</h6>
+    <textarea
+      pInputTextarea
+      [disabled]="disableForm"
+      [(ngModel)]="item.content"
+    ></textarea>
+  </div>
+  <div class="col-3">
+    <h6>Ghi chú</h6>
+    <textarea
+      pInputTextarea
+      [disabled]="disableForm"
+      [(ngModel)]="item.note"
+    ></textarea>
+  </div>
+  <div class="col-12 flex flex-column justify-content-end">
+    <div class="flex flex-row justify-content-end">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Từ chối"
+        class="p-button-danger p-button-sm"
+        (click)="save(2)"
+        *ngIf="!disableForm && item.id"
+        style="min-width: 110px; margin-right: 10px"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Lưu"
+        class="p-button-success p-button-sm"
+        (click)="save(item.status_id)"
+        style="min-width: 110px; margin-right: 10px"
+        *ngIf="!disableForm"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Quay lại"
+        style="min-width: 110px; margin-right: 10px"
+        class="p-button-warning p-button-sm"
+        (click)="cancel()"
+      ></button>
+    </div>
+  </div>
+</div>
+<hr />
+<div>
+  <!-- <div>{{newProduct | json}}</div> -->
+  <p-table [value]="item.products" styleClass="p-datatable-sm">
+    <ng-template pTemplate="colgroup">
+      <col />
+      <col />
+      <col />
+      <!-- <col width="90px" /> -->
+      <col width="90px" />
+      <col />
+      <col />
+      <col />
+
+      <col width="90px" />
+      <col width="90px" />
+      <col />
+      <col />
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>#</th>
+        <th>Sản phẩm</th>
+        <th>Giá nhập</th>
+        <th>Giá bán</th>
+        <th>Số lượng</th>
+        <th>Đơn vị</th>
+        <th>Kiểu đóng gói</th>
+        <th>Barcode</th>
+        <th>Hạn sử dụng</th>
+        <th>Số ngày cảnh báo</th>
+        <th>Lô hàng</th>
+        <th>Ghi chú</th>
+        <th>Cân ký</th>
+        <th>Hàng Km</th>
+        <th></th>
+      </tr>
+      <tr *ngIf="!disableForm">
+        <td></td>
+        <td style="min-width: 300px">
+          <p-dropdown
+            [options]="products"
+            [(ngModel)]="newProduct.product_id"
+            (onChange)="changeProductId(newProduct)"
+            placeholder="Chọn sản phẩm"
+            [showClear]="true"
+            [disabled]="disableForm"
+            [filter]="true"
+            class="dropdown"
+          ></p-dropdown>
+        </td>
+        <td>
+          <p-inputNumber
+            class="max-w-5rem"
+            [(ngModel)]="newProduct.import_price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+            class="w-7rem"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            class="max-w-5rem"
+            [(ngModel)]="newProduct.price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+            class="w-7rem"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="newProduct.quantity"
+            mode="decimal"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="5"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td style="max-width: 100px">
+          <p-dropdown
+            [options]="units"
+            [(ngModel)]="newProduct.category_unit_code"
+            placeholder="Chọn đơn vị"
+            [disabled]="disableForm"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td style="max-width: 100px">
+          <p-dropdown
+            [options]="packings"
+            [(ngModel)]="newProduct.category_packing_code"
+            placeholder="Chọn kiểu đóng gói"
+            [disabled]="disableForm"
+            [showClear]="true"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <input
+            (keypress)="numberOnly($event)"
+            [(ngModel)]="newProduct.barcode"
+            type="text"
+            pInputText
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <p-calendar
+            [(ngModel)]="newProduct.exp_date"
+            [disabled]="disableForm"
+            [showIcon]="false"
+            aria-describedby="birth_day-help"
+          ></p-calendar>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="newProduct.warning_date"
+            mode="decimal"
+            [disabled]="disableForm"
+            [minFractionDigits]="0"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newProduct.batch_number"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newProduct.note"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <p-checkbox
+            [(ngModel)]="newProduct.is_weigh"
+            [binary]="true"
+            inputId="binary"
+            [disabled]="disableForm"
+          ></p-checkbox>
+        </td>
+        <td>
+          <p-checkbox
+            [(ngModel)]="newProduct.is_promotion"
+            [binary]="true"
+            inputId="binary"
+            [disabled]="disableForm"
+          ></p-checkbox>
+        </td>
+        <td>
+          <i
+            class="pi pi-plus"
+            style="color: rgb(45, 191, 16)"
+            pTooltip="Thêm"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            (click)="addProduct()"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-product
+      let-record="$implicit"
+      let-rowIndex="rowIndex"
+    >
+      <tr [pSelectableRow]="record">
+        <td>{{ rowIndex + 1 }}</td>
+        <td style="min-width: 300px">
+          <p-dropdown
+            [options]="products"
+            [(ngModel)]="product.product_id"
+            (onChange)="changeProductId(product)"
+            placeholder="Chọn sản phẩm"
+            [showClear]="true"
+            [disabled]="disableForm"
+            [filter]="true"
+            class="dropdown"
+          ></p-dropdown>
+        </td>
+        <!-- <td>
+          {{ product.barcode }}
+        </td> -->
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.import_price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            class="w-7rem"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.price"
+            mode="decimal"
+            [minFractionDigits]="0"
+            class="w-7rem"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.quantity"
+            mode="decimal"
+            [minFractionDigits]="1"
+            [maxFractionDigits]="5"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td style="max-width: 100px">
+          <p-dropdown
+            [options]="units"
+            [(ngModel)]="product.category_unit_code"
+            placeholder="Chọn đơn vị"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td style="max-width: 100px">
+          <p-dropdown
+            [options]="packings"
+            [(ngModel)]="product.category_packing_code"
+            placeholder="Chọn kiểu đóng gói"
+            [showClear]="true"
+            [disabled]="disableForm"
+            filter="true"
+          ></p-dropdown>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            (keypress)="numberOnly($event)"
+            [(ngModel)]="product.barcode"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <p-calendar
+            [(ngModel)]="product.exp_date"
+            [showIcon]="false"
+            [disabled]="disableForm"
+          ></p-calendar>
+        </td>
+        <td>
+          <p-inputNumber
+            [(ngModel)]="product.warning_date"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [disabled]="disableForm"
+          ></p-inputNumber>
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="product.batch_number"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="product.note"
+            [disabled]="disableForm"
+          />
+        </td>
+        <td>
+          <p-checkbox
+            [(ngModel)]="product.is_weigh"
+            [binary]="true"
+            inputId="binary"
+            [disabled]="disableForm"
+          ></p-checkbox>
+        </td>
+        <td>
+          <p-checkbox
+            [(ngModel)]="product.is_promotion"
+            [binary]="true"
+            inputId="binary"
+            [disabled]="disableForm"
+          ></p-checkbox>
+        </td>
+        <td>
+          <i
+            class="pi pi-trash"
+            style="color: rgb(214, 39, 39)"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            [showDelay]="1000"
+            (click)="deleteProduct(rowIndex)"
+            *ngIf="!disableForm"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<table #export style="display: none">
+  <thead>
+    <tr>
+      <th>Mã phiếu</th>
+      <th>{{ exportData.code }}</th>
+      <th>Tên đối tác</th>
+      <th>{{ exportData.partner_name }}</th>
+      <th>Kho đích</th>
+      <th>{{ exportData.warehouse_name }}</th>
+      <th>Ngày bắt đầu gửi</th>
+      <th>{{ exportData.transfer_date | date: "dd/MM/yyyy" }}</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>Địa chỉ giao</th>
+      <th>{{ exportData.delivery_address }}</th>
+      <th>Nội dung</th>
+      <th>{{ exportData.content }}</th>
+      <th>Ghi chú</th>
+      <th>{{ exportData.note }}</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>STT</th>
+      <th>Tên sản phẩm</th>
+      <th>Giá nhập</th>
+      <th>Giá bán</th>
+      <th>Số lượng</th>
+      <th>Cân ký</th>
+      <th>Đơn vị</th>
+      <th>Kiểu đóng gói</th>
+      <th>Hạn sử dụng</th>
+      <th>Số ngày cảnh báo</th>
+      <th>Lô hàng</th>
+      <th>Ghi chú</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of exportData.products; let i = index">
+      <td>
+        {{ i + 1 }}
+      </td>
+      <td>{{ product.product_name }}</td>
+      <td>{{ product.import_price }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.is_weigh ? "Có" : "Không" }}</td>
+      <td>{{ product.unit_name }}</td>
+      <td>{{ product.packing_name }}</td>
+      <td>{{ product.exp_date | date: "dd/MM/yyyy" }}</td>
+      <td>{{ product.warning_date }}</td>
+      <td>{{ product.batch_number }}</td>
+      <td>{{ product.note }}</td>
+    </tr>
+  </tbody>
+</table>

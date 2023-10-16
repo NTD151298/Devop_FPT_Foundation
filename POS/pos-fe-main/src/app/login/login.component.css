@@ -1,0 +1,40 @@
+.logo-abs {
+  position: absolute;
+  z-index: 5;
+  transform: translateX(38px) translateY(38px);
+}
+
+.company-name {
+  color: #2f4fa4;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 150%;
+}
+
+.software-name {
+}
+
+.login-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 44px;
+  color: #29398c;
+}
+.login-form-container {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 30px;
+  height: 560px;
+  width: 800px;
+  background: #ffffff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+.login-label{
+    font-size: 14px;
+    font-family: 'Open sans';
+    font-weight: 600;
+    margin-bottom: 8px;
+}

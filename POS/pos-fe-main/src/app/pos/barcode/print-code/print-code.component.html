@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-12">
+    <div class="field">
+      <label for="number" class="block"> Số tem</label>
+      <input id="number" type="text" pInputText [(ngModel)]="number" />
+    </div>
+  </div>
+</div>
+
+<div id="printbarcode" style="display: none">
+  <div *ngFor="let data of array">
+    <span>
+      <svg id="barcode{{ data.index }}"></svg>
+      <p>
+        <a>{{ data.name }}</a
+        ><a>{{ data.name }}</a
+        ><a>{{ data.name }}</a>
+      </p>
+      <p>
+        <a>{{ data.price | number }} đ</a><a>{{ data.price | number }} đ</a
+        ><a>{{ data.price | number }} đ</a>
+      </p>
+    </span>
+  </div>
+</div>
+
+<div class="pt-3 flex justify-content-end">
+  <div class="px-3">
+    <button
+      pButton
+      [hidden]="!hidden_btn"
+      type="button"
+      label="Tạo mã"
+      icon="pi pi-cog"
+      class="p-element p-button-success p-button-sm p-button p-component"
+      (click)="ceateBarcode()"
+    ></button>
+  </div>
+  <div class="px-3">
+    <button
+      pButton
+      type="button"
+      [hidden]="hidden_btn"
+      label="In mã"
+      icon="pi pi-print"
+      [printStyle]="{span : {'width': '100%','margin-top': '-2px','padding':'0','font-size':'12px'},
+      p : {'margin-top': '-2px','margin-bottom':'0','padding':'0 10','display':'flex','flex-wrap':'wap','text-align':'center'},
+      a:{'width':'33.33%'}
+      }"
+      class="p-element p-button-warning p-button-sm p-button p-component"
+      printSectionId="printbarcode"
+      ngxPrint
+    ></button>
+  </div>
+  <div class="px-3">
+    <button
+      [hidden]="hidden_btn"
+      pButton
+      type="button"
+      class="p-element p-button-success p-button-sm p-button p-component"
+      label="Đã in"
+      (click)="updatePrintModal()"
+    ></button>
+  </div>
+</div>

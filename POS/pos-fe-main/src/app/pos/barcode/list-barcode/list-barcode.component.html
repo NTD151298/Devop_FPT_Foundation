@@ -1,0 +1,34 @@
+<div class="wrap">
+  <div class="row col-12 pageOne" *ngFor="let page of listPrint">
+    <div class="item-barcode col-4 mr-1 mb-2" *ngFor="let data of page.pageItems">
+        <div class="row row-name" style="font-weight: bold; display: block;">
+          <div class="col-12 name">
+            {{ data.name.length>50?(data.name.slice(0, 50) + '...'):data.name}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 price-div">
+            <div style="display: inline-flex" [hidden]="data.sale_price<=0" class="text-center">
+              <div [class]="'price center'">
+                {{ data.sale_price | number }}
+              </div>
+              đ/{{ data.packing_name }}
+            </div>
+            <br [hidden]="data.sale_price<=0">
+            <div style="display: inline-flex" class="text-center">
+              <div [class]="data.sale_price>0?'price center line-through':'price center'">
+                {{ data.price | number }}
+              </div>
+              đ/{{ data.packing_name }}
+            </div>
+          </div>
+        </div>
+        <div class="row row-barcode">
+          <div class="col-12 text-right barcode-v">
+            <svg id="barcode{{ data.index }}"></svg>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h4>Kết thúc ca làm</h4>
+    </div>
+    <div class="row px-8">
+        <div class="col-12">
+            <p class="flex justify-content-start">Thu ngân: &nbsp;<b>{{modelView.user?.full_name}}</b></p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start"><b>Tổng tiền đơn: </b></p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end"><b>{{modelView.closing_total_proceeds | number}} đ</b></p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start">Thanh toán bằng thẻ:</p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end">
+                <b>{{modelView.closing_card| number}} đ</b>
+            </p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start">Thanh toán chuyển khoản:</p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end">
+                <b>{{modelView.closing_online_transfer| number}} đ</b>
+            </p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start">Tiền mặt lúc bắt đầu ca:</p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end"><b>{{modelView.opening_cash | number}} đ</b></p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start">Tiền mặt trong ca:</p>
+        </div> 
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end">
+                <b>{{modelView.closing_cash - modelView.opening_cash| number}} đ</b>
+            </p>
+        </div> 
+        <div class="col-6 p-0">
+            <p class="flex justify-content-start">Tổng tiền mặt hiện có:</p>
+        </div>
+        <div class="col-6 p-0">
+            <p class="flex justify-content-end">
+                <p-inputNumber class="w-12" [(ngModel)]="modelView.closing_cash" mode="decimal" [minFractionDigits]="0">
+                    </p-inputNumber>&nbsp; <b>đ</b>
+            </p>
+        </div>
+        <div class="col-12 pt-3">
+            <h6>Ghi chú</h6>
+            <textarea pInputTextarea [(ngModel)]="modelView.note"></textarea>
+        </div>
+    </div>
+</div>
+<div class="pt-3 flex justify-content-center">
+    <div class="px-3"><button pButton type="button" class="p-button-danger" label="Kết thúc"
+            (click)="onSaveClick()"></button></div>
+    <div class="px-3"><button pButton type="button" label="Tiếp tục" (click)="onCloseClick()"></button></div>
+</div>

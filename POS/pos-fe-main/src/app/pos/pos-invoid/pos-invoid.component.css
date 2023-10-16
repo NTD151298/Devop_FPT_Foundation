@@ -1,0 +1,44 @@
+@media print {
+    #print {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 13px;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-width: 1px 0 1px 0;
+        color: #212529;
+        background: #ffffff;
+    }
+
+    html,
+    body {
+        display: none;
+        visibility: hidden;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h5 {
+        font-size: 15px;
+    }
+
+    table, td, th {
+        border: 1px solid;
+      }
+    table { 
+        border-collapse: collapse;
+      }
+
+    .line-through{
+        text-decoration-line: line-through;
+    }
+}

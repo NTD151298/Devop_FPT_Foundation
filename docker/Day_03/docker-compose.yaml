@@ -1,0 +1,22 @@
+version: '3.4'
+
+networks:
+  test_day3:
+    driver: bridge
+
+services:
+  nginx1:
+    container_name: ${con1}
+    image: nginx
+    networks:
+      - ${net}
+    ports:
+      - "${port1}"
+
+  nginx2:
+    container_name: ${con2}
+    image: nginx
+    networks:
+      - ${net}
+    ports:
+      - "${port2}"

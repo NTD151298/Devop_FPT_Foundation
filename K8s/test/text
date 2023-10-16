@@ -1,0 +1,21 @@
+"Name": "bridge",
+
+	"Name": "a000",
+                	"EndpointID": "56fc57c2765c0531523d078e05e222fca5c731234f74f2b74a1abf75651df5ca",
+                	"MacAddress": "02:42:ac:11:00:02",
+                	"IPv4Address": "172.17.0.2/16",
+	"Name": "a001",
+                	"EndpointID": "e7eba0a37926216fbd173feaf0da9dcee05955d5a18b88ab70dac87290b47829",
+                	"MacAddress": "02:42:ac:11:00:03",
+                	"IPv4Address": "172.17.0.3/16",
+
+docker exec -it a000 bash
+docker exec -it a001 bash
+
+apt update
+apt install iputils-ping
+
+ping a001 \ ping 172.17.0.3
+ping a000 \ ping 172.17.0.2
+
+docker network connect bridge b000

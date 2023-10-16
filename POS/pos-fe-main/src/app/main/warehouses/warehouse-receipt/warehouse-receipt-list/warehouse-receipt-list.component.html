@@ -1,0 +1,187 @@
+<div>
+  <h3 class="mr-2">Danh sách nhập kho</h3>
+</div>
+<hr />
+<div class="flex flex-row">
+  <div class="w-12 flex flex-row gap-5">
+    <div class="row col-12">
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Loại phiếu nhập</h6>
+        <p-dropdown
+          [options]="listTypeReceipt"
+          [(ngModel)]="filter.type"
+          placeholder="Chọn loại"
+          [showClear]="true"
+          (onChange)="getList(true)"
+        ></p-dropdown>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Đối tác</h6>
+        <p-dropdown
+          [options]="listPartner"
+          [(ngModel)]="filter.partner_id"
+          placeholder="Chọn đối tác"
+          [showClear]="true"
+          (onChange)="getList(true)"
+          filter="true"
+        ></p-dropdown>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Kho</h6>
+        <p-dropdown
+          *ngIf="listWarehouse.length>0"
+          [options]="listWarehouse"
+          [(ngModel)]="filter.warehouse_id"
+          placeholder="Chọn kho"
+          [showClear]="true"
+          (onChange)="getList(true)"
+          filter="true"
+        ></p-dropdown>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Từ khoá</h6>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="filter.keyword"
+          (keyup.enter)="getList(true)"
+        />
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Ngày bắt đầu</h6>
+        <p-calendar [(ngModel)]="filter.start_date" [showIcon]="true" dateFormat="dd/mm/yy"
+          (onSelect)="compareDate(filter.start_date,filter.end_date)" (keyup.enter)="getList(true)"></p-calendar>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
+        <h6>Ngày kết thúc</h6>
+        <p-calendar [(ngModel)]="filter.end_date" [showIcon]="true" dateFormat="dd/mm/yy"
+          (onSelect)="compareDate(filter.start_date,filter.end_date)" (keyup.enter)="getList(true)"></p-calendar>
+      </div>
+      <div class="wrap col-lg-6 col-xxl-12">
+        <div class="flex flex-column justify-content-end">
+          <button
+            style="min-width: 110px; margin-right: 10px"
+            pButton
+            pRipple
+            type="button"
+            label="Tìm kiếm"
+            class="p-button-outlined p-button-rounded p-button-sm"
+            (click)="getList(true)"
+          ></button>
+        </div>
+        <div class="flex flex-column justify-content-end align-self-end">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Thêm"
+            class="p-button-success p-button-sm"
+            (click)="add()"
+            *appHasRole="['WAREHOUSE-RECEIPT-create']"
+            style="min-width: 110px"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-3">
+  <p-table
+    responsiveLayout="scroll"
+    [value]="items"
+    styleClass="p-datatable-sm w-100"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px">STT</th>
+        <th class="user-table-th-big">Mã phiếu</th>
+        <th class="user-table-th-big">Đối tác</th>
+        <th class="user-table-th-big">Ngày gửi</th>
+        <th class="user-table-th-big">Kho đến</th>
+        <th class="user-table-th-big">Tổng tiền nhập</th>
+        <th class="user-table-th-big">Người nhập kho</th>
+        <th class="user-table-th-big">Thời gian nhập kho</th>
+        <th class="user-table-th-big">Trạng thái</th>
+        <th class="user-table-th-big">Thao tác</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-i="rowIndex">
+      <tr>
+        <td class="text-center">
+          {{ paging.pageSize * (paging.pageIndex - 1) + i + 1 }}
+        </td>
+        <td>{{ item.code }}</td>
+        <td>
+          {{ item.partner_name }}
+        </td>
+        <td>{{ item.transfer_date | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.warehouse_name }}</td>
+        <td>{{ item.total_amount | number }}</td>
+        <td>{{ item.user_name }}</td>
+        <td>{{ item.dateUpdate | date: "dd/MM/yyyy HH:mm" }}</td>
+        <td>
+          <span *ngIf="item.status_id === 2">Từ chối</span>
+          <span *ngIf="item.status_id === 1">Đã xử lý</span>
+          <span *ngIf="item.status_id === 0">Chưa xử lý</span>
+        </td>
+        <td class="text-center">
+          <ng-container *appHasRole="['WAREHOUSE-RECEIPT-modify']">
+            <i
+              *ngIf="item.status_id === 0"
+              class="pi pi-check"
+              pTooltip="Duyệt phiếu"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(26, 172, 48); margin-right: 10px"
+              (click)="statusChange(item)"
+            ></i>
+          </ng-container>
+          <ng-container *appHasRole="['WAREHOUSE-RECEIPT-modify']">
+            <i
+              *ngIf="item.status_id === 0"
+              class="pi pi-pencil"
+              pTooltip="Chỉnh sửa phiếu"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(40, 122, 209); margin-right: 10px"
+              (click)="edit(item)"
+            ></i>
+          </ng-container>
+          <ng-container *appHasRole="['WAREHOUSE-RECEIPT-detail']">
+            <i
+              *ngIf="item.status_id !== 0"
+              class="pi pi-eye"
+              pTooltip="Chi tiết phiếu"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              style="color: rgb(91, 217, 37); margin-right: 10px"
+              (click)="edit(item)"
+            ></i>
+          </ng-container>
+          <ng-container *appHasRole="['WAREHOUSE-RECEIPT-print']">
+            <i
+              *ngIf="item.status_id === 1"
+              class="pi pi-print"
+              pTooltip="In phiếu"
+              tooltipPosition="bottom"
+              [showDelay]="1000"
+              (click)="printReceipt(item.id)"
+            ></i>
+          </ng-container>
+          <!-- <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-sm" (click)="delete(item)"></button> -->
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="row">
+    <p-paginator
+      #paginator
+      [rows]="paging.pageSize"
+      [totalRecords]="paging.TotalItems"
+      (onPageChange)="getList(false, $event)"
+    ></p-paginator>
+  </div>
+</div>
+<app-warehouse-receipt-print
+  [modelPrint]="modelPrint"
+></app-warehouse-receipt-print>

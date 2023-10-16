@@ -1,0 +1,86 @@
+<div class="modal-content">
+    <form [formGroup]="form" novalidate autocomplete="off">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <span>Tạo phiếu mua</span>
+            </h5>
+            <button type="button" class="close" (click)="close()" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">  
+            
+            <div class="row pb-4">
+                <div class="col-lg-6">
+                    <h6>Nhà cung cấp</h6>
+                    <p-dropdown 
+                        placeholder="Chọn trạng thái" 
+                        [showClear]="true"
+                        [options]="listSuppliers"
+                    >
+                    </p-dropdown>
+                </div>
+    
+                <div class="col-lg-6">
+                    <h6>Ngành hàng</h6>
+                    <p-dropdown 
+                        placeholder="Chọn trạng thái" 
+                        [showClear]="true"
+                        [options]="ListItems"
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col" sortable="name">Nhà cung cấp</th>
+                            <th scope="col" sortable="area">Đợt mua hàng</th>
+                            <th scope="col" sortable="area">Số tiền hàng</th>
+                            <th scope="col" sortable="area">Số tiền còn phải thanh toán</th>                            
+                            <th scope="col" sortable="area">Số tiền thanh toán đợt này</th>                            
+                            <th class="text-center">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="isCheckAll"
+                                    [ngModelOptions]="{standalone: true}" (click)="checkAllUnits()">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <tr class="ng-star-inserted" *ngFor="let item of listOrderListForTransfer">
+                            <th scope="row">
+                                {{item.shop_name}}
+                            </th>
+                            <td>
+                                {{item.recipient_name}}
+                            </td>
+                            <td>
+                                {{item.product_total_cost|number:0}}
+                            </td>
+                            <td>
+                                {{item.postage|number:0}}
+                            </td>                            
+                            <td class="text-center">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2" [(ngModel)]="item.isCheck"
+                                    [ngModelOptions]="{standalone: true}" (click)="checkUnits(item)">                                
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default " (click)="close()">
+                Bỏ qua
+            </button>
+            <!-- (click)="save()" -->
+            <button type="submit" class="btn btn-primary btn-smartgap" (click)="save()">
+                <i class="fa fa-save"></i>
+                <span>Lưu</span>
+            </button>
+        </div>
+    </form>
+</div>

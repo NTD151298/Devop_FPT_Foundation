@@ -1,0 +1,279 @@
+<h3 *ngIf="!isView">Hoàn hàng</h3>
+<h3 *ngIf="isView">Chi tiết hoàn hàng</h3>
+<hr />
+<div class="flex flex-row" *ngIf="!isView">
+  <div class="w-4 p-2">
+    <div class="flex flex-row">
+      <div class="w-12 flex flex-row gap-5">
+        <div class="row col-12">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <h6>Kho</h6>
+            <p-dropdown [options]="listWarehouse" [(ngModel)]="item.warehouse_id" (onChange)="getList(true)"
+              placeholder="Chọn kho" [showClear]="true" [disabled]="disable"></p-dropdown>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <h6>Mã hóa đơn</h6>
+            <p-autoComplete [(ngModel)]="item.order" [suggestions]="filteredOrders" styleClass="w-full"
+              (completeMethod)="filterOrders($event)" field="code" placeholder="Search" [delay]="500" [minLength]="2">
+            </p-autoComplete>
+          </div>
+          <div class="wrap col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <div class="flex flex-column justify-content-end" style="width: 140px">
+              <button pButton pRipple type="button" label="Thêm đơn hoàn" class="p-button-success p-button-sm"
+                (click)="addOrder()" style="width: 140px"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div>
+      <div class="flex flex-row">
+        <div class="row col-12">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <h6>Mã hóa đơn</h6>
+            <input type="text" pInputText [ngModel]="item.order?.code" [disabled]="true" />
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <h6>Khách hàng</h6>
+            <input type="text" pInputText [ngModel]="item.order?.customer_name" [disabled]="true" />
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <h6>Tổng tiền hàng</h6>
+            <input type="text" pInputText [ngModel]="item.order?.total_amount | number" [disabled]="true" />
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <h6>Ngày mua hàng</h6>
+            <input type="text" pInputText [ngModel]="item.order?.dateAdded | date: 'dd/MM/yyyy'" [disabled]="true" />
+          </div>
+        </div>
+      </div>
+      <p-table [value]="item.order?.products" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Mã Sp</th>
+            <th>Giá bán</th>
+            <th>Số lượng</th>
+            <th>Đơn vị</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>
+              {{ product.barcode }}
+            </td>
+            <td>{{ product.price | number }} đ</td>
+            <td>
+              {{ product.quantity | number }}
+            </td>
+            <td>{{ product.unit_code }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <div class="w-8 border-left-1 p-2">
+    <div class="flex flex-row gap-5">
+      <div class="row col-12">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4">
+          <h6>Tổng tiền hàng hoàn</h6>
+          <input type="text" pInputText [ngModel]="item.product_total_cost | number" [disabled]="true" />
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4">
+          <h6>Tổng tiền hoàn trả khách</h6>
+          <input type="text" pInputText [ngModel]="item.total_refund_money | number" [disabled]="false"  (keyup)="calculateSaleSost()"/>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4 flex flex-column">
+          <h6>Khách hàng hoàn</h6>
+          <div class="p-inputgroup">
+            <p-autoComplete [(ngModel)]="item.Customer" [suggestions]="filteredCustomers" styleClass="w-full"
+              (completeMethod)="filterCustomers($event)" field="nameView" placeholder="Search">
+            </p-autoComplete>
+            <button type="button" pButton pRipple (click)="showCreateCustomer()" style="padding: 0.3rem 0.65rem">
+              <i class="pi pi-user-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4">
+          <h6>Tiền giảm</h6>
+          <input type="text" pInputText [ngModel]="item.sale_cost | number" [disabled]="false" />
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4">
+          <h6>Tiền Voucher</h6>
+          <input type="text" pInputText [ngModel]="item.voucher_cost | number" [disabled]="false" />
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row">
+      <div class="w-12 flex flex-row gap-5">
+        <div class="w-8">
+          <h6>Nội dung</h6>
+          <textarea pInputTextarea [disabled]="product_form_dis" [(ngModel)]="item.note"></textarea>
+        </div>
+        <div class="wrap w-4">
+          <div class="flex flex-column justify-content-end">
+            <button pButton pRipple type="button" label="Hoàn hàng" class="p-button-success p-button-sm"
+              (click)="save()" style="width: 140px"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let refund of item.refund_order" class="py-2">
+      <hr />
+      <div class="justify-content-end flex">
+        <a (click)="deleteRefund(refund)">
+          <i class="pi pi-times" style="color: red"></i>
+        </a>
+      </div>
+      <div class="grid">
+        <div class="col-3">
+          <h6>Mã hóa đơn</h6>
+          <input type="text" pInputText [ngModel]="refund?.code" [disabled]="true" />
+        </div>
+        <div class="col-3">
+          <h6>Khách hàng</h6>
+          <input type="text" pInputText [ngModel]="refund?.customer_name" [disabled]="true" />
+        </div>
+        <div class="col-3">
+          <h6>Tổng tiền hàng</h6>
+          <input type="text" pInputText [ngModel]="refund?.total_amount | number" [disabled]="true" />
+        </div>
+        <div class="col-3">
+          <h6>Ngày hoàn hàng</h6>
+          <input type="text" pInputText [ngModel]="refund?.dateAdded | date: 'dd/MM/yyyy'" [disabled]="true" />
+        </div>
+      </div>
+      <p-table [value]="refund?.products" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th [width]="60">
+              <p-checkbox [binary]="true" inputId="default" [(ngModel)]="refund.isCheckAll"
+                (onChange)="selectAllProduct(refund)"></p-checkbox>
+            </th>
+            <th>Sản phẩm</th>
+            <th>Mã Sp</th>
+            <th>Giá KM</th>
+            <th>Giá bán</th>
+            <th>Số lượng</th>
+            <th>Đơn vị</th>
+            <th>Trạng thái</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+          <tr>
+            <td [width]="60">
+              <p-checkbox *ngIf="product.quantity > 0" [binary]="true" inputId="default" [(ngModel)]="product.isCheck"
+                (onChange)="selectProduct(refund)">
+              </p-checkbox>
+            </td>
+            <td>{{ product.name }}</td>
+            <td>
+              {{ product.barcode }}
+            </td>
+            <td>{{ product.sale_price | number }} đ</td>
+            <td>{{ product.price | number }} đ</td>
+            <td>
+              <p-inputNumber [(ngModel)]="product.quantity" mode="decimal" mode="decimal" [minFractionDigits]="1"
+                [maxFractionDigits]="5" [min]="0" (ngModelChange)="selectProduct(refund)"></p-inputNumber>
+            </td>
+            <td>{{ product.unit_code }}</td>
+            <td>{{ product.quantity_max <= 0 ? "Đã hoàn" : "" }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-row" *ngIf="isView">
+  <div class="w-12">
+    <div class="flex flex-row">
+      <div class="w-12 flex flex-row gap-5">
+        <div class="w-3">
+          <h6>Mã hóa đơn</h6>
+          <input type="text" pInputText [ngModel]="item.code" [disabled]="true" />
+        </div>
+        <div class="w-3">
+          <h6>Tổng tiền hàng hoàn</h6>
+          <input type="text" pInputText [ngModel]="item.product_total_cost | number" [disabled]="true" />
+        </div>
+        <div class="w-3">
+          <h6>Khách hàng hoàn</h6>
+          <input type="text" pInputText [ngModel]="item.customer_name" [disabled]="true" />
+        </div>
+        <div class="w-3">
+          <h6>Người hoàn đơn</h6>
+          <input type="text" pInputText [ngModel]="item.staff_name" [disabled]="true" />
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row">
+      <div class="w-12 flex flex-row gap-5">
+        <div class="w-3">
+          <h6>Tổng tiền hoàn trả khách</h6>
+          <input type="text" [disabled]="true" pInputText [ngModel]="item.total_refund_money" />
+        </div>
+        <div class="w-3">
+          <h6>Tiền giảm</h6>
+          <input type="text" pInputText [ngModel]="item.sale_cost | number" [disabled]="true" />
+        </div>
+        <div class="w-3">
+          <h6>Tiền Voucher</h6>
+          <input type="text" pInputText [ngModel]="item.voucher_cost | number" [disabled]="true" />
+        </div>
+        <div class="w-3">
+          <h6>Nội dung</h6>
+          <textarea pInputTextarea [disabled]="true" [(ngModel)]="item.note"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let refund of item.refund_order" class="py-2">
+      <hr />
+      <div class="grid">
+        <div class="col-3">
+          <h6>Mã hóa đơn</h6>
+          <input type="text" pInputText [ngModel]="refund?.order_code" [disabled]="true" />
+        </div>
+        <div class="col-3">
+          <h6>Ngày mua hàng</h6>
+          <input type="text" pInputText [ngModel]="refund?.dateAdded | date: 'dd/MM/yyyy'" [disabled]="true" />
+        </div>
+        <div class="col-3">
+          <h6>Tiền hàng hoàn của đơn</h6>
+          <input type="text" pInputText [ngModel]="refund?.total_refund_money | number" [disabled]="true" />
+        </div>
+      </div>
+      <p-table [value]="refund?.products" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Mã Sp</th>
+            <th>Giá bán</th>
+            <th>Số lượng</th>
+            <th>Đơn vị</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+          <tr>
+            <td>
+              {{ i + 1 }}
+            </td>
+            <td>{{ product.name }}</td>
+            <td>
+              {{ product.barcode }}
+            </td>
+            <td>{{ product.price | number }} đ</td>
+            <td>{{ product.quantity | number }}</td>
+            <td>{{ product.unit_code }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

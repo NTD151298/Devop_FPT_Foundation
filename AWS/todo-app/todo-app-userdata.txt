@@ -1,0 +1,51 @@
+lệnh và câu hỏi lặp đi lặp lại
+psql -h database-1.cp8ekwy8tfuw.us-east-1.rds.amazonaws.com -U postgres
+psql -h database-2.cp8ekwy8tfuw.us-east-1.rds.amazonaws.com -U postgres
+psql -h database-3.cp8ekwy8tfuw.us-east-1.rds.amazonaws.com -U postgres
+
+#!/bin/bash
+set -x
+sudo yum update 
+sudo yum install git npm postgresql15 -y
+cd /home/ec2-user
+sudo git clone https://github.com/MiguelLamas/to-do-app-pern-stack.git  
+cd to-do-app-pern-stack
+# server
+sudo npm install
+export PG_USER=postgres;
+export PG_PASSWORD=passdb123;
+export PG_HOST=database-3.cp8ekwy8tfuw.us-east-1.rds.amazonaws.com;
+export PG_DATABASE=perntodo;
+export PG_PORT=5432
+node ./server/index.js &
+# client
+cd ./client
+sudo npm install
+# sudo npm audit fix --force
+mkdir -p node_modules/.cache 
+sudo chmod -R 777 node_modules/.cache
+export NODE_OPTIONS=--openssl-legacy-provider
+npm start &
+echo "~~~~~~~> run user data end!"
+# Debug: sudo tail -n 1000 -f /var/log/cloud-init-output.log 
+
+sudo netstat -tuln
+
+ Để xem PID của ứng dụng, bạn có thể sử dụng lệnh 
+sudo lsof -i :5000 
+sudo lsof -i :3000 
+
+no pg_hba.conf entry for host "10.0.1.111", user "postgres", database "postgres", no encryption
+10.0.3.131
+sudo rm -rf to-do-app-pern-stack/*
+
+sudo systemctl status httpd
+sudo systemctl start httpd
+sudo systemctl stop httpd
+sudo systemctl restart httpd
+sudo systemctl enable httpd
+sudo systemctl disable httpd
+
+[HCM23_FRF.V_Devops_02]
+
+

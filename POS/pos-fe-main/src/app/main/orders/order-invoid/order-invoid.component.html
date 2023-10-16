@@ -1,0 +1,99 @@
+<div id="printInvoid">
+  <div style="text-align: center">
+    <h2 style="text-transform: uppercase; padding-top: 10px">S1-Mart</h2>
+    <p>{{modelInvoid?.address}}</p>
+    <h5 style="text-transform: uppercase">Hóa đơn bán hàng</h5>
+  </div>
+  <div style="text-align: left; padding: 10px">
+    <p>Khách hàng: {{ modelInvoid?.customer_name }}</p>
+    <p>Số điện thoại: {{ modelInvoid?.customer_phone }}</p>
+    <p>Mã đơn hàng: {{ modelInvoid?.code }}</p>
+  </div>
+  <table style="width: 100%; padding: 0px">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mặt hàng</th>
+        <th>Giá</th>
+        <th>SL</th>
+        <th style="text-align: right">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of modelInvoid?.products;let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          {{ data.name }}<br />
+          {{ data.barcode }}
+        </td>
+        <td>
+          <p
+            [style]="
+              data.sale_price > 0 ? 'text-decoration-line: line-through;' : ''
+            "
+          >
+            {{ data.price | number }}
+          </p>
+          <p [hidden]="data.sale_price <= 0">{{ data.sale_price | number }}</p>
+        </td>
+        <td>{{ data.quantity }} {{ data.unit_code }}</td>
+        <td style="text-align: right">
+          {{
+            data.sale_price > 0
+              ? (data.sale_price * data.quantity | number)
+              : (data.price * data.quantity | number)
+          }}
+          đ
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display: flex">
+    <div style="width: 60%; text-align: right">
+      <b>Tổng tiền hàng:</b>
+    </div>
+    <div style="width: 40%; text-align: right">
+      <b>{{ modelInvoid?.product_total_cost | number }} đ</b>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div style="width: 60%; text-align: right"><b>Giảm giá:</b></div>
+    <div style="width: 40%; text-align: right">
+      <b>{{ modelInvoid?.sale_cost | number }} đ</b>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div style="width: 60%; text-align: right"><b>Khuyến mại:</b></div>
+    <div style="width: 40%; text-align: right">
+      <b>{{ modelInvoid?.voucher_cost | number }} đ</b>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div style="width: 60%; text-align: right">
+      <b>Tổng tiền thanh toán:</b>
+    </div>
+    <div style="width: 40%; text-align: right">
+      <b>{{ modelInvoid?.total_amount | number }} đ</b>
+    </div>
+  </div>
+  <p style="text-align: center; padding-top: 20px"><i>Cảm ơn hẹn gặp lại</i></p>
+  <p style="text-align: right; font-size: 9px">
+    {{ dateInvoid | date: "dd/MM/yyyy HH:mm:ss" }}
+  </p>
+</div>
+
+<button
+  pButton
+  pRipple
+  type="button"
+  #printBtn
+  hidden="true"
+  printSectionId="printInvoid"
+  ngxPrint
+  label="In mã"
+  [printStyle]="{
+    table: { border: '1px solid', 'border-collapse': 'collapse' },
+    td: { border: '1px solid' },
+    th: { border: '1px solid' }
+  }"
+></button>
